@@ -1,0 +1,43 @@
+# General
+.DS_Store
+Thumbs.db
+*.log
+*.swp
+*.tmp
+
+# Node.js (client)
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.*.local
+
+# Python (server)
+env/
+server_env/
+*.pyc
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.vscode/
+
+# IDE/Editor settings
+.idea/
+*.iml
+*.code-workspace
+
+# Operating System Files
+*.exe
+*.dll
+*.so
+
+# Other
+.coverage
+.tox
+.cache
+
+# Project-specific files (add as needed)
+# Example:
+# db.sqlite3 
+# secrets.json 
