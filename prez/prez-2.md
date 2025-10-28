@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Technical Presentation</title>
-  <style>
-    /* Marp theme styles will be injected here */
-  </style>
-</head>
-<body>
-  <script type="text/markdown">
 ---
 marp: true
 theme: alten
@@ -130,26 +119,4 @@ Streamline enrichment, classification, and delivery.
 
 ---
 
-# **Possible Other Improvements**
-Additional requests to tackle next.
-
-- From Bassel: deploy a focused version covering the seven highest-signal sources.
-- From Emilio (OCR): improve Cosmos DB accessibility.
-- From Emilio (OCR): resolve Cloud Defender alerts related to the VM.
-- From Emilio (OCR): restore Cosmos DB access within the Azure portal.
-
----
-
 # **Questions?**
-
-  </script>
-  <script src="https://unpkg.com/marp-core/lib/marp.browser.js"></script>
-  <script>
-    const marp = new Marp();
-    const markdown = document.querySelector('script[type="text/markdown"]').textContent;
-    const { html, css } = marp.render(markdown);
-    document.head.querySelector('style').textContent = css;
-    document.body.innerHTML = html;
-  </script>
-</body>
-</html>

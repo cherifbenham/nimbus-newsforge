@@ -10,7 +10,7 @@ from newsletter_generation import (
     fetch_from_url,
     get_html_content, 
 )
-from utils import generate_random_id, get_logger, MODEL_FLASH
+from utils import generate_random_id, get_logger, MODEL_FLASH, PROJECT_ID, LOCATION
 from server.bigquery_helpers import (
     insert_bq_rows,
     save_news_to_bigquery,
@@ -150,53 +150,105 @@ def format_and_extract(html, news_dict, max_pages=MAX_PAGES):
         return news_dict
 
 def fetch_news():
+    """Fetch news from configured URLs, extract with LLM aids, and upsert to BigQuery.
+
+    Adds detailed logging of environment, per‑site progress, totals, and timing.
+    """
+    run_start = datetime.now(timezone.utc)
+    logger.info("========== News fetch run started ==========")
+    logger.info(
+        "Environment: PROJECT_ID=%s, REGION=%s, MODEL=%s",
+        PROJECT_ID,
+        LOCATION,
+        MODEL_FLASH,
+    )
+
     urls_to_retrieve = get_urls()
     logger.info("---------------------------------------")
-    logger.info("URLs to retrieve:")
-    logger.info(urls_to_retrieve)
+    logger.info("URLs to retrieve (%d): %s", len(urls_to_retrieve), urls_to_retrieve)
     logger.info("---------------------------------------")
 
-    html_results = []
-    if len(urls_to_retrieve) > 0:
-        html_results = get_html_content(urls=urls_to_retrieve)
-    else:
+    if not urls_to_retrieve:
         logger.info("No URLs found in Firestore config. Exiting fetch.")
         return
 
+    html_results = get_html_content(urls=urls_to_retrieve)
+
     news_list = []
+    site_success = 0
+    site_fail = 0
+    total_articles = 0
 
     for html in html_results:
-        if html:
+        if not html:
+            site_fail += 1
+            continue
+        website = html.get("website", "unknown")
+        site_t0 = datetime.now(timezone.utc)
+        logger.info("Processing site: %s", website)
+        try:
             result = format_and_extract(html, {})  # Call format_and_extract directly
-            if result:
-                news_added = result["news"]
-                website = result["website"]
-                url_hashes = result["url_hashes"]
-                news_list.append({"website": website, "news": news_added, "url_hashes": url_hashes})
-    # if the retrieval was successfull, writing the batch object to the database:
-    if len(news_list) > 0:
-        # create a new batch document in Firestore
+        except Exception as e:
+            site_fail += 1
+            logger.warning("Extraction error for %s: %s", website, e)
+            continue
+
+        if not result:
+            site_fail += 1
+            logger.info("No result extracted for %s", website)
+            continue
+
+        news_added = result.get("news", [])
+        url_hashes = result.get("url_hashes", [])
+        site_success += 1
+        total_articles += len(news_added)
+        logger.info(
+            "Site done: %s | articles: %d | duration: %.2fs",
+            website,
+            len(news_added),
+            (datetime.now(timezone.utc) - site_t0).total_seconds(),
+        )
+        news_list.append({"website": website, "news": news_added, "url_hashes": url_hashes})
+
+    logger.info(
+        "Summary: sites=%d success=%d fail=%d new_articles=%d",
+        len(urls_to_retrieve), site_success, site_fail, total_articles,
+    )
+
+    # Write batch metadata + URL hashes if anything new was discovered
+    if news_list:
         batch_id = generate_random_id()
         run_datetime = datetime.now(timezone.utc).isoformat()
         batch_data = [{
             "batch_id": batch_id,
-            "news_count": sum([len(news["news"]) for news in news_list]),
+            "news_count": sum(len(n["news"]) for n in news_list),
             "run_datetime": run_datetime,
-            "websites": [{"website": news["website"], "count": len(news["news"])} for news in news_list],
+            "websites": [{"website": n["website"], "count": len(n["news"])} for n in news_list],
         }]
+        logger.info("Writing batch metadata to BigQuery: id=%s", batch_id)
         batch_result = insert_bq_rows(BQ_BATCH_TABLE_ID, batch_data)
         if batch_result:
             logger.info(
-                f"Batch {batch_id} created with {batch_data[0]['news_count']} news articles.")
-        # update url hash table
-        url_hash_rows = [{"website": news["website"], "url_hashes": news["url_hashes"], "batch_id": batch_id, "run_datetime": run_datetime} for news in news_list]
+                "Batch %s created with %d news articles.", batch_id, batch_data[0]["news_count"]
+            )
+
+        logger.info("Updating URL hash table for %d sites", len(news_list))
+        url_hash_rows = [{
+            "website": n["website"],
+            "url_hashes": n.get("url_hashes", []),
+            "batch_id": batch_id,
+            "run_datetime": run_datetime,
+        } for n in news_list]
         url_hash_result = update_url_hash_rows(url_hash_rows)
         if url_hash_result:
-            logger.info(
-                f"URL Hashes updated for batch {batch_id}"
-            )
+            logger.info("URL Hashes updated for batch %s", batch_id)
     else:
         logger.info("No new news articles found since the last batch run.")
+
+    logger.info(
+        "========== News fetch run finished in %.2fs ==========",
+        (datetime.now(timezone.utc) - run_start).total_seconds(),
+    )
 
 
 if __name__ == "__main__":

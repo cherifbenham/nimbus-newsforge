@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 try:
     # Load environment variables from a local .env file if present (dev convenience)
     # Use override=True so .env wins over stray shell settings
@@ -7,6 +8,13 @@ try:
 except Exception:
     # Safe no-op if python-dotenv is not installed or not needed in prod
     pass
+
+# Ensure local service-account credentials are picked up when running outside GCP
+_repo_root = Path(__file__).resolve().parents[1]
+_local_creds = _repo_root / "fsa-amadeus-471508-b1e0395dd912.json"
+if _local_creds.exists():
+    # Force the SDK to use repo-local credentials when running locally
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = str(_local_creds)
 import vertexai
 import logging
 import json_repair

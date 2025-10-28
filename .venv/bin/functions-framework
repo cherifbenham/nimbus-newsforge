@@ -1,4 +1,4 @@
-#!/Users/cherifbenham/Downloads/amadeus-er-277500-v2-main/.venv/bin/python3.11
+#!/Users/cherifbenham/code/amadeus_ci_newsletter/.venv/bin/python3.11
 import sys
 from functions_framework._cli import _cli
 if __name__ == '__main__':

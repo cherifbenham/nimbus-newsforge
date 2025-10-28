@@ -37,6 +37,15 @@ __pycache__/
 .tox
 .cache
 
+# Secrets and credentials
+*.env
+.env.*
+*.key
+*.pem
+*creds*.json
+*credentials*.json
+fsa-amadeus-*.json
+
 # Project-specific files (add as needed)
 # Example:
 # db.sqlite3 

@@ -1,4 +1,4 @@
-#!/Users/cherifbenham/Downloads/amadeus-er-277500-v2-main/.venv/bin/python3.11
+#!/Users/cherifbenham/code/amadeus_ci_newsletter/.venv/bin/python3.11
 # -*- coding: utf-8 -*-
 # Copyright 2024 Google LLC
 #
