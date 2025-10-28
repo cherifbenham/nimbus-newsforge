@@ -22,6 +22,7 @@ const DailyNewsletter: React.FC<DailyNewsletterProps> = () => {
     const [newsletter, setNewsletter] = useState<Newsletter | null>(null);
     const { nlId, isNewDailyNL, setIsNewDailyNL } = useContext(NewsletterContext) as NewsletterContextType;
     const [newsletterIsLoading, setNewsletterIsLoading] = useState(false)
+    const [emailSubject, setEmailSubject] = useState<string>("")
 
     const startDateRef = useRef<HTMLInputElement>(null);
     const endDateRef = useRef<HTMLInputElement>(null);
@@ -366,7 +367,7 @@ const DailyNewsletter: React.FC<DailyNewsletterProps> = () => {
                                     <h2 className="text-xl font-medium text-gray-600 dark:text-white mb-4">
                                         Settings
                                     </h2>
-                                    <div className="flex space-x-4 mb-4">
+                                    <div className="flex space-x-4 mb-4 items-center">
                                         <div className="flex-1">
                                             <input
                                                 type="text"
@@ -383,15 +384,197 @@ const DailyNewsletter: React.FC<DailyNewsletterProps> = () => {
                                                 className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500 dark:bg-gray-600 dark:text-white dark:border-gray-600"
                                             />
                                         </div>
+                                        <div className="flex-1">
+                                            <input
+                                                type="text"
+                                                value={emailSubject}
+                                                onChange={(e) => setEmailSubject(e.target.value)}
+                                                placeholder="Email subject (optional)"
+                                                className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500 dark:bg-gray-600 dark:text-white dark:border-gray-600"
+                                            />
+                                        </div>
                                         <button onClick={handleGenerate} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none">
                                             Generate
                                         </button>
+                                        {newsletter && (
+                                            <button
+                                                onClick={async () => {
+                                                    try {
+                                                        const defaultHint = `${new Date(startDate!).toLocaleDateString()} - ${new Date(endDate!).toLocaleDateString()}`;
+                                                        const subjectHint = emailSubject || defaultHint;
+                                                        const { subject, html } = await ApiHelper.composeEmailFromNewsletter(newsletter!, subjectHint);
+                                                        const win = window.open('', '_blank');
+                                                        if (win) {
+                                                            win.document.title = subject || 'Newsletter Email';
+                                                            win.document.write(html);
+                                                            win.document.close();
+                                                        }
+                                                    } catch (e) {
+                                                        console.error('Error composing email', e);
+                                                    }
+                                                }}
+                                                className="ml-2 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+                                            >
+                                                Compose Email
+                                            </button>
+                                        )}
+                                        {newsletter && (
+                                            <button
+                                                onClick={async () => {
+                                                    try {
+                                                        const defaultHint = `${new Date(startDate!).toLocaleDateString()} - ${new Date(endDate!).toLocaleDateString()}`;
+                                                        const subjectHint = emailSubject || defaultHint;
+                                                        const { subject, html } = await ApiHelper.composeEmailFromNewsletter(newsletter!, subjectHint);
+                                                        const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+                                                        const url = URL.createObjectURL(blob);
+                                                        const a = document.createElement('a');
+                                                        a.href = url;
+                                                        const safeName = (subject || 'newsletter_email').replace(/[^a-z0-9\-_]+/gi,'_').slice(0,60);
+                                                        a.download = `${safeName}.html`;
+                                                        document.body.appendChild(a);
+                                                        a.click();
+                                                        a.remove();
+                                                        // Delay revocation to avoid cancelling the download in some browsers
+                                                        setTimeout(() => URL.revokeObjectURL(url), 2000);
+                                                    } catch (e) {
+                                                        console.error('Error downloading email HTML', e);
+                                                    }
+                                                }}
+                                                className="ml-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+                                            >
+                                                Download HTML
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
                             </div>
 
                         )}
 
+                        {newsletter && (
+                            <div className="flex space-x-2 mt-3">
+                                <input
+                                    type="text"
+                                    value={emailSubject}
+                                    onChange={(e) => setEmailSubject(e.target.value)}
+                                    placeholder="Email subject (optional)"
+                                    className="flex-1 border border-gray-300 p-2 rounded focus:outline-none focus:border-blue-500 dark:bg-gray-600 dark:text-white dark:border-gray-600"
+                                />
+                                <button
+                                    onClick={async () => {
+                                        try {
+                                            const defaultHint = `${new Date(startDate!).toLocaleDateString()} - ${new Date(endDate!).toLocaleDateString()}`;
+                                            const subjectHint = emailSubject || defaultHint;
+                                            const { subject, html } = await ApiHelper.composeEmailFromNewsletter(newsletter!, subjectHint);
+                                            const win = window.open('', '_blank');
+                                            if (win) {
+                                                win.document.title = subject || 'Newsletter Email';
+                                                win.document.write(html);
+                                                win.document.close();
+                                            }
+                                        } catch (e) {
+                                            console.error('Error composing email', e);
+                                        }
+                                    }}
+                                    className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+                                >
+                                    Compose Email
+                                </button>
+                                <button
+                                    onClick={async () => {
+                                        try {
+                                            const defaultHint = `${new Date(startDate!).toLocaleDateString()} - ${new Date(endDate!).toLocaleDateString()}`;
+                                            const subjectHint = emailSubject || defaultHint;
+                                            const { subject, html } = await ApiHelper.composeCuratedEmailFromNewsletter(newsletter!, subjectHint, 5);
+                                            const win = window.open('', '_blank');
+                                            if (win) {
+                                                win.document.title = subject || 'Newsletter Email';
+                                                win.document.write(html);
+                                                win.document.close();
+                                            }
+                                        } catch (e) {
+                                            console.error('Error composing curated email', e);
+                                        }
+                                    }}
+                                    className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+                                >
+                                    Curate & Compose
+                                </button>
+                                <button
+                                    onClick={async () => {
+                                        try {
+                                            const defaultHint = `${new Date(startDate!).toLocaleDateString()} - ${new Date(endDate!).toLocaleDateString()}`;
+                                            const subjectHint = emailSubject || defaultHint;
+                                            const { subject, html } = await ApiHelper.composeEmailFromNewsletter(newsletter!, subjectHint);
+                                            const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+                                            const url = URL.createObjectURL(blob);
+                                            const a = document.createElement('a');
+                                            a.href = url;
+                                            a.download = `${(subject || 'newsletter').replace(/[^a-z0-9\-_]+/gi,'_').slice(0,60)}.html`;
+                                            document.body.appendChild(a);
+                                            a.click();
+                                            a.remove();
+                                            setTimeout(() => URL.revokeObjectURL(url), 2000);
+                                        } catch (e) {
+                                            console.error('Error downloading email HTML', e);
+                                        }
+                                    }}
+                                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+                                >
+                                    Download HTML
+                                </button>
+                                <button
+                                    onClick={async () => {
+                                        try {
+                                            const defaultHint = `${new Date(startDate!).toLocaleDateString()} - ${new Date(endDate!).toLocaleDateString()}`;
+                                            const subjectHint = emailSubject || defaultHint;
+                                            const { subject, html } = await ApiHelper.composeCuratedEmailFromNewsletter(newsletter!, subjectHint, 5);
+                                            const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+                                            const url = URL.createObjectURL(blob);
+                                            const a = document.createElement('a');
+                                            a.href = url;
+                                            const safeName = ((subject || 'newsletter_curated') + '').replace(/[^a-z0-9\-_]+/gi,'_').slice(0,60);
+                                            a.download = `${safeName}.html`;
+                                            document.body.appendChild(a);
+                                            a.click();
+                                            a.remove();
+                                            setTimeout(() => URL.revokeObjectURL(url), 2000);
+                                        } catch (e) {
+                                            console.error('Error downloading curated email HTML', e);
+                                        }
+                                    }}
+                                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+                                >
+                                    Curate & Download
+                                </button>
+                                <button
+                                    onClick={async () => {
+                                        try {
+                                            const defaultHint = `${new Date(startDate!).toLocaleDateString()} - ${new Date(endDate!).toLocaleDateString()}`;
+                                            const subjectHint = emailSubject || defaultHint;
+                                            const { html } = await ApiHelper.composeEmailFromNewsletter(newsletter!, subjectHint);
+                                            if (navigator.clipboard && navigator.clipboard.writeText) {
+                                                await navigator.clipboard.writeText(html);
+                                                window.alert('Email HTML copied to clipboard');
+                                            } else {
+                                                const ta = document.createElement('textarea');
+                                                ta.value = html;
+                                                document.body.appendChild(ta);
+                                                ta.select();
+                                                document.execCommand('copy');
+                                                ta.remove();
+                                                window.alert('Email HTML copied to clipboard');
+                                            }
+                                        } catch (e) {
+                                            console.error('Error copying email HTML', e);
+                                        }
+                                    }}
+                                    className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none"
+                                >
+                                    Copy HTML
+                                </button>
+                            </div>
+                        )}
 
                     </div>
                 </div>

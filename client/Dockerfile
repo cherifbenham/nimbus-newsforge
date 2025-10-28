@@ -1,24 +1,21 @@
-FROM node:18-alpine AS builder
-
+FROM node:20-alpine AS build
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+# Install deps
+COPY package.json package-lock.json* ./
+RUN npm ci || npm install
 
+# Copy source and build
 COPY . .
-
-# Build the application
+# Allow passing backend API at build time
+ARG VITE_API_URL
+ENV VITE_API_URL=${VITE_API_URL}
 RUN npm run build
 
-# Use a smaller Nginx base image for production
+# Serve with nginx
 FROM nginx:alpine
-
-COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
-# Copy the build output from the builder stage
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-# Expose port 80
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 8080
-
-# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
+

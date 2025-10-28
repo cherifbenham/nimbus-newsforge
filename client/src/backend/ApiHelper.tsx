@@ -77,10 +77,26 @@ export const ApiHelper = {
         }
     }
     ,
+    async composeEmailFromNewsletter(newsletter: Newsletter, subjectHint?: string): Promise<{ subject: string, html: string }> {
+        const payload: any = { newsletter };
+        if (subjectHint) payload.subject_hint = subjectHint;
+        const response = await axios.post(`${serverUrl}/newsletters/email/compose`, payload);
+        return response.data as { subject: string, html: string };
+    },
+    async composeCuratedEmailFromNewsletter(newsletter: Newsletter, subjectHint?: string, maxItems: number = 5): Promise<{ subject: string, html: string }> {
+        const payload: any = { newsletter, max_items: maxItems };
+        if (subjectHint) payload.subject_hint = subjectHint;
+        const response = await axios.post(`${serverUrl}/newsletters/email/compose/curated`, payload);
+        return response.data as { subject: string, html: string };
+    },
     async getNewsForPeriod(startDate: Date, endDate: Date, website?: string, ranked?: boolean): Promise<News[]> {
         try {
-
-            const params = { start_date: startDate, end_date: endDate, website: website, ranked: ranked || false };
+            const params = {
+                start_date: startDate.toISOString(),
+                end_date: endDate.toISOString(),
+                website: website,
+                ranked: ranked || false
+            } as any;
             if (website) {
                 params.website = website;
             }
@@ -113,7 +129,7 @@ export const ApiHelper = {
 
     async generateNewsletter(startDate: Date, endDate: Date): Promise<Newsletter> {
         try {
-            const response = await axios.post(`${serverUrl}/newsletters/generate`, { start_date: startDate, end_date: endDate });
+            const response = await axios.post(`${serverUrl}/newsletters/generate`, { start_date: startDate.toISOString(), end_date: endDate.toISOString() });
 
             const data = response.data;
 
@@ -151,7 +167,7 @@ export const ApiHelper = {
             console.error('Error saving newsletter:', error);
             throw error; // Re-throw the error to be handled by the caller
         }
-    },
+    },  
 
     async deleteNewsletter(nlId: string): Promise<void> {
         try {
@@ -279,8 +295,12 @@ export const ApiHelper = {
                 const response = await axios.put(`${serverUrl}/digests/${digestId}`, { digest });
                 data = response.data;
             } else {
-                // Create new newsletter
-                const response = await axios.post(`${serverUrl}/digests`, { digestId });
+                // Create new digest requires digest + start/end dates
+                const response = await axios.post(`${serverUrl}/digests`, {
+                    digest: digest,
+                    start_date: digest.start_date instanceof Date ? digest.start_date.toISOString() : digest.start_date,
+                    end_date: digest.end_date instanceof Date ? digest.end_date.toISOString() : digest.end_date,
+                });
                 data = response.data;
             }
             return data.id;
@@ -319,7 +339,7 @@ export const ApiHelper = {
 
     async searchNews(query: string): Promise<SearchResponse> {
         try {
-            const response = await axios.get(`${serverUrl}/news/search?input=${query}`);
+            const response = await axios.get(`${serverUrl}/news/search`, { params: { input: query } });
             const parsedSearchResults = SearchResponseSchema.parse(response.data);
             console.log(parsedSearchResults)
 
