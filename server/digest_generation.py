@@ -7,7 +7,7 @@ from datetime import datetime, date
 import json_repair
 import logging
 from firebase_helpers import get_last_week_newsletters, save_digest, get_news_by_date_range, get_config, get_past_digests
-from utils import fix_json_formatting
+from utils import fix_json_formatting, MODEL_FLASH
 from urllib.parse import urlparse
 from typing import Any, Dict, List, Optional
 from pydantic import BaseModel
@@ -164,7 +164,7 @@ in this digest. Do not use the actual examples in this digest.
 
     generation_config = {"temperature": 0,
                          "response_mime_type": "application/json"}
-    model = GenerativeModel(model_name="gemini-1.5-flash-002",
+    model = GenerativeModel(model_name=MODEL_FLASH,
                             generation_config=generation_config)
 
     responses = model.generate_content(
@@ -237,7 +237,7 @@ in the highlights section, and how to format it. Do not use the actual examples 
 
     generation_config = {"temperature": 0,
                          "response_mime_type": "application/json"}
-    model = GenerativeModel(model_name="gemini-1.5-flash-002",
+    model = GenerativeModel(model_name=MODEL_FLASH,
                             generation_config=generation_config)
     responses = model.generate_content(
         [prompt.format(config['prompt_weekly_highlights'],
@@ -302,7 +302,7 @@ def regenerate_digest_highlights(digest: Digest):
 
     generation_config = {"temperature": 0,
                          "response_mime_type": "application/json"}
-    model = GenerativeModel(model_name="gemini-1.5-flash-002",
+    model = GenerativeModel(model_name=MODEL_FLASH,
                             generation_config=generation_config)
 
     responses = model.generate_content(
@@ -358,7 +358,7 @@ def generate_digest_metadata(nl_article):
 
     generation_config = {"temperature": 0,
                          "response_mime_type": "application/json"}
-    model = GenerativeModel(model_name="gemini-1.5-flash-002",
+    model = GenerativeModel(model_name=MODEL_FLASH,
                             generation_config=generation_config)
 
     prompt = prompt.format(nl_article)
@@ -406,7 +406,7 @@ def highlights_cleanup(highlights_markdown):
 
     prompt = prompt.format(highlights_markdown)
 
-    model = GenerativeModel(model_name="gemini-1.5-flash-001")
+    model = GenerativeModel(model_name=MODEL_FLASH)
     responses = model.generate_content(
         [prompt],)
 

@@ -1,5 +1,9 @@
 from flask import Flask, request, jsonify
 from google.cloud import firestore
+from google.cloud import bigquery
+from vertexai.generative_models import GenerativeModel, GenerationConfig
+from utils import MODEL_FLASH
+import os
 from datetime import datetime
 from firebase_helpers import *
 from newsletter_generation import *
@@ -14,13 +18,141 @@ import json
 
 port = int(os.environ.get('PORT', 5000))
 app = Flask(__name__)
-CORS(app, resources={"/api/*": {"origins": "http://localhost:*",
-     "methods": ["GET", "POST", "PUT", "DELETE"]}})
+# Allow CORS origins from env (comma-separated) or default to localhost for dev
+cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:*")
+if "," in cors_origins:
+    cors_origins = [o.strip() for o in cors_origins.split(",") if o.strip()]
+CORS(app, resources={
+    "/api/*": {
+        "origins": cors_origins,
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"],
+        "max_age": 600,
+    }
+})
 
 
 db = firestore.Client()
 
+# Basic status/index endpoints
+
+@app.route('/', methods=['GET'])
+def root_index():
+    return jsonify({
+        "service": "competitive-intel-api",
+        "status": "ok",
+        "api_root": "/api",
+        "example_endpoints": [
+            "/api/newsletters",
+            "/api/digests",
+            "/api/news",
+            "/api/news/search"
+        ]
+    }), 200
+
+
+@app.route('/api', methods=['GET'])
+def api_index():
+    return jsonify({
+        "message": "API root",
+        "status": "ok",
+        "endpoints": [
+            "/api/newsletters",
+            "/api/digests",
+            "/api/news",
+            "/api/news/search"
+        ]
+    }), 200
+
+
+@app.route('/api/health', methods=['GET'])
+def api_health():
+    return jsonify({"status": "ok"}), 200
+
 # Firestore Flask routes
+
+
+@app.route('/api/health/deps', methods=['GET'])
+def api_health_deps():
+    """Checks connectivity to Firestore, BigQuery, and Vertex AI."""
+    results = {
+        "firestore": {"ok": False},
+        "bigquery": {"ok": False},
+        "vertex_ai": {"ok": False},
+    }
+
+    # Firestore: attempt a lightweight read
+    try:
+        _ = list(db.collection('config').limit(1).get())
+        results["firestore"]["ok"] = True
+    except Exception as e:
+        results["firestore"]["error"] = str(e)
+
+    # BigQuery: simple SELECT 1
+    try:
+        bq_client = bigquery.Client()
+        bq_client.query("SELECT 1").result()
+        results["bigquery"]["ok"] = True
+    except Exception as e:
+        results["bigquery"]["error"] = str(e)
+
+    # Vertex AI: minimal generation
+    try:
+        region = os.getenv("REGION", "us-central1")
+        model = GenerativeModel(
+            model_name=MODEL_FLASH,
+            generation_config=GenerationConfig(temperature=0, max_output_tokens=1),
+        )
+        _ = model.generate_content(["ping"])  # minimal request
+        results["vertex_ai"].update({"ok": True, "model": MODEL_FLASH, "region": region})
+    except Exception as e:
+        results["vertex_ai"]["error"] = str(e)
+
+    status = "ok" if all(v.get("ok") for v in results.values()) else "degraded"
+    return jsonify({"status": status, **results}), (200 if status == "ok" else 503)
+
+
+@app.route('/api/newsletters/email/compose', methods=['POST'])
+def compose_email_route():
+    try:
+        data = request.get_json() or {}
+        subject_hint = data.get('subject_hint')
+
+        # Accept either a flat list of news items or a newsletter with sections
+        news = data.get('news')
+        if not news:
+            newsletter = data.get('newsletter') or {}
+            sections = (newsletter or {}).get('sections') or {}
+            news = []
+            # Flatten sections
+            for item in sections.get('topNews', []) + sections.get('moreStories', []):
+                news.append(item)
+            for region in sections.get('regionalNews', []):
+                for item in region.get('news', []):
+                    news.append(item)
+            for item in sections.get('podcasts', []):
+                news.append(item)
+
+        if not news:
+            return jsonify({"error": "No news items provided"}), 400
+
+        composed = compose_compact_email(news, subject_hint=subject_hint)
+        return jsonify(composed), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/newsletters/email/compose/curated', methods=['POST'])
+def compose_email_curated_route():
+    try:
+        data = request.get_json() or {}
+        newsletter = data.get('newsletter') or {}
+        subject_hint = data.get('subject_hint')
+        max_items = int(data.get('max_items', 5))
+        result = compose_curated_email(newsletter, max_items=max_items, subject_hint=subject_hint)
+        return jsonify(result), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route('/api/newsletters', methods=['GET'])

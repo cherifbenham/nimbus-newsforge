@@ -1,4 +1,12 @@
 import os
+try:
+    # Load environment variables from a local .env file if present (dev convenience)
+    # Use override=True so .env wins over stray shell settings
+    from dotenv import load_dotenv
+    load_dotenv(override=True)
+except Exception:
+    # Safe no-op if python-dotenv is not installed or not needed in prod
+    pass
 import vertexai
 import logging
 import json_repair
@@ -18,6 +26,10 @@ import google.cloud.logging
 
 PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus")
 LOCATION = os.getenv("REGION", "us-central1")
+# Model names can be overridden via environment variables
+# Default to Gemini 2.0 Flash for broader availability
+MODEL_FLASH = os.getenv("MODEL_FLASH", "gemini-2.0-flash-001")
+MODEL_PRO = os.getenv("MODEL_PRO", "gemini-1.5-pro-002")
 
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 
@@ -89,7 +101,7 @@ def fix_json_formatting(json_string, error_message):
     error message if correction fails.
   """
 
-    model = GenerativeModel(model_name="gemini-1.5-flash-001")
+    model = GenerativeModel(model_name=MODEL_FLASH)
     prompt = f"""
     You are a JSON correction tool. Your goal is to help users fix invalid JSON strings.
 You will receive an input JSON string and an error message describing the problem with the JSON.
@@ -140,10 +152,41 @@ Error:
 
 
 def parse_iso_date(date_str: str) -> datetime.datetime:
+    """Parse various ISO8601 formats into a timezone-naive UTC datetime.
+
+    Accepts strings like:
+    - YYYY-MM-DDTHH:MM:SSZ
+    - YYYY-MM-DDTHH:MM:SS.sssZ (ms)
+    - YYYY-MM-DDTHH:MM:SS.%fZ (us)
+    - Or with timezone offset: replace trailing 'Z' with +00:00 and use fromisoformat.
+    """
+    if not isinstance(date_str, str):
+        raise ValueError(f"Invalid ISO date: expected string, got {type(date_str)}")
+
+    s = date_str.strip()
+    # Fast paths
+    fmts = [
+        "%Y-%m-%dT%H:%M:%SZ",
+        "%Y-%m-%dT%H:%M:%S.%fZ",
+    ]
+    for fmt in fmts:
+        try:
+            return datetime.datetime.strptime(s, fmt)
+        except ValueError:
+            pass
+
+    # Try Python's fromisoformat with timezone offset
     try:
-        # Parse using UTC timezone to be consistent
-        return datetime.datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S.%fZ")
-    except ValueError as e:
+        if s.endswith("Z"):
+            s2 = s[:-1] + "+00:00"
+        else:
+            s2 = s
+        dt = datetime.datetime.fromisoformat(s2)
+        # Normalize to naive UTC
+        if dt.tzinfo:
+            dt = dt.astimezone(datetime.timezone.utc).replace(tzinfo=None)
+        return dt
+    except Exception as e:
         raise ValueError(f"Invalid ISO date string: {date_str}, error: {e}")
 
 def generate_random_id(length=20):
@@ -185,3 +228,31 @@ def get_logger():
 
     logger.addHandler(handler)
     return logger
+
+
+def generate_with_fallback(contents, generation_config=None, prefer_pro=True):
+    """Generate content trying PRO first, then FLASH as fallback.
+
+    Args:
+        contents: list or str passed to model.generate_content
+        generation_config: optional GenerationConfig
+        prefer_pro: if True, try MODEL_PRO before MODEL_FLASH
+
+    Returns:
+        The responses object from model.generate_content
+
+    Raises:
+        Last exception if both attempts fail.
+    """
+    order = [MODEL_PRO, MODEL_FLASH] if prefer_pro else [MODEL_FLASH, MODEL_PRO]
+    last_exc = None
+    for name in order:
+        try:
+            model = GenerativeModel(model_name=name, generation_config=generation_config)
+            return model.generate_content(contents)
+        except Exception as e:
+            last_exc = e
+            continue
+    if last_exc:
+        raise last_exc
+    raise RuntimeError("generate_with_fallback: unexpected state")

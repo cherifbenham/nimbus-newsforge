@@ -10,13 +10,16 @@ from newsletter_generation import (
     fetch_from_url,
     get_html_content, 
 )
-from utils import generate_random_id, get_logger
-from server.bigquery_helpers import (insert_bq_rows, save_news_to_bigquery, update_url_hash_rows)
+from utils import generate_random_id, get_logger, MODEL_FLASH
+from server.bigquery_helpers import (
+    insert_bq_rows,
+    save_news_to_bigquery,
+    update_url_hash_rows,
+    BQ_BATCH_TABLE_ID,
+)
 from datetime import datetime, timezone, date, timedelta
 
 MAX_PAGES = 5
-BQ_BATCH_TABLE_ID = "fsa-amadeus.competitive_intel.batches_v2"
-BQ_URL_HASH_TABLE_ID = "fsa-amadeus.competitive_intel.url_hashes"
 
 db = firestore.Client()
 logger = get_logger()
@@ -36,7 +39,7 @@ def extract_datetime_with_gemini(html):
     try:
         generation_config = {"temperature": 0}
         model = GenerativeModel(
-            model_name="gemini-1.5-flash-001", generation_config=generation_config)
+            model_name=MODEL_FLASH, generation_config=generation_config)
         prompt = """
         ```html
         {}
@@ -153,8 +156,12 @@ def fetch_news():
     logger.info(urls_to_retrieve)
     logger.info("---------------------------------------")
 
+    html_results = []
     if len(urls_to_retrieve) > 0:
         html_results = get_html_content(urls=urls_to_retrieve)
+    else:
+        logger.info("No URLs found in Firestore config. Exiting fetch.")
+        return
 
     news_list = []
 

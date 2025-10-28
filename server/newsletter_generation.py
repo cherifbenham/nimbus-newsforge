@@ -9,7 +9,7 @@ from datetime import datetime
 import traceback
 import json_repair
 from firebase_helpers import get_rejected_stories, get_config, get_urls, save_media
-from utils import fetch_and_store
+from utils import fetch_and_store, MODEL_FLASH, MODEL_PRO, generate_with_fallback
 import concurrent.futures
 from urllib.parse import urlparse
 import pandas as pd
@@ -17,6 +17,7 @@ import pandas as pd
 
 PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus")
 LOCATION = os.getenv("REGION", "us-central1")
+MEDIA_BUCKET = os.getenv("MEDIA_BUCKET", "fsa_amadeus")
 MAX_PAGES = 5
 
 vertexai.init(project=PROJECT_ID, location=LOCATION)
@@ -144,7 +145,7 @@ Analyzis:
     
     """.format(news_item)
 
-    model = GenerativeModel(model_name="gemini-1.5-flash-002", generation_config=GenerationConfig(
+    model = GenerativeModel(model_name=MODEL_FLASH, generation_config=GenerationConfig(
         temperature=0.3, max_output_tokens=500))
     responses = model.generate_content(
         [prompt],
@@ -157,7 +158,7 @@ Analyzis:
 
 def fetch_and_analyze_media(url):
 
-    media_obj = fetch_and_store(url, "fsa_amadeus")
+    media_obj = fetch_and_store(url, MEDIA_BUCKET)
 
     prompt = """
 You are an industry specialist working at Amadeus. Summarize and give structured highlights about this podcast. Those highlights should be focused on:
@@ -184,7 +185,7 @@ return a JSON object structured like this:
         mime_type="video/mp4",
         uri=gcs_file)
 
-    model = GenerativeModel(model_name="gemini-1.5-flash-001")
+    model = GenerativeModel(model_name=MODEL_FLASH)
     responses = model.generate_content(
         [prompt, media],
 
@@ -290,7 +291,7 @@ Input news:
 {}
 """
 
-        model = GenerativeModel(model_name="gemini-1.5-flash-002", generation_config=GenerationConfig(
+        model = GenerativeModel(model_name=MODEL_FLASH, generation_config=GenerationConfig(
             response_mime_type="application/json", temperature=0.3, max_output_tokens=200))
 
         comparison_prompt = ranking_prompt.format(
@@ -426,7 +427,7 @@ def extract_news_with_gemini(html_content):
     try:
         generation_config = {"temperature": 0}
         model = GenerativeModel(
-            model_name="gemini-1.5-flash-001", generation_config=generation_config)
+            model_name=MODEL_FLASH, generation_config=generation_config)
         prompt = """
         ```html
         {}
@@ -516,7 +517,7 @@ def fix_json_formatting(json_string, error_message):
     error message if correction fails.
   """
 
-    model = GenerativeModel(model_name="gemini-1.5-flash-001")
+    model = GenerativeModel(model_name=MODEL_FLASH)
     prompt = f"""
     You are a JSON correction tool. Your goal is to help users fix invalid JSON strings.
 You will receive an input JSON string and an error message describing the problem with the JSON.
@@ -579,7 +580,7 @@ def extract_datetime_with_gemini(html):
     try:
         generation_config = {"temperature": 0}
         model = GenerativeModel(
-            model_name="gemini-1.5-flash-001", generation_config=generation_config)
+            model_name=MODEL_FLASH, generation_config=generation_config)
         prompt = """
         ```html
         {}
@@ -719,12 +720,7 @@ Newsletter:
 
     config = GenerationConfig(
         response_mime_type="application/json", temperature=0.6)
-    model = GenerativeModel(
-        model_name="gemini-1.5-pro-001", generation_config=config)
-    responses = model.generate_content(
-        [prompt],
-
-    )
+    responses = generate_with_fallback([prompt], generation_config=config, prefer_pro=True)
 
     newsletter = responses.text.strip()
     newsletter = newsletter.replace("```json", "").replace("```", "").strip()
@@ -782,16 +778,13 @@ existing articles:
 Duplicates(url):
     """
 
-    model = GenerativeModel(model_name="gemini-1.5-pro-001", generation_config=GenerationConfig(
-        response_mime_type="application/json", temperature=0.6))
+    model_config = GenerationConfig(
+        response_mime_type="application/json", temperature=0.6)
 
     prompt = prompt.format(
         json.dumps(news_list, default=str), json.dumps(simplified_published_newslist, default=str))
 
-    responses = model.generate_content(
-        [prompt],
-
-    )
+    responses = generate_with_fallback([prompt], generation_config=model_config, prefer_pro=True)
 
     filtered_news = responses.text.strip()
     filtered_news = filtered_news.replace(
@@ -911,9 +904,7 @@ example:
     """
     options = GenerationConfig(
         response_mime_type="application/json", temperature=0.6)
-    model = GenerativeModel(
-        model_name="gemini-1.5-pro-001", generation_config=options)
-    responses = model.generate_content([prompt])
+    responses = generate_with_fallback([prompt], generation_config=options, prefer_pro=True)
 
     selected_news = responses.text.strip()
     selected_news = selected_news.replace(
@@ -925,3 +916,164 @@ example:
         selected_news_json = fix_json_formatting(selected_news, e)
 
     return selected_news_json
+
+
+def compose_compact_email(news_items, subject_hint: str | None = None):
+    """Compose a compact HTML email for a set of news items using Gemini.
+
+    Args:
+        news_items: list[dict] with (website, title, abstract, url)
+        subject_hint: optional string (e.g., a date range)
+
+    Returns:
+        dict: {"subject": str, "html": str}
+    """
+    simplified = []
+    for item in news_items or []:
+        simplified.append({
+            "website": item.get("website", ""),
+            "title": item.get("title", ""),
+            "abstract": (item.get("abstract", "") or "")[:600],
+            "url": item.get("url", ""),
+        })
+
+    prompt = f"""
+You are an experienced newsletter editor. Create a short, executive-friendly HTML email from the input articles.
+
+Constraints:
+- Keep it brief (approx. 150–250 words total).
+- Use a simple, mobile-friendly HTML layout (no external CSS; inline styles allowed sparingly).
+- Start with a bolded title and a one-line summary.
+- Then list 4–8 bullets with: Source (domain), title (as a link), and a one-line takeaway.
+- Do not invent facts; if abstract is missing, write a neutral line.
+- Use British English; avoid hype.
+
+Output format (strict JSON, no markdown fences):
+{{
+  "subject": "<short subject line>{' - ' + subject_hint if subject_hint else ''}",
+  "html": "<full HTML email body>"
+}}
+
+Articles:
+{json.dumps(simplified, ensure_ascii=False)}
+"""
+
+    config = GenerationConfig(response_mime_type="application/json", temperature=0.3, max_output_tokens=1000)
+    responses = generate_with_fallback([prompt], generation_config=config, prefer_pro=False)
+
+    text = responses.text.strip().replace("```json", "").replace("```", "").strip()
+    try:
+        obj = json_repair.loads(text)
+        subject = obj.get("subject", "Newsletter")
+        html = obj.get("html", "")
+        return {"subject": subject, "html": html}
+    except Exception as e:
+        logging.error(f"Error composing email: {e}")
+        items_html = "".join([f"<li><a href='{i.get('url','')}'>{i.get('title','')}</a> — {i.get('website','')}</li>" for i in simplified[:8]])
+        html = f"<h2>Newsletter</h2><ul>{items_html}</ul>"
+        return {"subject": subject_hint or "Newsletter", "html": html}
+
+
+def rank_top_stories(news_items, max_items: int = 5):
+    """Use Gemini to select the top N stories from a list of items.
+
+    Args:
+        news_items: list of dicts with at least url, title, abstract, website
+        max_items: number of stories to select
+
+    Returns:
+        list of urls selected in priority order
+    """
+    if not news_items:
+        return []
+    prompt = f"""
+You are a senior editor. From the input articles, output the top {max_items} most important for a corporate audience at Amadeus (travel tech).
+
+Prioritise: competitive moves, strategy, partnerships, funding/M&A, regulatory, material performance signals, and items with direct/adjacent impact on distribution, airline/hotel IT, payments, airport IT, or major competitors.
+Avoid: minor local items, routine route openings, awards, hiring notes, cabin designs.
+
+Output (strict JSON, no markdown fences):
+{{"urls": ["<url1>", "<url2>", "..."]}}
+
+Articles:
+{json.dumps(news_items, ensure_ascii=False)}
+"""
+    cfg = GenerationConfig(response_mime_type="application/json", temperature=0.2, max_output_tokens=400)
+    resp = generate_with_fallback([prompt], generation_config=cfg, prefer_pro=True)
+    text = resp.text.strip().replace("```json", "").replace("```", "").strip()
+    try:
+        data = json_repair.loads(text)
+        urls = data.get("urls", [])
+        return urls[:max_items]
+    except Exception:
+        return []
+
+
+def compose_curated_email(newsletter: dict, max_items: int = 5, subject_hint: str | None = None):
+    """Compose a curated email from a newsletter's top news with a short summary.
+
+    Steps:
+      1) Take sections.topNews (fallback to moreStories if empty)
+      2) Ask Gemini to select top N urls
+      3) Build an executive summary paragraph
+      4) Compose compact HTML email (title + summary + bullets)
+
+    Returns {"subject", "html"}
+    """
+    sections = (newsletter or {}).get("sections", {}) or {}
+    candidates = list(sections.get("topNews", []))
+    if not candidates:
+        candidates = list(sections.get("moreStories", []))
+
+    selected_urls = rank_top_stories(candidates, max_items=max_items)
+    if selected_urls:
+        # keep order as returned by ranker
+        selected = [n for url in selected_urls for n in candidates if n.get("url") == url]
+    else:
+        selected = candidates[:max_items]
+
+    # Generate an executive summary paragraph
+    summary_prompt = f"""
+You are an experienced newsletter editor. Using the articles' titles AND abstracts below, write one cohesive executive summary paragraph (4–6 sentences, British English) that captures what is happening in the travel industry over this period.
+
+Requirements:
+- Synthesize cross‑article themes (strategy moves, partnerships, funding/M&A, AI adoption, regulatory shifts, and material performance signals), not a bullet list.
+- Be factual and action‑oriented; no hype; no source names; no repetition.
+- Do not list the articles; produce a single narrative paragraph.
+
+Input articles (title, website, abstract, url):
+{json.dumps([{k: v for k, v in i.items() if k in ("title","website","abstract","url")} for i in selected], ensure_ascii=False)}
+"""
+    cfg = GenerationConfig(temperature=0.2, max_output_tokens=250)
+    resp = generate_with_fallback([summary_prompt], generation_config=cfg, prefer_pro=False)
+    summary = (resp.text or "").strip()
+
+    # Compose the compact email content and inject the summary at the top
+    composed = compose_compact_email(selected, subject_hint=subject_hint)
+    html = composed.get("html", "")
+    if summary and html:
+        # Insert summary immediately after the first opening container div,
+        # without breaking attributes on the <div> tag.
+        lower_html = html.lower()
+        div_pos = lower_html.find('<div')
+        inserted = False
+        if div_pos != -1:
+            gt_pos = html.find('>', div_pos)
+            if gt_pos != -1:
+                html = (
+                    html[:gt_pos+1]
+                    + f"<p style=\"font-size:14px; margin-bottom:12px;\"><b>Summary:</b> {summary}</p>"
+                    + html[gt_pos+1:]
+                )
+                inserted = True
+        if not inserted:
+            # Fallback: inject before </body>
+            body_close = lower_html.rfind('</body>')
+            if body_close != -1:
+                html = (
+                    html[:body_close]
+                    + f"<p style=\"font-size:14px; margin:12px 0;\"><b>Summary:</b> {summary}</p>"
+                    + html[body_close:]
+                )
+    subject = composed.get("subject") or (subject_hint or "Newsletter")
+    return {"subject": subject, "html": html}

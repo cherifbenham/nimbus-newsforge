@@ -1,11 +1,31 @@
 import hashlib
 import datetime
+import os
 from google.cloud import bigquery
 from utils import get_logger
 
-BQ_NEWS_TABLE_ID = "fsa-amadeus.competitive_intel.news_v2"
-BQ_BATCH_TABLE_ID = "fsa-amadeus.competitive_intel.batches_v2"
-BQ_URL_HASH_TABLE_ID = "fsa-amadeus.competitive_intel.url_hashes"
+# BigQuery configuration via environment variables
+#
+# - PROJECT_ID: GCP project (falls back to defaults below)
+# - BQ_DATASET: BigQuery dataset name (default: competitive_intel)
+# - BQ_NEWS_TABLE_ID / BQ_BATCH_TABLE_ID / BQ_URL_HASH_TABLE_ID: fully-qualified
+#   table IDs. If not provided, they will be constructed from PROJECT_ID and BQ_DATASET.
+
+_BQ_PROJECT = os.getenv("PROJECT_ID", "fsa-amadeus")
+_BQ_DATASET = os.getenv("BQ_DATASET", "competitive_intel")
+
+BQ_NEWS_TABLE_ID = os.getenv(
+    "BQ_NEWS_TABLE_ID",
+    f"{_BQ_PROJECT}.{_BQ_DATASET}.news_v2",
+)
+BQ_BATCH_TABLE_ID = os.getenv(
+    "BQ_BATCH_TABLE_ID",
+    f"{_BQ_PROJECT}.{_BQ_DATASET}.batches_v2",
+)
+BQ_URL_HASH_TABLE_ID = os.getenv(
+    "BQ_URL_HASH_TABLE_ID",
+    f"{_BQ_PROJECT}.{_BQ_DATASET}.url_hashes",
+)
 
 bq_client = bigquery.Client()
 logger = get_logger()

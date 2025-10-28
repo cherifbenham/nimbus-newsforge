@@ -1,0 +1,6 @@
+README.md
+setup.py
+amadeus_newsgenerator.egg-info/PKG-INFO
+amadeus_newsgenerator.egg-info/SOURCES.txt
+amadeus_newsgenerator.egg-info/dependency_links.txt
+amadeus_newsgenerator.egg-info/top_level.txt

@@ -1,6 +1,7 @@
 from google.api_core.client_options import ClientOptions
 from google.cloud import discoveryengine_v1 as discoveryengine
 from vertexai.generative_models import GenerativeModel, Part, GenerationConfig
+from utils import MODEL_FLASH
 import vertexai
 import os
 
@@ -11,13 +12,13 @@ IResponseParams = {
     "ISearchResponse": 2,
 }
 
-project_id = "fsa-amadeus"
-location = "global"
-engine_id = "news-finder-v2_1730891472107"
+DE_PROJECT_ID = os.getenv("DISCOVERY_PROJECT_ID") or os.getenv("PROJECT_ID", "fsa-amadeus")
+DE_LOCATION = os.getenv("DISCOVERY_LOCATION", "global")
+DE_ENGINE_ID = os.getenv("DISCOVERY_ENGINE_ID", "news-finder-v2_1730891472107")
 
 client_options = (
-    ClientOptions(api_endpoint=f"{location}-discoveryengine.googleapis.com")
-    if location != "global"
+    ClientOptions(api_endpoint=f"{DE_LOCATION}-discoveryengine.googleapis.com")
+    if DE_LOCATION != "global"
     else None
 )
 discovery_client = discoveryengine.SearchServiceClient(
@@ -36,7 +37,10 @@ def search(
 ) -> discoveryengine.AnswerQueryResponse:
 
     # The full resource name of the search app serving config
-    serving_config = f"projects/{project_id}/locations/{location}/collections/default_collection/engines/{engine_id}/servingConfigs/default_config"
+    serving_config = (
+        f"projects/{DE_PROJECT_ID}/locations/{DE_LOCATION}/"
+        f"collections/default_collection/engines/{DE_ENGINE_ID}/servingConfigs/default_config"
+    )
 
     content_search_spec = discoveryengine.SearchRequest.ContentSearchSpec(
         snippet_spec=discoveryengine.SearchRequest.ContentSearchSpec.SnippetSpec(
@@ -91,7 +95,7 @@ def search(
     Answer:
     """
 
-    model = GenerativeModel(model_name="gemini-1.5-flash-002")
+    model = GenerativeModel(model_name=MODEL_FLASH)
     responses = model.generate_content(
         [prompt],
 

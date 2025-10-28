@@ -132,7 +132,7 @@ def fix_json_formatting(json_string, error_message):
     error message if correction fails.
   """
 
-    model = GenerativeModel(model_name="gemini-1.5-flash-001")
+    model = GenerativeModel(model_name="gemini-2.0-flash-001")
     prompt = f"""
     You are a JSON correction tool. Your goal is to help users fix invalid JSON strings.
 You will receive an input JSON string and an error message describing the problem with the JSON.
@@ -242,7 +242,7 @@ def next_page_url(html):
     Returns:
         The URL of the next page of articles.
     """
-    model = GenerativeModel(model_name="gemini-1.5-flash-001")
+    model = GenerativeModel(model_name="gemini-2.0-flash-001")
 
     prompt = """
     ```html
@@ -283,7 +283,7 @@ def extract_datetime_with_gemini(html):
     try:
         generation_config = {"temperature": 0}
         model = GenerativeModel(
-            model_name="gemini-1.5-flash-001", generation_config=generation_config)
+            model_name="gemini-1.5-flash-002", generation_config=generation_config)
         prompt = """
         ```html
         {}
@@ -404,7 +404,7 @@ def extract_article_with_gemini(html_content):
     try:
         generation_config = {"temperature": 0}
         model = GenerativeModel(
-            model_name="gemini-1.5-flash-001", generation_config=generation_config)
+            model_name="gemini-1.5-flash-002", generation_config=generation_config)
         prompt = """
         ```html
         {}
@@ -478,7 +478,7 @@ def extract_news_with_gemini(html_content):
     try:
         generation_config = {"temperature": 0}
         model = GenerativeModel(
-            model_name="gemini-1.5-flash-001", generation_config=generation_config)
+            model_name="gemini-1.5-flash-002", generation_config=generation_config)
         prompt = """
         ```html
         {}
@@ -665,7 +665,7 @@ return a JSON object structured like this:
         mime_type="video/mp4",
         uri=gcs_file)
 
-    model = GenerativeModel(model_name="gemini-1.5-flash-001")
+    model = GenerativeModel(model_name="gemini-2.0-flash-001")
     responses = model.generate_content(
         [prompt, media],
 
@@ -847,7 +847,7 @@ Newsletter:
     config = GenerationConfig(
         response_mime_type="application/json", temperature=0.6)
     model = GenerativeModel(
-        model_name="gemini-1.5-pro-001", generation_config=config)
+        model_name="gemini-1.5-pro-002", generation_config=config)
     responses = model.generate_content(
         [prompt],
 
@@ -943,7 +943,7 @@ in this digest. Do not use the actual examples in this digest.
 
     generation_config = {"temperature": 0,
                          "response_mime_type": "application/json"}
-    model = GenerativeModel(model_name="gemini-1.5-pro-001",
+    model = GenerativeModel(model_name="gemini-1.5-pro-002",
                             generation_config=generation_config)
 
     responses = model.generate_content(
@@ -1020,7 +1020,7 @@ in the highlights section, and how to format it. Do not use the actual examples 
 
     generation_config = {"temperature": 0,
                          "response_mime_type": "application/json"}
-    model = GenerativeModel(model_name="gemini-1.5-pro-001",
+    model = GenerativeModel(model_name="gemini-1.5-pro-002",
                             generation_config=generation_config)
     responses = model.generate_content(
         [prompt.format(config['prompt_weekly_highlights'],
@@ -1085,7 +1085,7 @@ def regenerate_digest_highlights(digest, highlights_news_list):
 
     generation_config = {"temperature": 0,
                          "response_mime_type": "application/json"}
-    model = GenerativeModel(model_name="gemini-1.5-pro-001",
+    model = GenerativeModel(model_name="gemini-1.5-pro-002",
                             generation_config=generation_config)
 
     responses = model.generate_content(
@@ -1138,7 +1138,7 @@ def reformat_article_for_digest(nl_article):
 
     generation_config = {"temperature": 0,
                          "response_mime_type": "application/json"}
-    model = GenerativeModel(model_name="gemini-1.5-pro-001",
+    model = GenerativeModel(model_name="gemini-1.5-pro-002",
                             generation_config=generation_config)
     
     prompt = prompt.format(nl_article)
@@ -1200,7 +1200,7 @@ existing articles:
 Duplicates(url):
     """
 
-    model = GenerativeModel(model_name="gemini-1.5-pro-001", generation_config=GenerationConfig(
+    model = GenerativeModel(model_name="gemini-1.5-pro-002", generation_config=GenerationConfig(
         response_mime_type="application/json", temperature=0.6))
 
     prompt = prompt.format(
@@ -1412,7 +1412,7 @@ example:
     options = GenerationConfig(
         response_mime_type="application/json", temperature=0.6)
     model = GenerativeModel(
-        model_name="gemini-1.5-pro-001", generation_config=options)
+        model_name="gemini-1.5-pro-002", generation_config=options)
     responses = model.generate_content([prompt])
 
     selected_news = responses.text.strip()
@@ -1458,7 +1458,7 @@ def highlights_cleanup(highlights_markdown):
 
     prompt = prompt.format(highlights_markdown)
 
-    model = GenerativeModel(model_name="gemini-1.5-flash-001")
+    model = GenerativeModel(model_name="gemini-2.0-flash-001")
     responses = model.generate_content(
         [prompt],)
 
