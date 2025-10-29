@@ -134,5 +134,31 @@ export const SearchResponseSchema = z.object({
 export type SearchResult = z.infer<typeof SearchResultSchema>;
 export type SearchResponse = z.infer<typeof SearchResponseSchema>;
 
+export const ComposeWeeklyClasses = [
+    "General Industry News",
+    "Competitors",
+    "M&A & Investments",
+    "Travel Providers",
+    "Financial Reports / Info",
+    "Research & Reports",
+] as const;
 
+export const ComposeWeeklyItemSchema = z.object({
+    id: z.string(),
+    title: z.string(),
+    abstract: z.string().optional(),
+    url: z.string().optional(),
+    date: z.string().optional(),
+    class_daily: z.string().optional(),
+});
 
+export type ComposeWeeklyItem = z.infer<typeof ComposeWeeklyItemSchema>;
+
+export const ComposeWeeklyInsightSchema = z.object({
+    id: z.string(),
+    gemini_comment: z.string(),
+    gemini_classification: z.string(),
+    similarity: z.number().int().min(0).max(100).optional(),
+});
+
+export type ComposeWeeklyInsight = z.infer<typeof ComposeWeeklyInsightSchema>;

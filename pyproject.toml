@@ -1,0 +1,23 @@
+[tool.ruff]
+# Match project’s Python and formatting preferences
+target-version = "py311"
+line-length = 100
+exclude = [
+  ".venv",
+  "client",
+  "client/dist",
+  "node_modules",
+  "news_fetcher_v1_archive",
+]
+
+[tool.ruff.lint]
+# Enable basic errors, undefined names, and import sorting
+select = ["E", "F", "I"]
+# Defer line-length concerns to the formatter
+ignore = ["E501"]
+
+[tool.ruff.format]
+# Black-compatible formatting via Ruff formatter
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"

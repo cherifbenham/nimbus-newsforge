@@ -3,6 +3,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import DailyNewsletter from "../pages/DailyNewsletter";
 import WeeklyDigest from "../pages/WeeklyDigest";
 import SearchResults from "../pages/SearchResults";
+import ComposeWeekly from "../pages/ComposeWeekly";
+import Setup from "../pages/Setup";
 
 const AppRoutes: React.FC = () => {
 
@@ -19,6 +21,14 @@ const AppRoutes: React.FC = () => {
             <Route
                 path="/weekly"
                 element={<WeeklyDigest />}
+            />
+            <Route
+                path="/compose"
+                element={<ComposeWeekly />}
+            />
+            <Route
+                path="/setup"
+                element={<Setup />}
             />
             <Route
                 path="/search"

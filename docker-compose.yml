@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  # Backend Flask API
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: amadeus-backend
+    ports:
+      - "5001:5001"
+    environment:
+      - PORT=5001
+      - PROJECT_ID=${PROJECT_ID}
+      - REGION=${REGION}
+      - FIRESTORE_DATABASE_ID=${FIRESTORE_DATABASE_ID}
+      - COMPOSE_WEEKLY_SIM_WEIGHT=${COMPOSE_WEEKLY_SIM_WEIGHT:-0.3}
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials/service-account.json
+    volumes:
+      # Mount credentials for local development
+      - ./fsa-amadeus-471508-fc2039d8afcb.json:/app/credentials/service-account.json:ro
+      # Mount source code for hot-reload during development (optional)
+      - ./server:/app
+    restart: unless-stopped
+    networks:
+      - amadeus-network
+
+  # Frontend React/Vite
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:5001/api
+    container_name: amadeus-frontend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - amadeus-network
+
+networks:
+  amadeus-network:
+    driver: bridge

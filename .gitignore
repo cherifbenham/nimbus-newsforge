@@ -4,6 +4,9 @@ Thumbs.db
 *.log
 *.swp
 *.tmp
+*.pid
+*.xlsx
+*.xls
 
 # Credentials & Secrets
 fsa-amadeus-471508-*.json
@@ -55,13 +58,11 @@ fsa-amadeus-*.json
 # secrets.json
 creds.json
 
-# Local documentation and drafts - do not commit
-# Specific files generated/added during design and note-taking
-/Amadeus - Reference Technical Design Document - Generative Newsletter V2.pdf
-/Amadeus - Reference Technical Design Document - Generative Newsletter V2.txt
-/remaining_specs.md
+# Documentation files
+*.pdf
 
-# If you want to ignore all PDFs or Markdown drafts in the future,
-# uncomment one of the following lines (careful: will ignore README.md too):
-## *.pdf
-## *.md
+# Allow important markdown files
+!README.md
+!DOCKER_DEPLOYMENT.md
+# But ignore other markdown drafts
+remaining_specs.md

@@ -11,10 +11,18 @@ except Exception:
 
 # Ensure local service-account credentials are picked up when running outside GCP
 _repo_root = Path(__file__).resolve().parents[1]
-_local_creds = _repo_root / "fsa-amadeus-471508-b1e0395dd912.json"
-if _local_creds.exists():
-    # Force the SDK to use repo-local credentials when running locally
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = str(_local_creds)
+# Try to load from .env first, then fall back to checking for any matching credential file
+_creds_from_env = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+if _creds_from_env:
+    _local_creds = _repo_root / _creds_from_env
+    if _local_creds.exists():
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = str(_local_creds)
+else:
+    # Fallback: look for any fsa-amadeus service account key in repo root
+    import glob
+    _cred_files = sorted(glob.glob(str(_repo_root / "fsa-amadeus-471508-*.json")), reverse=True)
+    if _cred_files:
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = _cred_files[0]
 import vertexai
 import logging
 import json_repair
@@ -208,7 +216,7 @@ def generate_random_id(length=20):
   """
 
   # Generate random characters (alphanumeric + uppercase)
-  characters = string.ascii_letters + string.digits 
+  characters = string.ascii_letters + string.digits
   random_chars = ''.join(random.choice(characters) for i in range(length - 3))
 
   # Construct the ID string

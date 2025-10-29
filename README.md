@@ -15,7 +15,7 @@ how to upload the dailies in a black box that dispatches them into a structured 
 
 
 25 09 25
-check the customisability of the system prompt regarfing the input criteria for news ranking / selelction
+check the customisability of the system prompt regarding the input criteria for news ranking / selelction
 
 since the criteria belong to the daily, no need for the weekly
 

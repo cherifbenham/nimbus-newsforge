@@ -46,7 +46,7 @@ interface MenuItemProps {
 }
 const MenuItem: React.FC<MenuItemProps> = ({ label, hasArrow }) => {
     return (
-        <NavigationMenu.Trigger className="px-4 py-4 rounded text font-medium text-gray-700 dark:text-slate-100 hover:text-gray-800 dark:hover:text-slate-200 hover:font-bold ">
+        <NavigationMenu.Trigger className="px-4 py-4 rounded text font-medium text-gray-700 dark:text-slate-100 hover:text-gray-800 dark:hover:text-slate-200 hover:font-bold flex items-center justify-center">
             {label}
             {hasArrow && (
                 <ChevronDownIcon className="h-4 w-4 inline-block ml-1 text-gray-600 dark:text-slate-400" />
@@ -80,7 +80,7 @@ const NavigationHeader = () => {
     return (
         <nav className="flex space-x-4 z-50">
             <NavigationMenu.Root>
-                <NavigationMenu.List className="flex space-x-4 bg-white dark:bg-slate-700 rounded-full shadow-sm h-16 px-2 "> {/* Changed background */}
+                <NavigationMenu.List className="flex space-x-4 bg-white dark:bg-slate-700 rounded-full shadow-sm h-16 px-2 items-center"> {/* Added items-center for vertical alignment */}
                     {/* Daily Menu */}
                     <NavigationMenu.Item >
                         <MenuItem label="Daily" hasArrow={true} />
@@ -127,6 +127,19 @@ const NavigationHeader = () => {
                             </div>
                         </NavigationMenu.Content>
                     </NavigationMenu.Item>
+
+                    <NavigationMenu.Item>
+                        <NavigationMenu.Link
+                            className="px-4 py-4 rounded text font-medium text-gray-700 dark:text-slate-100 hover:text-gray-800 dark:hover:text-slate-200 hover:font-bold flex items-center justify-center text-center"
+                            href="/compose"
+                            onClick={(event) => {
+                                event.preventDefault();
+                                navigate('/compose');
+                            }}
+                        >
+                            <span className="whitespace-pre-line">Compose{'\n'}Weekly</span>
+                        </NavigationMenu.Link>
+                    </NavigationMenu.Item>
                     <NavigationMenu.Item>
                         <MenuItem label="Weekly" hasArrow={true} />
                         <NavigationMenu.Content className="absolute right-0 mt-2 bg-white dark:bg-black rounded-md shadow-md py-2 w-60">
@@ -172,9 +185,18 @@ const NavigationHeader = () => {
                     </NavigationMenu.Item>
 
 
-                    {/* Settings Menu */}
+                    {/* Settings / Setup */}
                     <NavigationMenu.Item>
-                        <MenuItem label="Setup" />
+                        <NavigationMenu.Link
+                            className="px-4 py-4 rounded text font-medium text-gray-700 dark:text-slate-100 hover:text-gray-800 dark:hover:text-slate-200 hover:font-bold flex items-center justify-center"
+                            href="/setup"
+                            onClick={(event) => {
+                                event.preventDefault();
+                                navigate('/setup');
+                            }}
+                        >
+                            Setup
+                        </NavigationMenu.Link>
                     </NavigationMenu.Item>
                 </NavigationMenu.List>
                 <NavigationMenu.Indicator className="hidden" />

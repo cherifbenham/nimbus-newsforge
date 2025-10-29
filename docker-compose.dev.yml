@@ -1,0 +1,31 @@
+version: "3.8"
+
+# Development override - use with: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    command: python app.py
+    volumes:
+      # Mount source for hot-reload
+      - ./server:/app
+      - ./fsa-amadeus-471508-fc2039d8afcb.json:/app/credentials/service-account.json:ro
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+      args:
+        - VITE_API_URL=http://localhost:5001/api
+    command: npm run dev -- --host 0.0.0.0
+    ports:
+      - "5173:5173"
+    volumes:
+      # Mount source for hot-reload
+      - ./client:/app
+      - /app/node_modules

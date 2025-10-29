@@ -1,0 +1,120 @@
+steps:
+  # Build backend
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "build"
+      - "-t"
+      - "gcr.io/$PROJECT_ID/amadeus-ci-backend:$COMMIT_SHA"
+      - "-t"
+      - "gcr.io/$PROJECT_ID/amadeus-ci-backend:latest"
+      - "./server"
+    id: "build-backend"
+
+  # Build frontend
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "build"
+      - "-t"
+      - "gcr.io/$PROJECT_ID/amadeus-ci-frontend:$COMMIT_SHA"
+      - "-t"
+      - "gcr.io/$PROJECT_ID/amadeus-ci-frontend:latest"
+      - "--build-arg"
+      - "VITE_API_URL=${_BACKEND_URL}/api"
+      - "./client"
+    id: "build-frontend"
+    waitFor: ["-"]
+
+  # Push backend image
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "push"
+      - "gcr.io/$PROJECT_ID/amadeus-ci-backend:$COMMIT_SHA"
+    id: "push-backend"
+    waitFor: ["build-backend"]
+
+  # Push frontend image
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "push"
+      - "gcr.io/$PROJECT_ID/amadeus-ci-frontend:$COMMIT_SHA"
+    id: "push-frontend"
+    waitFor: ["build-frontend"]
+
+  # Deploy backend to Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - "run"
+      - "deploy"
+      - "amadeus-ci-backend"
+      - "--image"
+      - "gcr.io/$PROJECT_ID/amadeus-ci-backend:$COMMIT_SHA"
+      - "--region"
+      - "${_REGION}"
+      - "--platform"
+      - "managed"
+      - "--allow-unauthenticated"
+      - "--service-account"
+      - "${_SERVICE_ACCOUNT}"
+      - "--set-env-vars"
+      - "PROJECT_ID=$PROJECT_ID,REGION=${_REGION},FIRESTORE_DATABASE_ID=(default),COMPOSE_WEEKLY_SIM_WEIGHT=0.3"
+      - "--port"
+      - "5001"
+      - "--memory"
+      - "1Gi"
+      - "--cpu"
+      - "1"
+      - "--timeout"
+      - "300"
+      - "--min-instances"
+      - "0"
+      - "--max-instances"
+      - "10"
+    id: "deploy-backend"
+    waitFor: ["push-backend"]
+
+  # Deploy frontend to Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - "run"
+      - "deploy"
+      - "amadeus-ci-frontend"
+      - "--image"
+      - "gcr.io/$PROJECT_ID/amadeus-ci-frontend:$COMMIT_SHA"
+      - "--region"
+      - "${_REGION}"
+      - "--platform"
+      - "managed"
+      - "--allow-unauthenticated"
+      - "--port"
+      - "8080"
+      - "--memory"
+      - "512Mi"
+      - "--cpu"
+      - "1"
+      - "--timeout"
+      - "60"
+      - "--min-instances"
+      - "0"
+      - "--max-instances"
+      - "5"
+    id: "deploy-frontend"
+    waitFor: ["push-frontend", "deploy-backend"]
+
+images:
+  - "gcr.io/$PROJECT_ID/amadeus-ci-backend:$COMMIT_SHA"
+  - "gcr.io/$PROJECT_ID/amadeus-ci-backend:latest"
+  - "gcr.io/$PROJECT_ID/amadeus-ci-frontend:$COMMIT_SHA"
+  - "gcr.io/$PROJECT_ID/amadeus-ci-frontend:latest"
+
+substitutions:
+  _REGION: "europe-west1"
+  _SERVICE_ACCOUNT: "fsa-amadeus-471508@amadeus-471508.iam.gserviceaccount.com"
+  _BACKEND_URL: "https://amadeus-ci-backend-<YOUR_HASH>-ew.a.run.app"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  machineType: "E2_HIGHCPU_8"
+
+timeout: 1800s

@@ -14,8 +14,12 @@ from classes.Newsletter import *
 app = Flask(__name__)
 # logging = get_logging()
 
-# Initialize Firestore client
-db = firestore.Client()
+# Initialize Firestore client honoring env
+import os
+db = firestore.Client(
+    project=os.getenv('PROJECT_ID') or None,
+    database=os.getenv('FIRESTORE_DATABASE_ID', '(default)')
+)
 
 
 def save_news(news_list):

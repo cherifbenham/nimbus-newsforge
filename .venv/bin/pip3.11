@@ -1,4 +1,4 @@
-#!/Users/cherifbenham/code/amadeus_ci_newsletter/.venv/bin/python3.11
+#!/Users/cherifbenham/code/amadeus_ci_newsletter/.venv311/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

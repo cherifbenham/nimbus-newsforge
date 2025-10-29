@@ -21,7 +21,11 @@ from datetime import datetime, timezone, date, timedelta
 
 MAX_PAGES = 5
 
-db = firestore.Client()
+import os
+db = firestore.Client(
+    project=os.getenv('PROJECT_ID') or None,
+    database=os.getenv('FIRESTORE_DATABASE_ID', '(default)')
+)
 logger = get_logger()
 # Function that incrementally fetches news from a list of given websites
 # and saves them to a Firestore database.

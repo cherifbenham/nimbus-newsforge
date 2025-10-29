@@ -31,7 +31,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ initialValue }) => {
             whileHover={{ scale: 1.02 }}
             whileFocus={{ scale: 1.02 }}
             transition={{ duration: 0.2, ease: 'easeInOut' }}
-            className="w-3/5 my-4 mx-auto" // Make the container full width
+            className="w-2/5 my-4 mx-auto" // Reduced width to give more space to navigation
         >
             <div className="relative flex items-center">
                 <input

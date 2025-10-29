@@ -1,4 +1,4 @@
-#!/Users/cherifbenham/code/amadeus_ci_newsletter/.venv/bin/python3.11
+#!/Users/cherifbenham/code/amadeus_ci_newsletter/.venv311/bin/python
 import sys
 from dotenv.__main__ import cli
 if __name__ == '__main__':

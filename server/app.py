@@ -12,6 +12,7 @@ from classes.Newsletter import *
 from news_search import *
 from urllib.parse import urlparse
 from flask_cors import CORS
+from compose_weekly import generate_compose_weekly_insights
 
 import concurrent.futures
 import json
@@ -32,7 +33,11 @@ CORS(app, resources={
 })
 
 
-db = firestore.Client()
+# Initialize Firestore client honoring PROJECT_ID and FIRESTORE_DATABASE_ID
+db = firestore.Client(
+    project=os.getenv('PROJECT_ID') or None,
+    database=os.getenv('FIRESTORE_DATABASE_ID', '(default)')
+)
 
 # Basic status/index endpoints
 
@@ -655,6 +660,84 @@ def search_news_route():
         query = request.args.get('input')
         search_results = search(query)
         return jsonify(search_results), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/compose-weekly/analyze', methods=['POST'])
+def compose_weekly_analyze_route():
+    try:
+        data = request.get_json() or {}
+        items = data.get('items', [])
+        if not isinstance(items, list) or not items:
+            return jsonify({"error": "No news items provided"}), 400
+
+        sanitized = []
+        for idx, item in enumerate(items):
+            if not isinstance(item, dict):
+                continue
+            title = str(item.get("title", "") or "").strip()
+            abstract = str(item.get("abstract", "") or "").strip()
+            if not title and not abstract:
+                continue
+            sanitized.append(
+                {
+                    "id": str(item.get("id", idx)),
+                    "title": title,
+                    "abstract": abstract,
+                    "url": str(item.get("url", "") or "").strip(),
+                    "date": str(item.get("date", "") or "").strip(),
+                    "class_daily": str(item.get("class_daily", "") or "").strip(),
+                }
+            )
+
+        if not sanitized:
+            return jsonify({"error": "No valid items to analyze"}), 400
+
+        insights_out = generate_compose_weekly_insights(sanitized)
+        if isinstance(insights_out, tuple):
+            insights, source = insights_out
+        else:
+            insights, source = insights_out, "unknown"
+        return jsonify({"results": insights, "source": source}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/compose-weekly/prompt', methods=['GET'])
+def get_compose_weekly_prompt():
+    """Read prompt from Firestore config/dev.prompt_weekly_compose."""
+    try:
+        text = ''
+        # Allow dev mode to bypass Firestore
+        local_only = os.getenv('COMPOSE_WEEKLY_PROMPT_LOCAL_ONLY', '').strip().lower() in {'1','true','yes'}
+        if not local_only:
+            try:
+                doc = db.collection('config').document('dev').get()
+                if doc.exists:
+                    text = str(doc.to_dict().get('prompt_weekly_compose', '') or '')
+            except Exception:
+                pass
+        return jsonify({"prompt": text}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/compose-weekly/prompt', methods=['PUT'])
+def set_compose_weekly_prompt():
+    """Persist prompt in Firestore config/dev.prompt_weekly_compose."""
+    try:
+        data = request.get_json() or {}
+        prompt = str(data.get('prompt', '') or '')
+        # Save to Firestore unless disabled via env
+        local_only = os.getenv('COMPOSE_WEEKLY_PROMPT_LOCAL_ONLY', '').strip().lower() in {'1','true','yes'}
+        if not local_only:
+            try:
+                db.collection('config').document('dev').set({'prompt_weekly_compose': prompt}, merge=True)
+            except Exception:
+                # In dev, ignore Firestore errors
+                pass
+        return jsonify({"status": "ok"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

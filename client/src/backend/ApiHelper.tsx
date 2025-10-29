@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '../config/apiService';
-import { Digest, DigestHighlight, NewsletterHeader, Newsletter, NewsletterSchema, News, NewsSchema, SearchResponseSchema, SearchResponse, DigestSchema, DigestHightlightSchema } from '../dto/InterfaceDefinition';
+import { Digest, DigestHighlight, NewsletterHeader, Newsletter, NewsletterSchema, News, NewsSchema, SearchResponseSchema, SearchResponse, DigestSchema, DigestHightlightSchema, ComposeWeeklyItem, ComposeWeeklyInsightSchema, ComposeWeeklyInsight } from '../dto/InterfaceDefinition';
 import { z } from 'zod';
 
 
@@ -77,6 +77,16 @@ export const ApiHelper = {
         }
     }
     ,
+    async analyzeComposeWeekly(items: ComposeWeeklyItem[]): Promise<ComposeWeeklyInsight[]> {
+        try {
+            const response = await axios.post(`${serverUrl}/compose-weekly/analyze`, { items });
+            const parsed = ComposeWeeklyInsightSchema.array().parse(response.data.results);
+            return parsed;
+        } catch (error) {
+            console.error('Error analyzing compose weekly items:', error);
+            throw error;
+        }
+    },
     async composeEmailFromNewsletter(newsletter: Newsletter, subjectHint?: string): Promise<{ subject: string, html: string }> {
         const payload: any = { newsletter };
         if (subjectHint) payload.subject_hint = subjectHint;
