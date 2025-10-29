@@ -18,9 +18,9 @@ if _creds_from_env:
     if _local_creds.exists():
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = str(_local_creds)
 else:
-    # Fallback: look for any fsa-amadeus service account key in repo root
+    # Fallback: look for any service-account key in repo root (generic pattern)
     import glob
-    _cred_files = sorted(glob.glob(str(_repo_root / "fsa-amadeus-471508-*.json")), reverse=True)
+    _cred_files = sorted(glob.glob(str(_repo_root / "service-account-*.json")), reverse=True)
     if _cred_files:
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = _cred_files[0]
 import vertexai
@@ -40,7 +40,7 @@ from logging import getLogger
 import os
 import google.cloud.logging
 
-PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus")
+PROJECT_ID = os.getenv("PROJECT_ID", "demo-project")
 LOCATION = os.getenv("REGION", "us-central1")
 # Model names can be overridden via environment variables
 # Default to Gemini 2.0 Flash for broader availability

@@ -39,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
     return (
         <aside className="w-64 bg-customer-blue dark:bg-black shadow-md md:block flex flex-col h-screen sticky top-0">
             <div className='my-8 mx-auto flex justify-center'>
-                <img src='/amadeus-logo-dark-sky.png' alt='logo' />
+                <img src='/company-logo-dark-sky.png' alt='logo' />
 
             </div>
             <div className="p-4 flex-grow mt-32">

@@ -15,9 +15,9 @@ from urllib.parse import urlparse
 import pandas as pd
 
 
-PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus")
+PROJECT_ID = os.getenv("PROJECT_ID", "demo-project")
 LOCATION = os.getenv("REGION", "us-central1")
-MEDIA_BUCKET = os.getenv("MEDIA_BUCKET", "fsa_amadeus")
+MEDIA_BUCKET = os.getenv("MEDIA_BUCKET", "ci_media")
 MAX_PAGES = 5
 
 vertexai.init(project=PROJECT_ID, location=LOCATION)
@@ -135,7 +135,7 @@ def group_news_by_website(news_list):
 def analyze_news(news_item):
 
     prompt = """
-You are an industry specialist working at Amadeus. Analyze the news article below and give a summary of why this news is important (or not) to Amadeus.
+You are an industry specialist working at our company. Analyze the news article below and give a summary of why this news is important (or not) to our company.
 Use markdown for formatting. Do not exceed 100 words. Format the response using all the possible markdown elements (like bullet points) to make it clear and readable to the user
 
 News:
@@ -161,17 +161,17 @@ def fetch_and_analyze_media(url):
     media_obj = fetch_and_store(url, MEDIA_BUCKET)
 
     prompt = """
-You are an industry specialist working at Amadeus. Summarize and give structured highlights about this podcast. Those highlights should be focused on:
+You are an industry specialist working at our company. Summarize and give structured highlights about this podcast. Those highlights should be focused on:
 * **Areas:** Travel distribution, Travel IT Solutions, Airlines, Hospitality, Airport IT.
-* **Players:** Amadeus' competitors (Sabre, Travelport), major tech companies (Google, Amazon, Microsoft), OTAs, Metasearch engines, TMCs, Aggregators, Airlines, Hotel chains, Short-term rentals, and key players in each area.
+* **Players:** Our company's competitors (Sabre, Travelport), major tech companies (Google, Amazon, Microsoft), OTAs, Metasearch engines, TMCs, Aggregators, Airlines, Hotel chains, Short-term rentals, and key players in each area.
 * **Key Topics:** Industry updates on capacity, traffic, forecasts, NDC, biometrics, consolidation, funding, regulations, financial results, sustainability, loyalty, business travel, and changes in strategies.
 
-Finally, make a summary of the content and explain if this has an interest for Amadeus and why.
+Finally, make a summary of the content and explain if this has an interest for our company and why.
 
 return a JSON object structured like this:
 {
     "summary": "The summary of the podcast.",
-    "pov"  :   "Point of view on the podcast from the perspective of Amadeus",
+    "pov"  :   "Point of view on the podcast from our company's perspective",
     "highlights": [
         "Highlight 1",
         "Highlight 2",
@@ -246,11 +246,11 @@ def tournament_rank(news_items, article_data):
         article2 = article_data[item2]
 
         ranking_prompt = """TASK:
-As an experienced travel industry editor working for Amadeus, look carrefully at the 2 given input news and output the most important one for Amadeus
+As an experienced travel industry editor working for our company, look carefully at the 2 given input news and output the most important one for our company
 
 
 INSTRUCTIONS
-- CAREFULLY analyze the text before choosing the most important news for Amadeus
+- CAREFULLY analyze the text before choosing the most important news for our company
 - you MUST choose between the 2 input news and return only one.
 - return the URL of the chosen news
 
@@ -280,7 +280,7 @@ When ranking news, consider:
 Classify news based on:
 
 * **Quantitative criteria:** Size of players, funding amounts (above $5M), impact on market share.
-* **Qualitative criteria:** Involvement of key players, impact on the travel industry, potential impact on Amadeus's business, relevance to Amadeus's customer segments, avoiding repetitive topics, and focusing on global rather than local news.
+* **Qualitative criteria:** Involvement of key players, impact on the travel industry, potential impact on our company's business, relevance to our company's customer segments, avoiding repetitive topics, and focusing on global rather than local news.
 
 Output is a JSON object with the following format:
 {{'url':'url of the highhest importantce news'}}
@@ -656,7 +656,7 @@ def generate_newsletter_text(news_list, past_newsletters=None, media_list=None):
 
         **Prioritization:**
 
-* **Relevance:** Prioritize news that directly impacts Amadeus's business, its competitors, or its key customer segments.
+* **Relevance:** Prioritize news that directly impacts our company's business, its competitors, or its key customer segments.
 * **Quantitative Metrics:**  Prioritize news that involves significant funding rounds (above $5M), mergers, acquisitions, or changes in market share. 
 
 **Rejected News Examples:**
@@ -673,7 +673,7 @@ def generate_newsletter_text(news_list, past_newsletters=None, media_list=None):
           "title": "title of the news”,
           "abstract": "abstract of the news",
           "url":"link to the full article",
-          "reason":"explanation on why this news is important for Amadeus",
+          "reason":"explanation on why this news is important for our company",
           "duplicate_candidates": [optional - full url of the artcle pointing to the duplicate news]
         }}
       ],"Podcasts of the Day": [
@@ -682,7 +682,7 @@ def generate_newsletter_text(news_list, past_newsletters=None, media_list=None):
           "title": "title of the podcast”,
           "abstract": "summary of the podcast",
           "url":"link to the podcast",
-          "reason":"explanation on why this news is important for Amadeus",
+          "reason":"explanation on why this news is important for our company",
           "duplicate_candidates": [optional - full url of the artcle pointing to the duplicate news]
         }}
       ],
@@ -693,7 +693,7 @@ def generate_newsletter_text(news_list, past_newsletters=None, media_list=None):
             "title": "title of the news”",
             "abstract": "abstract of the news",
             "url":"link to the full article",
-            "reason":"explanation on why this news is important for Amadeus",
+            "reason":"explanation on why this news is important for our company",
             "duplicate_candidates": [optional - full url of the artcle pointing to the duplicate news]
             }}
           ]
@@ -704,7 +704,7 @@ def generate_newsletter_text(news_list, past_newsletters=None, media_list=None):
             "title": "title of the news",
             "abstract": "abstract of the news",
             "url":"link to the full article",
-            "reason":"explanation on why this news is important for Amadeus",
+            "reason":"explanation on why this news is important for our company",
             "duplicate_candidates": [optional - full url of the artcle pointing to the duplicate news]
           }}
         ]
@@ -843,7 +843,7 @@ def process_news_chunk(news_chunk):
 
 
     The following news articles are from sources that were not included in the initial newsletter.
-    Please carefully consider these articles and select only the most important ones for Amadeus, based on the criteria provided below:
+    Please carefully consider these articles and select only the most important ones for our company, based on the criteria provided below:
     When selecting news, consider:
 
 * **Areas:** Travel distribution, Travel IT Solutions, Airlines, Hospitality, Airport IT.
@@ -870,13 +870,13 @@ def process_news_chunk(news_chunk):
 Prioritize news based on:
 
 * **Quantitative criteria:** Size of players, funding amounts (above $5M), impact on market share.
-* **Qualitative criteria:** Involvement of key players, impact on the travel industry, potential impact on Amadeus's business, relevance to Amadeus's customer segments, avoiding repetitive topics, and focusing on global rather than local news.
+* **Qualitative criteria:** Involvement of key players, impact on the travel industry, potential impact on our company's business, relevance to our company's customer segments, avoiding repetitive topics, and focusing on global rather than local news.
 * **User control: articles having the flag {{forced: True}} must be added in the newsletter, either in the Top News of the Day or Regional News section.**
 * **Source website:** priority websites are skift, theBeat, sabre,Phocuswire and businesstravelnews
 
 Do not include stories covering the following topics:
 
-* News focused on Amadeus itself, unless in connection to additional major players (eg. Google, Mariot, United Airlines)
+* News focused on our company itself, unless in connection to additional major players (eg. Google, Mariot, United Airlines)
 * News included in previous newsletters, including from separate sources – list of previous newsletter provided below
 * Industries to avoid: Cargo, Cruises or cruise lines, Entertainment, Amusement parks, Events
 * Overly local news that lacks broader industry implications
@@ -987,7 +987,7 @@ def rank_top_stories(news_items, max_items: int = 5):
     if not news_items:
         return []
     prompt = f"""
-You are a senior editor. From the input articles, output the top {max_items} most important for a corporate audience at Amadeus (travel tech).
+You are a senior editor. From the input articles, output the top {max_items} most important for a corporate audience at our company (travel tech).
 
 Prioritise: competitive moves, strategy, partnerships, funding/M&A, regulatory, material performance signals, and items with direct/adjacent impact on distribution, airline/hotel IT, payments, airport IT, or major competitors.
 Avoid: minor local items, routine route openings, awards, hiring notes, cabin designs.

@@ -12,7 +12,7 @@ IResponseParams = {
     "ISearchResponse": 2,
 }
 
-DE_PROJECT_ID = os.getenv("DISCOVERY_PROJECT_ID") or os.getenv("PROJECT_ID", "fsa-amadeus")
+DE_PROJECT_ID = os.getenv("DISCOVERY_PROJECT_ID") or os.getenv("PROJECT_ID", "demo-project")
 DE_LOCATION = os.getenv("DISCOVERY_LOCATION", "global")
 DE_ENGINE_ID = os.getenv("DISCOVERY_ENGINE_ID", "news-finder-v2_1730891472107")
 
@@ -25,7 +25,7 @@ discovery_client = discoveryengine.SearchServiceClient(
     client_options=client_options)
 
 
-PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus")
+PROJECT_ID = os.getenv("PROJECT_ID", "demo-project")
 LOCATION = os.getenv("REGION", "us-central1")
 
 
@@ -53,7 +53,7 @@ def search(
         #     ignore_adversarial_query=True,
         #     ignore_non_summary_seeking_query=True,
         #     model_prompt_spec=discoveryengine.SearchRequest.ContentSearchSpec.SummarySpec.ModelPromptSpec(
-        #         preamble="You are a News search engine for Amadeus, the travel provider. The returned news are travel industry news"
+        #         preamble="You are a News search engine for our company in the travel industry. The returned news are travel industry news"
         #     ),
         #     model_spec=discoveryengine.SearchRequest.ContentSearchSpec.SummarySpec.ModelSpec(
         #         version="stable",
@@ -81,7 +81,7 @@ def search(
         struct = dict(result.document.struct_data)
         formatted_response.append(struct)
 
-    prompt = f""" You are a helpful assistant for the competitive intelligence department of Amadeus, the leading travel provider
+    prompt = f""" You are a helpful assistant for the competitive intelligence function at our company in the travel industry.
     Use the following RAG context to answer to the users question.
     Guidelines: if the query is not formulated as a question, try to detect the intent behind the query. Clearly indicate in your response that you reformulated
     Give a markdown formatted result.

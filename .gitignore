@@ -9,7 +9,9 @@ Thumbs.db
 *.xls
 
 # Credentials & Secrets
-fsa-amadeus-471508-*.json
+# Generic service account and credential files
+service-account-*.json
+*.env
 .env
 .env.local
 .env.*.local
@@ -17,11 +19,14 @@ fsa-amadeus-471508-*.json
 # Node.js (client)
 node_modules/
 dist/
+client/dist/
 build/
 
 # Python (server)
 env/
 server_env/
+.venv/
+server/.venv/
 *.pyc
 __pycache__/
 .pytest_cache/
@@ -50,7 +55,6 @@ __pycache__/
 *.pem
 *creds*.json
 *credentials*.json
-fsa-amadeus-*.json
 
 # Project-specific files (add as needed)
 # Example:
@@ -66,3 +70,18 @@ creds.json
 !DOCKER_DEPLOYMENT.md
 # But ignore other markdown drafts
 remaining_specs.md
+
+# Logs directory
+logs/
+*.log
+*.pid
+
+# Data and examples
+data/examples/
+data/*.xlsx
+data/*.json
+
+# Documentation (optional - remove if you want to track docs)
+docs/*.pdf
+docs/*.xlsx
+news_fetcher_v1_archive/

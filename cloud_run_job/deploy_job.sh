@@ -2,7 +2,7 @@
 REGION="europe-west1" # Updated region 
 IMAGE_NAME="news_fetcher_v2"
 JOB_NAME="news-fetcher-job-v2" 
-PROJECT_ID="fsa-amadeus"
+PROJECT_ID="${PROJECT_ID:-demo-project}"
 
 # Get Project ID (excellent error handling!)
 if [[ -z "$PROJECT_ID" ]]; then

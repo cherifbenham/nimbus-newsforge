@@ -4,7 +4,7 @@ set -euo pipefail
 # Usage:
 #   bash scripts/create_bq_tables.sh <PROJECT_ID> <DATASET> [LOCATION]
 # Example:
-#   bash scripts/create_bq_tables.sh fsa-amadeus-471508 competitive_intel US
+#   bash scripts/create_bq_tables.sh YOUR_PROJECT_ID competitive_intel US
 
 PROJECT_ID=${1:-${PROJECT_ID:-}}
 DATASET=${2:-${BQ_DATASET:-competitive_intel}}
@@ -53,4 +53,3 @@ bq mk --table --schema=/tmp/url_hashes.schema.json "${PROJECT_ID}:${DATASET}.url
 
 echo "All tables ensured. Listing dataset contents:"
 bq ls "${PROJECT_ID}:${DATASET}"
-

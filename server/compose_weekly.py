@@ -86,8 +86,8 @@ def _build_prompt(items: List[Dict[str, str]]) -> str:
     custom = _load_custom_prompt()
     addendum = f"\n\nAdditional CI instructions (for scoring/classification):\n{custom}\n" if custom else ""
     return f"""
-You are assisting the Amadeus Competitive Intelligence team. For each news item provide:
-- "gemini_comment": one or two sentences on why this news matters to Amadeus. Avoid marketing fluff.
+You are assisting the company's Competitive Intelligence team. For each news item provide:
+- "gemini_comment": one or two sentences on why this news matters to our company. Avoid marketing fluff.
 - "gemini_classification": choose exactly one of: {classes}. Use the wording exactly as listed.{addendum}
 
 Return a JSON array with objects formatted as:
@@ -168,8 +168,8 @@ def _fallback_comment(title: str, abstract: str) -> str:
     """Build a concise, non-fluffy comment as a fallback."""
     base = title.strip() or abstract.strip()
     if not base:
-        return "Relevant industry development with potential impact on Amadeus."
-    return f"Relevance for Amadeus: {base[:180]}"  # keep it short
+        return "Relevant industry development with potential impact on our company."
+    return f"Relevance for our company: {base[:180]}"  # keep it short
 
 
 def _parse_model_output(text: str) -> List[Dict[str, str]]:

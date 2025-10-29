@@ -49,8 +49,8 @@ kill_by_pattern() {
 }
 
 # 1) Use PID files when available
-kill_pidfile server_backend.pid "server"
-kill_pidfile client_dev.pid "client"
+kill_pidfile logs/server_backend.pid "server"
+kill_pidfile logs/client_dev.pid "client"
 
 # 2) Kill by known ports
 kill_by_port 5001 "server"

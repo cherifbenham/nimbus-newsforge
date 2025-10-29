@@ -1,4 +1,4 @@
-# Amadeus CI Newsletter - Docker Deployment Guide
+# CI Newsletter - Docker Deployment Guide
 
 ## 🐳 Docker Setup
 
@@ -34,7 +34,7 @@ This application is fully containerized with Docker for easy deployment to Googl
 
 3. **Development mode with hot-reload**:
    ```bash
-   docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+   docker-compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml up
    ```
    - Frontend dev server: http://localhost:5173
    - Backend: http://localhost:5001
@@ -69,7 +69,7 @@ docker-compose up --build
 
 1. Install [Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
 2. Authenticate: `gcloud auth login`
-3. Set your project: `gcloud config set project amadeus-471508`
+3. Set your project: `gcloud config set project YOUR_PROJECT_ID`
 4. Enable required APIs:
    ```bash
    gcloud services enable run.googleapis.com
@@ -83,12 +83,12 @@ The easiest way to deploy:
 
 ```bash
 # Set environment variables (or edit the script)
-export PROJECT_ID=amadeus-471508
+export PROJECT_ID=YOUR_PROJECT_ID
 export REGION=europe-west1
-export SERVICE_ACCOUNT=fsa-amadeus-471508@amadeus-471508.iam.gserviceaccount.com
+export SERVICE_ACCOUNT=YOUR_SA@YOUR_PROJECT_ID.iam.gserviceaccount.com
 
 # Run deployment
-./deploy-to-gcp.sh
+./docker/deploy-to-gcp.sh
 ```
 
 This script will:
@@ -106,16 +106,16 @@ This script will:
 cd server
 
 # Build and submit
-gcloud builds submit --tag gcr.io/amadeus-471508/amadeus-ci-backend
+gcloud builds submit --tag gcr.io/$PROJECT_ID/ci-newsletter-backend
 
 # Deploy to Cloud Run
-gcloud run deploy amadeus-ci-backend \
-  --image gcr.io/amadeus-471508/amadeus-ci-backend \
+gcloud run deploy ci-newsletter-backend \
+  --image gcr.io/$PROJECT_ID/ci-newsletter-backend \
   --platform managed \
   --region europe-west1 \
   --allow-unauthenticated \
-  --service-account fsa-amadeus-471508@amadeus-471508.iam.gserviceaccount.com \
-  --set-env-vars "PROJECT_ID=amadeus-471508,REGION=europe-west1,FIRESTORE_DATABASE_ID=(default),COMPOSE_WEEKLY_SIM_WEIGHT=0.3" \
+  --service-account $SERVICE_ACCOUNT \
+  --set-env-vars "PROJECT_ID=$PROJECT_ID,REGION=$REGION,FIRESTORE_DATABASE_ID=(default),COMPOSE_WEEKLY_SIM_WEIGHT=0.3" \
   --port 5001 \
   --memory 1Gi \
   --cpu 1 \
@@ -128,15 +128,15 @@ gcloud run deploy amadeus-ci-backend \
 cd client
 
 # Get backend URL first
-BACKEND_URL=$(gcloud run services describe amadeus-ci-backend --region europe-west1 --format 'value(status.url)')
+BACKEND_URL=$(gcloud run services describe ci-newsletter-backend --region $REGION --format 'value(status.url)')
 
 # Build with backend URL
-gcloud builds submit --tag gcr.io/amadeus-471508/amadeus-ci-frontend \
+gcloud builds submit --tag gcr.io/$PROJECT_ID/ci-newsletter-frontend \
   --substitutions=_VITE_API_URL="${BACKEND_URL}/api"
 
 # Deploy to Cloud Run
-gcloud run deploy amadeus-ci-frontend \
-  --image gcr.io/amadeus-471508/amadeus-ci-frontend \
+gcloud run deploy ci-newsletter-frontend \
+  --image gcr.io/$PROJECT_ID/ci-newsletter-frontend \
   --platform managed \
   --region europe-west1 \
   --allow-unauthenticated \
@@ -150,15 +150,15 @@ gcloud run deploy amadeus-ci-frontend \
 Set up continuous deployment from your git repository:
 
 ```bash
-# Submit build using cloudbuild.yaml
-gcloud builds submit --config cloudbuild.yaml
+# Submit build using docker/cloudbuild.yaml
+gcloud builds submit --config docker/cloudbuild.yaml
 
 # Or connect to GitHub/Cloud Source Repositories for automatic triggers
 gcloud beta builds triggers create github \
-  --repo-name=amadeus-er-277500-v2-main \
-  --repo-owner=cherifbenham \
+  --repo-name=YOUR_REPO_NAME \
+  --repo-owner=YOUR_GITHUB_USER \
   --branch-pattern="^main$" \
-  --build-config=cloudbuild.yaml
+  --build-config=docker/cloudbuild.yaml
 ```
 
 ---
@@ -169,12 +169,12 @@ gcloud beta builds triggers create github \
 
 **Backend** (`.env`):
 ```env
-PROJECT_ID=amadeus-471508
+PROJECT_ID=$PROJECT_ID
 REGION=europe-west1
 FIRESTORE_DATABASE_ID=(default)
 PORT=5001
 COMPOSE_WEEKLY_SIM_WEIGHT=0.3
-GOOGLE_APPLICATION_CREDENTIALS=./fsa-amadeus-471508-fc2039d8afcb.json
+GOOGLE_APPLICATION_CREDENTIALS=./service-account-credentials.json
 ```
 
 **Frontend** (build-time):
@@ -198,18 +198,18 @@ Ensure your service account has:
 
 ```bash
 # Backend logs
-gcloud run services logs read amadeus-ci-backend --region europe-west1
+gcloud run services logs read ci-newsletter-backend --region europe-west1
 
 # Frontend logs
-gcloud run services logs read amadeus-ci-frontend --region europe-west1
+gcloud run services logs read ci-newsletter-frontend --region europe-west1
 
 # Follow logs
-gcloud run services logs tail amadeus-ci-backend --region europe-west1
+gcloud run services logs tail ci-newsletter-backend --region europe-west1
 ```
 
 ### Access Cloud Run console
 
-https://console.cloud.google.com/run?project=amadeus-471508
+https://console.cloud.google.com/run?project=$PROJECT_ID
 
 ---
 
@@ -217,7 +217,7 @@ https://console.cloud.google.com/run?project=amadeus-471508
 
 1. **Custom Domain**: Configure a custom domain for better branding
    ```bash
-   gcloud run domain-mappings create --service amadeus-ci-frontend --domain ci.amadeus.com
+   gcloud run domain-mappings create --service ci-newsletter-frontend --domain ci.example.com
    ```
 
 2. **HTTPS**: Automatically enabled by Cloud Run
@@ -245,11 +245,11 @@ To update after code changes:
 
 ```bash
 # Quick update
-./deploy-to-gcp.sh
+./docker/deploy-to-gcp.sh
 
 # Or for specific service
-cd server && gcloud builds submit --tag gcr.io/amadeus-471508/amadeus-ci-backend
-gcloud run deploy amadeus-ci-backend --image gcr.io/amadeus-471508/amadeus-ci-backend
+cd server && gcloud builds submit --tag gcr.io/$PROJECT_ID/ci-newsletter-backend
+gcloud run deploy ci-newsletter-backend --image gcr.io/$PROJECT_ID/ci-newsletter-backend
 ```
 
 ---

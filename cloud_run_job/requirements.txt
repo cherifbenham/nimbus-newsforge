@@ -1,5 +1,4 @@
 altair==5.3.0
-amadeus-newsgenerator>=0.1
 annotated-types==0.7.0
 attrs==23.2.0
 beautifulsoup4==4.12.3

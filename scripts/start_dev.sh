@@ -3,7 +3,7 @@
 # - Uses .venv for Python
 # - Binds server on PORT (default 5001)
 # - Starts Vite on 5173
-# - Writes PIDs to server_backend.pid and client_dev.pid
+# - Writes PIDs to logs/server_backend.pid and logs/client_dev.pid
 
 set -euo pipefail
 
@@ -126,8 +126,8 @@ PY
 fi
 
 echo "[start_dev] Starting backend on port $PORT"
-nohup "$PYTHON_BIN" server/app.py >> server_backend.log 2>&1 &
-echo $! > server_backend.pid
+nohup "$PYTHON_BIN" server/app.py >> logs/server_backend.log 2>&1 &
+echo $! > logs/server_backend.pid
 
 # Frontend
 echo "[start_dev] Preparing client dependencies..."
@@ -138,8 +138,8 @@ fi
 echo "[start_dev] Starting client on http://localhost:5173"
 (
   cd client
-  nohup npm run dev -- --host --port 5173 >> ../client_dev.log 2>&1 &
-  echo $! > ../client_dev.pid
+  nohup npm run dev -- --host --port 5173 >> ../logs/client_dev.log 2>&1 &
+  echo $! > ../logs/client_dev.pid
 )
 
 echo "[start_dev] Done. Open the app at http://localhost:5173"

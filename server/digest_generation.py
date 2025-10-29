@@ -16,7 +16,7 @@ from classes.Newsletter import *
 from utils import parse_iso_date
 
 
-PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus")
+PROJECT_ID = os.getenv("PROJECT_ID", "demo-project")
 LOCATION = os.getenv("REGION", "us-central1")
 MAX_PAGES = 5
 
@@ -347,7 +347,7 @@ def generate_digest_metadata(nl_article):
     Additional instructions on generating the gen_context field:
     * 'gen_context' should explain why the story is important, what broader industry trend it reflects, and why it is meaningful given other ongoing trends.
     * Keep the statement short and to the point. 
-    * Do not include phrases such as "This news is significant for Amadeus because...". 
+    * Do not include phrases such as "This news is significant for our company because...". 
     * Do not restate what is already said in the key message.
 
     The output format should be a well formatted JSON object. Do not place the complete output text in brackets ("[]").
