@@ -6,7 +6,7 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
-    container_name: amadeus-backend
+    container_name: newsletter-backend
     ports:
       - "5001:5001"
     environment:
@@ -18,12 +18,12 @@ services:
       - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials/service-account.json
     volumes:
       # Mount credentials for local development
-      - ./fsa-amadeus-471508-fc2039d8afcb.json:/app/credentials/service-account.json:ro
+      - ${GOOGLE_APPLICATION_CREDENTIALS:-./.secrets/service-account.json}:/app/credentials/service-account.json:ro
       # Mount source code for hot-reload during development (optional)
       - ./server:/app
     restart: unless-stopped
     networks:
-      - amadeus-network
+      - newsletter-network
 
   # Frontend React/Vite
   frontend:
@@ -32,15 +32,15 @@ services:
       dockerfile: Dockerfile
       args:
         - VITE_API_URL=http://localhost:5001/api
-    container_name: amadeus-frontend
+    container_name: newsletter-frontend
     ports:
       - "8080:8080"
     depends_on:
       - backend
     restart: unless-stopped
     networks:
-      - amadeus-network
+      - newsletter-network
 
 networks:
-  amadeus-network:
+  newsletter-network:
     driver: bridge

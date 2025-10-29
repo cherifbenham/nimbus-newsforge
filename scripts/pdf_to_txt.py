@@ -1,8 +1,8 @@
 import fitz  # PyMuPDF
 import sys
 
-PDF_PATH = "Amadeus - Reference Technical Design Document - Generative Newsletter V2.pdf"
-TXT_PATH = "Amadeus - Reference Technical Design Document - Generative Newsletter V2.txt"
+PDF_PATH = "Reference Technical Design Document - Generative Newsletter V2.pdf"
+TXT_PATH = "Reference Technical Design Document - Generative Newsletter V2.txt"
 
 def pdf_to_txt(pdf_path, txt_path):
     doc = fitz.open(pdf_path)

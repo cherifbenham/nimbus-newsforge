@@ -1,23 +1,23 @@
 #!/bin/bash
 set -e
 
-# Amadeus CI Newsletter - GCP Cloud Run Deployment Script
+# CI Newsletter - GCP Cloud Run Deployment Script
 # This script deploys both frontend and backend to Google Cloud Run
 
 # Configuration
-PROJECT_ID="${PROJECT_ID:-amadeus-471508}"
+PROJECT_ID="${PROJECT_ID:-your-gcp-project-id}"
 REGION="${REGION:-europe-west1}"
-SERVICE_ACCOUNT="${SERVICE_ACCOUNT:-fsa-amadeus-471508@amadeus-471508.iam.gserviceaccount.com}"
+SERVICE_ACCOUNT="${SERVICE_ACCOUNT:-your-service-account@your-gcp-project-id.iam.gserviceaccount.com}"
 
 # Service names
-BACKEND_SERVICE="amadeus-ci-backend"
-FRONTEND_SERVICE="amadeus-ci-frontend"
+BACKEND_SERVICE="ci-newsletter-backend"
+FRONTEND_SERVICE="ci-newsletter-frontend"
 
 # Image names
 BACKEND_IMAGE="gcr.io/${PROJECT_ID}/${BACKEND_SERVICE}"
 FRONTEND_IMAGE="gcr.io/${PROJECT_ID}/${FRONTEND_SERVICE}"
 
-echo "🚀 Deploying Amadeus CI Newsletter to GCP Cloud Run"
+echo "🚀 Deploying CI Newsletter to GCP Cloud Run"
 echo "Project: ${PROJECT_ID}"
 echo "Region: ${REGION}"
 echo ""

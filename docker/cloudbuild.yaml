@@ -4,9 +4,9 @@ steps:
     args:
       - "build"
       - "-t"
-      - "gcr.io/$PROJECT_ID/amadeus-ci-backend:$COMMIT_SHA"
+      - "gcr.io/$PROJECT_ID/ci-newsletter-backend:$COMMIT_SHA"
       - "-t"
-      - "gcr.io/$PROJECT_ID/amadeus-ci-backend:latest"
+      - "gcr.io/$PROJECT_ID/ci-newsletter-backend:latest"
       - "./server"
     id: "build-backend"
 
@@ -15,9 +15,9 @@ steps:
     args:
       - "build"
       - "-t"
-      - "gcr.io/$PROJECT_ID/amadeus-ci-frontend:$COMMIT_SHA"
+      - "gcr.io/$PROJECT_ID/ci-newsletter-frontend:$COMMIT_SHA"
       - "-t"
-      - "gcr.io/$PROJECT_ID/amadeus-ci-frontend:latest"
+      - "gcr.io/$PROJECT_ID/ci-newsletter-frontend:latest"
       - "--build-arg"
       - "VITE_API_URL=${_BACKEND_URL}/api"
       - "./client"
@@ -28,7 +28,7 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     args:
       - "push"
-      - "gcr.io/$PROJECT_ID/amadeus-ci-backend:$COMMIT_SHA"
+      - "gcr.io/$PROJECT_ID/ci-newsletter-backend:$COMMIT_SHA"
     id: "push-backend"
     waitFor: ["build-backend"]
 
@@ -36,7 +36,7 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     args:
       - "push"
-      - "gcr.io/$PROJECT_ID/amadeus-ci-frontend:$COMMIT_SHA"
+      - "gcr.io/$PROJECT_ID/ci-newsletter-frontend:$COMMIT_SHA"
     id: "push-frontend"
     waitFor: ["build-frontend"]
 
@@ -46,9 +46,9 @@ steps:
     args:
       - "run"
       - "deploy"
-      - "amadeus-ci-backend"
+      - "ci-newsletter-backend"
       - "--image"
-      - "gcr.io/$PROJECT_ID/amadeus-ci-backend:$COMMIT_SHA"
+      - "gcr.io/$PROJECT_ID/ci-newsletter-backend:$COMMIT_SHA"
       - "--region"
       - "${_REGION}"
       - "--platform"
@@ -79,9 +79,9 @@ steps:
     args:
       - "run"
       - "deploy"
-      - "amadeus-ci-frontend"
+      - "ci-newsletter-frontend"
       - "--image"
-      - "gcr.io/$PROJECT_ID/amadeus-ci-frontend:$COMMIT_SHA"
+      - "gcr.io/$PROJECT_ID/ci-newsletter-frontend:$COMMIT_SHA"
       - "--region"
       - "${_REGION}"
       - "--platform"
@@ -103,15 +103,15 @@ steps:
     waitFor: ["push-frontend", "deploy-backend"]
 
 images:
-  - "gcr.io/$PROJECT_ID/amadeus-ci-backend:$COMMIT_SHA"
-  - "gcr.io/$PROJECT_ID/amadeus-ci-backend:latest"
-  - "gcr.io/$PROJECT_ID/amadeus-ci-frontend:$COMMIT_SHA"
-  - "gcr.io/$PROJECT_ID/amadeus-ci-frontend:latest"
+  - "gcr.io/$PROJECT_ID/ci-newsletter-backend:$COMMIT_SHA"
+  - "gcr.io/$PROJECT_ID/ci-newsletter-backend:latest"
+  - "gcr.io/$PROJECT_ID/ci-newsletter-frontend:$COMMIT_SHA"
+  - "gcr.io/$PROJECT_ID/ci-newsletter-frontend:latest"
 
 substitutions:
   _REGION: "europe-west1"
-  _SERVICE_ACCOUNT: "fsa-amadeus-471508@amadeus-471508.iam.gserviceaccount.com"
-  _BACKEND_URL: "https://amadeus-ci-backend-<YOUR_HASH>-ew.a.run.app"
+  _SERVICE_ACCOUNT: "your-service-account@your-gcp-project-id.iam.gserviceaccount.com"
+  _BACKEND_URL: "https://ci-newsletter-backend-<YOUR_HASH>-ew.a.run.app"
 
 options:
   logging: CLOUD_LOGGING_ONLY
