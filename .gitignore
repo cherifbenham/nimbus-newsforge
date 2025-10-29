@@ -5,13 +5,16 @@ Thumbs.db
 *.swp
 *.tmp
 
+# Credentials & Secrets
+fsa-amadeus-471508-*.json
+.env
+.env.local
+.env.*.local
+
 # Node.js (client)
 node_modules/
 dist/
 build/
-.env
-.env.local
-.env.*.local
 
 # Python (server)
 env/
@@ -48,6 +51,17 @@ fsa-amadeus-*.json
 
 # Project-specific files (add as needed)
 # Example:
-# db.sqlite3 
-# secrets.json 
+# db.sqlite3
+# secrets.json
 creds.json
+
+# Local documentation and drafts - do not commit
+# Specific files generated/added during design and note-taking
+/Amadeus - Reference Technical Design Document - Generative Newsletter V2.pdf
+/Amadeus - Reference Technical Design Document - Generative Newsletter V2.txt
+/remaining_specs.md
+
+# If you want to ignore all PDFs or Markdown drafts in the future,
+# uncomment one of the following lines (careful: will ignore README.md too):
+## *.pdf
+## *.md
