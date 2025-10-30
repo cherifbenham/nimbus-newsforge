@@ -26,6 +26,7 @@ build/
 env/
 server_env/
 .venv/
+.venv*/
 server/.venv/
 *.pyc
 __pycache__/
