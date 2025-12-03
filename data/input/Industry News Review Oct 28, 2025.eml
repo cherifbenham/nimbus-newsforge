@@ -1,0 +1,1443 @@
+Received: from AS2PR10MB6544.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:55f::11)
+ by DB9PR10MB5907.EURPRD10.PROD.OUTLOOK.COM with HTTPS; Tue, 28 Oct 2025
+ 11:13:58 +0000
+Received: from AM0PR04CA0140.eurprd04.prod.outlook.com (2603:10a6:208:55::45)
+ by AS2PR10MB6544.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:55f::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9253.19; Tue, 28 Oct
+ 2025 11:13:54 +0000
+Received: from AMS0EPF000001A3.eurprd05.prod.outlook.com
+ (2603:10a6:208:55:cafe::c) by AM0PR04CA0140.outlook.office365.com
+ (2603:10a6:208:55::45) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9253.20 via Frontend Transport; Tue,
+ 28 Oct 2025 11:13:52 +0000
+Authentication-Results: spf=pass (sender IP is 5.61.115.80)
+ smtp.mailfrom=internal-communications.mail.amadeus.com; dkim=pass (signature
+ was verified) header.d=internal-communications.mail.amadeus.com;dmarc=pass
+ action=none
+ header.from=internal-communications.mail.amadeus.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of
+ internal-communications.mail.amadeus.com designates 5.61.115.80 as permitted
+ sender) receiver=protection.outlook.com; client-ip=5.61.115.80;
+ helo=1.mta.nw010.com; pr=C
+Received: from 1.mta.nw010.com (5.61.115.80) by
+ AMS0EPF000001A3.mail.protection.outlook.com (10.167.16.228) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9275.10
+ via Frontend Transport; Tue, 28 Oct 2025 11:13:52 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; t=1761649200;
+	s=POP2018Q4; d=internal-communications.mail.amadeus.com;
+	h=Subject:Poppulo-Customer-Ref:Reply-To:From:To:List-Unsubscribe:Feedback-ID:Content-Type:MIME-Version:Message-ID:Date;
+	bh=8jVE92zuFltOtX0Fiv7HufzEgfkcnH0du9Ca3XvWDuA=;
+	b=znlNE/xgyBBnJuucntUdUbG4WblKk1wC0Q7zvVfmuM/AWLVT7PLi/bUQ+Ma+wEqz
+	FpuiGHlqIWM7KTs4p8PobIJTt87czT2pL40fl1rTkdgs/eew9ZgjGG6ZGA3MDabB1ak
+	aSGo34dptvO2hNzLtrxl8PcqO/yDJwr/zqf+TeEK5BOyKd3IGe1JwBdps0XcnRzqrKu
+	9IRWYsjc7PcZI7iYdxtuhQo18oVTgycnUGPmbrmuOwSP9bIXMqhHuAn1gXyTjkZ731L
+	mPKeFn2Pjvh5n+zMxjz1TdKum7VMsDGcPElmtYBd1of77aRTbvUDZuMTFr58499pEDv
+	Tp5bd6R9+A==
+Date: Tue, 28 Oct 2025 11:00:00 +0000 (UTC)
+Message-ID: <NewsWeaver.0021kba6xr1wm3u81nam49.1uan4l2qe55.17616492000794844899@corporatestrategy.nw010.com>
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_14794321_1894863336.1761649200661"
+Feedback-ID: acct_corporatestrategy:Newsweaver
+List-Unsubscribe: <https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/subscriber/unsubscribe.html?list=true&nw_int_pfc=true&subscriberId=1uan4l2qe55&mailingRecordId=0021kba6xr1wm3u81nam49>,<mailto:list-unsubscribe@internal-communications.mail.amadeus.com?subject=unsubscribe&body=unsubscribe%20NewsWeaver.0021kba6xr1wm3u81nam49.1uan4l2qe55.17616492000794844899>
+To: Amaia.LAGAREJOSARIAS@amadeus.com
+From: Daily Industry News Review
+ <no-reply@internal-communications.mail.amadeus.com>
+Reply-To: Daily Industry News Review <NewsReview@amadeus.com>
+Poppulo-Customer-Ref: amadeusenterprise
+X-NW-Ref: <NewsWeaver.0021kba6xr1wm3u81nam49.1uan4l2qe55.17616492000794844899@corporatestrategy.nw010.com>
+X-NW-Mailer: domain=nw010.com;tls=no;speed=2;relay=;bulk=true;size=22133;shard=2;
+Subject: Industry News Review Oct 28, 2025
+Return-Path: no-reply@internal-communications.mail.amadeus.com
+X-MS-Exchange-Organization-ExpirationStartTime: 28 Oct 2025 11:13:52.6214
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: a668fcb4-a17d-43b3-aba1-08de161313d6
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: b3f4f7c2-72ce-4192-aba4-d6c7719b5766:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS0EPF000001A3:EE_|AS2PR10MB6544:EE_|DB9PR10MB5907:EE_
+X-MS-Exchange-Organization-AuthSource: AMS0EPF000001A3.eurprd05.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: a668fcb4-a17d-43b3-aba1-08de161313d6
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-MS-Exchange-Organization-SCL: -1
+X-Microsoft-Antispam: BCL:2;ARA:13230040|3072899012|2092899012|5062899012|3092899012|4022899009|31052699007|69100299015|12012899012|13003099007|8096899003;
+X-Forefront-Antispam-Report: CIP:5.61.115.80;CTRY:IE;LANG:en;SCL:-1;SRV:;IPV:NLI;SFV:SFE;H:1.mta.nw010.com;PTR:24.mta.nw010.com;CAT:NONE;SFS:(13230040)(3072899012)(2092899012)(5062899012)(3092899012)(4022899009)(31052699007)(69100299015)(12012899012)(13003099007)(8096899003);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2025 11:13:52.5201
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a668fcb4-a17d-43b3-aba1-08de161313d6
+X-MS-Exchange-CrossTenant-Id: b3f4f7c2-72ce-4192-aba4-d6c7719b5766
+X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001A3.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR10MB6544
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:05.7029868
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.9253.009
+X-Microsoft-Antispam-Mailbox-Delivery: wl:1;pcwl:1;ucf:1;jmr:0;auth:0;dest:C;OFR:CustomRules;ENG:(910005)(944506478)(944626604)(920097)(811242)(255002)(410001)(930097)(140003)(1420198);
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?TjdKOHBybWJOeVhEMXlGUHIrbzVDaXN2ZGJ3dTAzbnFyd0FuMHM2d3F3VmlH?=
+ =?utf-8?B?K3BJTWJYV1lJYjdoM2ZjWUN6QlVyZ015Y2J5QW5rNWVIZE5yVHJPYjJIZmpR?=
+ =?utf-8?B?U2pUYkZQaVhCcUxYY3NIaFdCaGNILzlzclA5YkgwZmc2SmtXRE9ONndrSXRo?=
+ =?utf-8?B?TUZYWjJBbFZpOHlFTEJVdGF0c0dhRWRObDJrUWtoS3pqb3YrcGwyOTc4M0Nt?=
+ =?utf-8?B?ZHBhK0RPVytUOUIzVTZOQ2dQVnZrZVl0anF2ZEFBc1p4NEFndUZyK0dVK211?=
+ =?utf-8?B?OFlxTEF0a1JJelpZOHR4bzA5ZVJGYXhpR3U0TUhUNEV5YU8rNVB4bXJLc2FR?=
+ =?utf-8?B?K3dqT3IySEVCR25SdFVLczYxeFVxMVc4RzFQZ2hRSjZoTTZHUEtPWnhwMW5P?=
+ =?utf-8?B?S2dpWXJrV3lWYWJ5MVRMT2ZtRDlONFJiMTR3UDFIWHYrSklsVHdRV0ZFcUZH?=
+ =?utf-8?B?WlpwRzZlaG5JMDA1bmF0dkVnSHVCK1Y1SHlXb0JWYWxpaTlVUGxtbUVOaWtF?=
+ =?utf-8?B?SjJLTVlnSldNTXVvRlhFTGpsSEZrV3F1ck5SZ2VkdVowekZISEpkMDNYUXF1?=
+ =?utf-8?B?SU45anJQZHJiU242c3pIU3UybU9FanloSkdnV3hGYkhxYTBuMys5V1FWUXFY?=
+ =?utf-8?B?d2NVbGFrOEJ3UWwyZ3lIblg4b3J1Q2RlMFBVcklqUkF1a1FPdmh5aWlOM2lp?=
+ =?utf-8?B?UlNVZCtKVVFWV2lQV0M2WnVCNjlodkpPNEZtdjJJV0EzMHhIenlNN3Q0M3Mz?=
+ =?utf-8?B?RUZlMlB6V3J5Sjh1Zlkzb3RFZTJwaTUxNitrYnNQRStLV3k1MXhMbVM5YXFK?=
+ =?utf-8?B?ci9LWE1NNFFHOG9TTHFFbnYxT0tPeTUvK1FGWGZXVDBCdmhhUXJKSFhzTXFa?=
+ =?utf-8?B?SUlvNFlkMyszYjNnNHM4ek95Rmh1bDFNV3VqUXpydzdzOTh2TFhzU0lBUGMz?=
+ =?utf-8?B?a0llMEh0WXpGazJlNHRhaVJYS0tuK3NSVm94QWlqQ3Q0WmIycTVSRUhTR0Zv?=
+ =?utf-8?B?bVdQbXAxdmw1elhrQXdQRStYZCtKUXV3L2dqZmJPV04reVIvWkM3eGVQYU5r?=
+ =?utf-8?B?OVRMZ2lZZVNFcjFnZTdvL2NWMnpwRzI0ZzVRSFhoUTd0Q05VdUptM3cveE9q?=
+ =?utf-8?B?OTRjajVWZzZYQmgzKy9oM2FtTDEwck5aeldMMndRMmprUXFBSi9Jc0RXQUg2?=
+ =?utf-8?B?Qmc2bSt5V0dqeFpuNkNscHdKTXBVcXU3OWpBT2FkY3NlUzBkTVBndElNV1lK?=
+ =?utf-8?B?MUxlbmdYRVRmSFZkd3RJT1F5ZzFGeUJpRjJJK0NPYUV2MU93TWdmUDhSbEdT?=
+ =?utf-8?B?bDE0VGdQam5IdFQwcUtDTmhKTnpmUm5IdzNhMWZ5dEQyUk5lOWtBQzlYVEJO?=
+ =?utf-8?B?cld1a1lEZkVyOE9rdUR4ZVJ2eHZUUFVWZE4wOEp6bEZBYzNEeFA0bm4xZ1ov?=
+ =?utf-8?B?SnRsaXcrMCs5VlVHRkpmbzdCejNCbjFLRm5WMnh6K0xWQlBLQkc4Y2JVeFNM?=
+ =?utf-8?B?Q0g2aTcyQTFBVkVSZ3hWM2MxWFcrL0ZaL2ZjMEpYQklnV0JUbmo3NDJHNXdz?=
+ =?utf-8?B?RWNqNVZyODVWeTc5M3dXNGtwVTBqQ05saUNKYnNrY3JGVkxNdUlndHZYVXla?=
+ =?utf-8?B?T0ZObk1zSktDTzcvNFJ3RlBzWjFZR3c3Zm01emZscVpGOXJvYVBPZ1E2UHQ4?=
+ =?utf-8?B?a2tWNEtmRmRMdTNCSE5EbVdodWpPdW03Rm03d3U1NWJvVy9xNmlLTnNFUU9T?=
+ =?utf-8?B?bGg2eDdYdzZia2I3MjNiUXFRV3IrTjBCcytZNlN1VTZEL05ydjhXSmFlNkk2?=
+ =?utf-8?B?YVg1WmFKRGU0M2FjdG9vYW85TGR6YlVLVE5qL3pnM2lwalVSa3JpOUxUSjhu?=
+ =?utf-8?B?ZlplS21GQ0Zudjg1KzZQS3Vmc2JOczY3OWpOYjc3NnI5YlVjSUwvdzRCcTB0?=
+ =?utf-8?B?RzdvOHhIVmZoekF4bjlsNUhKK0VEbU1GTTBMbWY2ZmxWN0JQeHJTZ0dFQzky?=
+ =?utf-8?B?NkRSQWZ2SlN2cnVWaTFFNVMyTXdvSERaOC9OeDFuRlNpKzFLSGs2bHdaaTV4?=
+ =?utf-8?B?NVdacFN0c01tQzhQNmFTUmVkeE1OcCt5Znh3ZDNoa2ZldTlWL1NjT0dzdFU1?=
+ =?utf-8?B?OFM5Y1lMTXI4NkExbkVVQVhQUGZFMTBNRHAvb0hmYjVockNNTWttdmFrSS9Y?=
+ =?utf-8?B?T2paaTBjMmNNWkZ1cThIeFVCNnp5RmNsNmxYYXdTbCtuQlN3NlpYbTZ1TEZ0?=
+ =?utf-8?B?SUVSQUY2TzRTV1ZCRDBDR3VjUGhMc1FIVlVVbEtMaUNURFg2WDVNMmw5T2Nu?=
+ =?utf-8?B?ZVFsUDk2R3U0Y2diSERQQ1pVQUJUdjlxYkc3RU45VDloYXloUWpQN1BYR0tV?=
+ =?utf-8?B?c1JhK0dHbGhFNWVUS1ZiLzErNDhoNjhLYlp3RG9JZmMyV1BHbUV5ejBwU00w?=
+ =?utf-8?B?b0dnOG1jM2RZMENuc29uazFDZTdOb084dzg4RWRiVDFWNFR6TEs3S1JSaUE3?=
+ =?utf-8?B?dE5sT1hGWEprdkdpc0RUUE1ENytyOXFuMmRDOEk4ekFHbUFxYkhsZWYxSFlQ?=
+ =?utf-8?B?dm5QWkJyQ3RkNFlQMDBKNWxwOEV1Ym4xY0lMZExPazZXc2laS1RCUUZKVmtV?=
+ =?utf-8?B?R3BCZEEzYSttRmljeGg3ejFZb0tNYTN0WjNtY25odERrQWR2eE84Nm1OWm1W?=
+ =?utf-8?B?TjVwYXBPaENaRmVKcTZFajZlSzZMTCtKWHZsamEzQXlOUkh6ZHdTM1F4R2xT?=
+ =?utf-8?B?SThNcW05ZXZnQUI1akM4d3JRM21BbER2cjdSMTNBOFlVaklVS01qQlJybnFq?=
+ =?utf-8?B?MWg3Wnp3blE4MitGbWVsUHNTemdNanVFTmRuSWJEVHRtdlYxWVJySzdRZ0pF?=
+ =?utf-8?B?YWx5cHhMeEttNXNHdU5VWVJPdDEwWFRPTStaeERTNk1HSHh6aXl2VjEwNXhk?=
+ =?utf-8?B?Y1pLY29nYWEvaWhJVkwzUUhxRW5hRG04eW5remcvV3czdjQrQ3dEUW9za0Nu?=
+ =?utf-8?B?dTJLZnEvYVFVWmtKdy8wVjNObkdmU2VMMVpBNURpMlBaZ09YUFZaWTRVUVJB?=
+ =?utf-8?B?bXFjeUNJMTRwWFJMYjNBK1p5QTU2SkZzc3JKUldjRU1rRk4xQUdORWNzOUpT?=
+ =?utf-8?B?Kzh6bWJ2MmE4clM5YVZYbHgvQXRxNGh2M0FUMmdJdmx4cDk5eHFxbHQrS3Jl?=
+ =?utf-8?B?R1BGMUtGcTgwZEJTVDg4cEJvaVBqUjQ1aE5ad28yTG5kT0VhZDZkRVNRcHNV?=
+ =?utf-8?B?Qm5WNkVwc3RLSEhGcE1KYnhGQ1A2QlRLZ21lc0FUNjBYVHgyb2V4YW1qcGtZ?=
+ =?utf-8?B?MzJRb3QyR0dyUElMa2JkVmVmQTlNaUR4VEV5OXIvMnZrRHdXVEg1K1VWejJG?=
+ =?utf-8?Q?H8SvugTAEKjAslLjXlM5e?=
+MIME-Version: 1.0
+
+------=_Part_14794321_1894863336.1761649200661
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+Web Version:=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+gpky81k6vd71uan4l2qe55?email=3Dtrue&lang=3Den
+-----------------------
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Top News of the Day
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+Air France-KLM buys minority stake in Canada=E2=80=99s WestJet (27 Oct 2025=
+)
+
+Air France-KLM has completed its purchase of a minority stake in Canadian c=
+arrier WestJet. The=20
+European aviation giant has acquired a 2.3 per cent shareholding in WestJet=
+ from its joint venture=20
+partner Delta Air Lines. The proposed deal was first announced in May. Air =
+France-KLM said it has=20
+been partnering with WestJet since 2009 and this relationship has expanded =
+in recent years to=20
+include codeshare deals and reciprocal benefits for loyalty programme membe=
+rs.
+
+Full story: BTNEurope=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+10k9pq9f9m91uan4l2qe55/external?email=3Dtrue&a=3D2&p=3D13612293&t=3D517952
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+North America
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+Wyndham=E2=80=99s $95 Loyalty Program: Can Hotels Make Subscriptions Work? =
+(27 Oct 2025)
+
+Wyndham has introduced a $95 annual paid loyalty program, Wyndham Rewards I=
+nsider, which provides=20
+members with hotel discounts, automatic gold status, bonus points, and savi=
+ngs on flights and=20
+cruises. This marks a significant experiment in subscription-based loyalty =
+by a U.S. hotel group.=20
+While the program seeks to drive greater customer engagement and compete wi=
+th credit card rewards,=20
+it must overcome challenges related to infrequent travel habits, partner co=
+ordination, and=20
+demonstrating consistent value to subscribers.
+
+Full story: Skift=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+3dvqpx0qwbw1uan4l2qe55/external?email=3Dtrue&a=3D2&p=3D13612293&t=3D517952
+-----------------------------------
+U.S. to Expand Facial Recognition For International Travelers (28 Oct 2025)
+
+The U.S. Department of Homeland Security is expanding facial recognition re=
+quirements for all=20
+non-U.S. citizens entering and exiting the country, covering land borders, =
+airports, and seaports.=20
+The new rule, effective December 26, also allows for the collection of addi=
+tional biometric data=20
+such as fingerprints and removes age exemptions for travelers under 14 and =
+over 79.
+
+Full story: Skift=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+glrckyypq6a1uan4l2qe55/external?email=3Dtrue&a=3D2&p=3D13612293&t=3D517952
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Asia Pacific
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+
+Grab, May Mobility partner to bring robotaxis to Southeast Asia (24 Oct 202=
+5)
+
+Singapore-based superapp Grab has partnered with autonomous vehicle company=
+ May Mobility to launch=20
+AV services in Southeast Asia. As part of the multiyear partnership, Grab i=
+nvested an undisclosed=20
+amount in Michigan-based May Mobility as the company expands operations bey=
+ond the U.S. and Japan.=20
+May Mobility=E2=80=99s AV driving technology will be integrated into Grab=
+=E2=80=99s =E2=80=9Ccore ecosystem,=E2=80=9D while May=20
+Mobility will have access to GrabMaps, the superapp=E2=80=99s proprietary m=
+apping technology.
+
+Full story: PhocusWire=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+s2v1fugkus01uan4l2qe55/external?email=3Dtrue&a=3D2&p=3D13612293&t=3D517952
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+More stories
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+ITC Hotels unveils new premium brand =E2=80=98Epiq Collection=E2=80=99 as i=
+t shifts to asset-light model [=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+1pibqlypdgy1uan4l2qe55/external?email=3Dtrue&a=3D5&p=3D13612293&t=3D517952=
+=20
+] (27 Oct 2025, Skift)
+CTM sees strong quarter following FY25 accounting errors [=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+1pp6okbeqz41uan4l2qe55/external?email=3Dtrue&a=3D5&p=3D13612293&t=3D517952=
+=20
+] (24 Oct 2025, BTNEurope)
+Banks and airlines battle consumer loyalty [=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+9nxoxy2gz0g1uan4l2qe55/external?email=3Dtrue&a=3D5&p=3D13612293&t=3D517952=
+=20
+] (24 Oct 2025, PhocusWire)
+Smart kiosk market for trusted traveler enrollment expected to reach $3.6 b=
+n by 2033 [=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+gp7p59ybq6k1uan4l2qe55/external?email=3Dtrue&a=3D5&p=3D13612293&t=3D517952=
+=20
+] (28 Oct 2025, TravelDailyNews)
+Wizz Air boss says EU aviation rules risk creating a decaying economy [=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+oprry1c3h7x1uan4l2qe55/external?email=3Dtrue&a=3D5&p=3D13612293&t=3D517952=
+=20
+] (23 Oct 2025, LuxTimes)
+Airbnb app just got smarter [=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+y4bi66ixlao1uan4l2qe55/external?email=3Dtrue&a=3D5&p=3D13612293&t=3D517952=
+=20
+] (27 Oct 2025, TTRWeekly)
+Airbnb safety reviews can turn off some travellers =E2=80=93 could increase=
+d transparency help [=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+23yxsdb2yeq1uan4l2qe55/external?email=3Dtrue&a=3D5&p=3D13612293&t=3D517952=
+=20
+] (24 Oct 2025, Euronews)
+SAF production in Europe set to meet 2030 blending target =E2=80=93 EU repo=
+rt [=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+1gslfwcwrh01uan4l2qe55/external?email=3Dtrue&a=3D5&p=3D13612293&t=3D517952=
+=20
+] (27 Oct 2025, BTNEurope)
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+15ct8t0sce21uan4l2qe55?email=3Dtrue&lang=3Den&a=3D2&p=3D13612293&t=3D517952
+-----------------------------------
+
+
+
+
+
+
+Manage your subscription here: Newsletter repository [=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+85j4xhmunde1uan4l2qe55/external?email=3Dtrue&a=3D5&p=3D13612293&t=3D517952=
+=20
+]
+
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+1ggjdmui2gk1uan4l2qe55?email=3Dtrue&lang=3Den&a=3D2&p=3D13612293&t=3D517952
+
+----------------------
+This email was sent to Amaia.LAGAREJOSARIAS@amadeus.com from=20
+no-reply@internal-communications.mail.amadeus.com
+
+
+Change Email Format (Text/HTML):=20
+https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/=
+subscriber/switchFormat.html?subscriberId=3D1uan4l2qe55&mailingRecordId=3D0=
+021kba6xr1wm3u81nam49&to=3DHTML&email=3Dtrue&lang=3Den
+
+------=_Part_14794321_1894863336.1761649200661
+Content-Type: text/html;charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.=
+w3.org/TR/html4/loose.dtd"><html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"><t=
+itle>Industry News Review Oct 28, 2025</title>
+=09
+=09
+	<meta name=3D"robots" content=3D"noindex,nofollow">
+		<style media=3D"all" type=3D"text/css">
+			a {color: blue;}
+		</style>
+
+
+				<link href=3D"https://amadeusenterprise.newsweaver.com/v3files/shard2/7=
+7635/170039/1532458/2col.css?t=3D1761649170940" media=3D"all" rel=3D"styles=
+heet" type=3D"text/css">
+=09
+	<link rel=3D"canonical" href=3D"https://amadeusenterprise.newsweaver.com/c=
+orporatestrategy.DailyNewsReview/gpky81k6vd7">
+        <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-sc=
+ale=3D1, maximum-scale=3D1">
+
+<html xmlns=3D"http://www.w3.org/1999/xhtml" xmlns:v=3D"urn:schemas-microso=
+ft-com:vml" xmlns:o=3D"urn:schemas-microsoft-com:office:office">
+
+<head>
+<!--[if gte mso 9]><xml>
+<o:OfficeDocumentSettings>
+<o:AllowPNG/>
+<o:PixelsPerInch>96</o:PixelsPerInch>
+</o:OfficeDocumentSettings>
+</xml><![endif]-->
+</head>
+</html></head>
+<body style=3D"background-color: #ffffff; margin: 0; padding: 0;">
+<style title=3D"notessa-stylesheet-body" media=3D"screen" type=3D"text/css"=
+><!--
+
+--></style>
+		<div style=3D"display:none;font-size:0;line-height:0;max-height:0;max-wid=
+th:0;width:0;opacity:0;overflow:hidden;">
+			&nbsp;=E2=80=8C
+		</div>
+	<div style=3D"display:none;font-size:0;line-height:0;max-height:0;max-widt=
+h:0;width:0;opacity:0;overflow:hidden;">
+		&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C
+	</div>
+	<div style=3D"display:none;font-size:0;line-height:0;max-height:0;max-widt=
+h:0;width:0;opacity:0;overflow:hidden;">
+		&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C
+	</div>
+	<div style=3D"display:none;font-size:0;line-height:0;max-height:0;max-widt=
+h:0;width:0;opacity:0;overflow:hidden;">
+		&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C
+	</div>
+<div style=3D"font-size:1px"><img height=3D"1" width=3D"1" src=3D"https://a=
+madeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/tracking/=
+1uan4l2qe55.0021kba6xr1wm3u81nam49.en.gif" style=3D"border: none;"></div>
+
+<table align=3D"center" id=3D"before_text" style=3D"border-collapse: collap=
+se; border-spacing: 0; width: 100%;"><tr><td class=3D"before_text" id=3D"in=
+ner_before_text" style=3D"color: #000835; font-family: Calibri,Verdana,Aria=
+l,sans-serif; font-size: 14px; font-style: normal; font-weight: normal; pad=
+ding: 0; text-decoration: none;"><table class=3D"before_text_wrapper" style=
+=3D"background-color: #ffffff; width: 100%;" border=3D"0" cellspacing=3D"0"=
+ cellpadding=3D"0" align=3D"center">
+<tbody>
+<tr>
+<td style=3D"color: #000001; font-family: Calibri,Verdana,Arial,sans-serif;=
+ font-size: 11px; font-style: normal; font-weight: normal; padding: 4px 0; =
+text-align: left; text-decoration: none;">
+<table style=3D"width: 650px;" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" align=3D"center">
+<tbody>
+<tr>
+<td style=3D"color: #000001; font-family: Calibri,Verdana,Arial,sans-serif;=
+ font-size: 11px; font-style: normal; font-weight: normal; padding: 4px 0; =
+text-align: left; text-decoration: none;"><a href=3D"https://eur01.safelink=
+s.protection.outlook.com/?url=3Dhttps%3A%2F%2Famadeusenterprise.newsweaver.=
+com%2Fcorporatestrategy.DailyNewsReview%2Fgpky81k6vd71uan4l2qe55%3Femail%3D=
+true%26lang%3Den%26a%3D11%26p%3D13612289&amp;data=3D05%7C02%7CAmaia.LAGAREJ=
+OSARIAS%40amadeus.com%7Ca668fcb4a17d43b3aba108de161313d6%7Cb3f4f7c272ce4192=
+aba4d6c7719b5766%7C0%7C0%7C638972468385861382%7CUnknown%7CTWFpbGZsb3d8eyJFb=
+XB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldU=
+IjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=3DRjfs8fwH6iOxTWxfQWYEg4f3WMGbM0ROczs6Y=
+rxO6aY%3D&amp;reserved=3D0" originalsrc=3D"https://amadeusenterprise.newswe=
+aver.com/corporatestrategy.DailyNewsReview/gpky81k6vd71uan4l2qe55?email=3Dt=
+rue&amp;lang=3Den&amp;a=3D11&amp;p=3D13612289" style=3D"color: #000001; fon=
+t-style: normal; font-weight: normal; text-decoration: underline;">Web Vers=
+ion</a> | <a href=3D"https://eur01.safelinks.protection.outlook.com/?url=3D=
+https%3A%2F%2Famadeusenterprise.newsweaver.com%2Fcorporatestrategy.DailyNew=
+sReview%2Fog1nbhjd8uf1uan4l2qe55%3Femail%3Dtrue%26lang%3Den%26a%3D11%26p%3D=
+13612289&amp;data=3D05%7C02%7CAmaia.LAGAREJOSARIAS%40amadeus.com%7Ca668fcb4=
+a17d43b3aba108de161313d6%7Cb3f4f7c272ce4192aba4d6c7719b5766%7C0%7C0%7C63897=
+2468385902419%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuM=
+DAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sd=
+ata=3DnD2h6A4MVax82O4xqkpiMNdG6EfgQffUue67fREgpRI%3D&amp;reserved=3D0" orig=
+inalsrc=3D"https://amadeusenterprise.newsweaver.com/corporatestrategy.Daily=
+NewsReview/og1nbhjd8uf1uan4l2qe55?email=3Dtrue&amp;lang=3Den&amp;a=3D11&amp=
+;p=3D13612289" style=3D"color: #000001; font-style: normal; font-weight: no=
+rmal; text-decoration: underline;">Subscribe to the Daily News Review</a></=
+td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Extra spacer table for Outlook 2007+ -->
+<table style=3D"width: 100%;" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0" align=3D"center">
+<tbody>
+<tr>
+<td style=3D"color: #000835; display: none; font-family: Calibri,Verdana,Ar=
+ial,sans-serif; font-size: 14px; font-style: normal; font-weight: normal; p=
+adding: 4px; text-decoration: none;">&nbsp;</td>
+</tr>
+</tbody>
+</table></td></tr></table>
+<div class=3D"content" id=3D"wrapper" style=3D"background-color: #ffffff; m=
+argin: 0; padding: 0; padding-top: 1em;">
+<div class=3D"nw_layout_LAYOUT1">
+<table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" cl=
+ass=3D"CoverPage" id=3D"CoverPage" style=3D"background-color: #ffffff; bord=
+er: none; border-collapse: separate; margin-bottom: 1em; width: 650px;" wid=
+th=3D"650">
+<tr><!-- buildCellForTableRow -->
+<!-- buildCellForTableRow -->
+<td id=3D"header" valign=3D"top" width=3D"650" style=3D"border-left: solid =
+0 #999999; border-right: solid 0 #999999; border-top: solid 0 #999999; colo=
+r: #000835; font-family: Calibri,Verdana,Arial,sans-serif; font-size: 14px;=
+ font-style: normal; font-weight: normal; padding: 0; text-decoration: none=
+; width: 100%;">
+<!-- renderCellComponentsList --><!-- renderCellComponentsList_list -->
+<!-- renderTemplateComponent -->
+
+<table id=3D"nw_masthead_wrapper" class=3D"nw_component_wrapper" cellpaddin=
+g=3D"0" cellspacing=3D"0" style=3D"width: 100%;">
+<tr><td class=3D"nw-componentSpacerMainCell" style=3D"color: #000835; font-=
+family: Calibri,Verdana,Arial,sans-serif; font-size: 14px; font-style: norm=
+al; font-weight: normal; padding-bottom: 10px; text-decoration: none;"><!--=
+ buildTemplateComponentStructure -->
+<table cellpadding=3D"0" cellspacing=3D"0" class=3D"ContentBlock" id=3D"mas=
+thead" style=3D"margin-top:0px;margin-bottom:0px;margin-left:0px;margin-rig=
+ht:0px;" width=3D"100%">
+<tr><td class=3D"nw-componentMainCell" style=3D"background-color: #eeeeee; =
+color: #000835; font-family: Calibri,Verdana,Arial,sans-serif; font-size: 1=
+4px; font-style: normal; font-weight: normal; padding: 0; text-decoration: =
+none;"><img alt=3D"" src=3D"https://amadeusenterprise.newsweaver.com/v3file=
+s/shard2/77635/0f/c8831b5c7f2e5fe0563a81.png" width=3D"650" height=3D"172" =
+style=3D"border: none; display: block;">
+</td></tr></table>
+<!-- /buildTemplateComponentStructure --></td></tr>
+</table>
+<!-- /renderTemplateComponent -->
+<!-- /renderCellComponentsList_list --><!-- renderCellComponentsList_list -=
+->
+<!-- renderTemplateComponent -->
+
+
+<!-- /renderTemplateComponent -->
+<!-- /renderCellComponentsList_list -->
+
+<!-- /renderCellComponentsList --></td>=20
+<!-- /buildCellForTableRow --></tr>
+<tr><!-- buildCellForTableRow -->
+<!-- buildCellForTableRow -->
+<td id=3D"main" valign=3D"top" width=3D"650" style=3D"background-color: #ff=
+ffff; border-bottom: solid 0 #999999; border-left: solid 0 #999999; border-=
+right: solid 0 #999999; color: #000835; font-family: Calibri,Verdana,Arial,=
+sans-serif; font-size: 14px; font-style: normal; font-weight: normal; paddi=
+ng-bottom: 0; padding-left: 20px; padding-right: 20px; text-decoration: non=
+e; width: 100%;">
+<!-- renderCellComponentsList --><!-- renderCellComponentsList_list -->
+<!-- renderTemplateComponent -->
+<!-- /renderTemplateComponent -->
+<!-- /renderCellComponentsList_list --><!-- renderCellComponentsList_list -=
+->
+<!-- renderTemplateComponent -->
+
+<table cellspacing=3D"0" cellpadding=3D"0" id=3D"articlesDisplayTitle" clas=
+s=3D"DisplayTitle" style=3D"width: 100%;"><tr><td style=3D"background-color=
+: #ffffff; color: #aeaeae; font-family: Arial,Helvetica,sans-serif; font-si=
+ze: 30px; font-style: normal; font-weight: normal; padding: 10px 0; text-de=
+coration: none;">
+Industry News Review
+</td></tr></table>
+<table id=3D"nw_articles_wrapper" class=3D"nw_component_wrapper" cellpaddin=
+g=3D"0" cellspacing=3D"0" style=3D"width: 100%;">
+<tr><td class=3D"nw-componentSpacerMainCell" style=3D"color: #000835; font-=
+family: Calibri,Verdana,Arial,sans-serif; font-size: 14px; font-style: norm=
+al; font-weight: normal; padding-bottom: 10px; text-decoration: none;"><!--=
+ buildTemplateComponentStructure -->
+<table cellpadding=3D"0" cellspacing=3D"0" class=3D"ArticleSummary" id=3D"a=
+rticles" style=3D"margin-top:0px;margin-bottom:0px;margin-left:0px;margin-r=
+ight:0px;" width=3D"100%">
+<tr><td class=3D"nw-componentMainCell" style=3D"background-color: transpare=
+nt; color: #000835; font-family: Calibri,Verdana,Arial,sans-serif; font-siz=
+e: 14px; font-style: normal; font-weight: normal; padding: 0; text-decorati=
+on: none;">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%">
+<tr>
+<td style=3D"color: #000835; font-family: Calibri,Verdana,Arial,sans-serif;=
+ font-size: 14px; font-style: normal; font-weight: normal; text-decoration:=
+ none;">
+<table width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"nw_section_title_table"><tr><td class=3D"TopNewsoftheDay" style=3D"col=
+or: #000835; font-family: Calibri,Verdana,Arial,sans-serif; font-size: 14px=
+; font-style: normal; font-weight: normal; text-decoration: none;">
+<div class=3D"section">
+<div class=3D"TopNewsoftheDay">
+<!-- section headers -->
+<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=3D"0"><tr>=
+<td class=3D"section_header" style=3D"background-color: #ffffff; color: #00=
+0835; font-family: Arial,Helvetica,sans-serif; font-size: 28px; font-style:=
+ normal; font-weight: normal; padding: 10px 0; text-decoration: none;"> <di=
+v class=3D"section-name" style=3D"color: #000835; font-family: Arial,Helvet=
+ica,sans-serif; font-size: 28px; font-style: normal; font-weight: normal; t=
+ext-decoration: none;">Top News of the Day</div>
+</td></tr></table><!-- After Section Title Fragment --><table style=3D"widt=
+h: 10%;" class=3D"after_section_title_fragment" border=3D"0" cellpadding=3D=
+"0" cellspacing=3D"0"><tbody><tr><td style=3D"color: #000835; font-family: =
+Calibri,Verdana,Arial,sans-serif; font-size: 14px; font-style: normal; font=
+-weight: normal; line-height: 1px; padding-bottom: 8px; text-decoration: no=
+ne;"><img border=3D"0" src=3D"https://amadeusenterprise.newsweaver.com/nwst=
+atic/spacer.gif" alt=3D"" width=3D"20" height=3D"1" style=3D"border: none; =
+display: block;"></td></tr></tbody></table> </div></div>
+</td></tr></table>
+<!-- [-ARTICLES-] -->
+<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=3D"0" alig=
+n=3D"left"><tr><td class=3D"article_wrapper" style=3D"color: #000835; font-=
+family: Calibri,Verdana,Arial,sans-serif; font-size: 14px; font-style: norm=
+al; font-weight: normal; text-decoration: none;"> <span class=3D"summary" i=
+d=3D"articleSummary_5756422" style=3D"color: #000835; font-family: Arial,He=
+lvetica,sans-serif; font-size: 13px; font-style: normal; font-weight: norma=
+l; text-decoration: none;">
+<p style=3D"line-height: 1.4; margin: 0; padding: 0;"><span style=3D"color:=
+ #3a8bff;"><span style=3D"font-size: 15px;"><img src=3D"https://amadeusente=
+rprise.newsweaver.com/v3files/shard2/77635/ca/87e5412df1f1f0aa1ecd5b.gif" s=
+tyle=3D"border: none; margin: 0px;" width=3D"75" height=3D"9" hspace=3D"0" =
+vspace=3D"0" alt=3D""> <img src=3D"https://amadeusenterprise.newsweaver.com=
+/v3files/shard2/77635/d6/7abff6b842450df0c7f3a8.png" style=3D"border: none;=
+ margin: 0px;" width=3D"77" height=3D"25" hspace=3D"0" vspace=3D"0" alt=3D"=
+"></span></span></p>
+<p style=3D"line-height: 1.4; margin: 0; padding: 0;"><span style=3D"color:=
+ #3a8bff;"><span style=3D"font-size: 15px;">Air France-KLM buys minority st=
+ake in Canada=E2=80=99s WestJet <span style=3D"color: #7e8c8d; font-size: 1=
+4px;">(27 Oct 2025)</span></span></span></p>
+<p style=3D"margin: 0; padding: 0; text-align: justify;">Air France-KLM has=
+ completed its purchase of a minority stake in Canadian carrier WestJet. Th=
+e European aviation giant has acquired a 2.3 per cent shareholding in WestJ=
+et from its joint venture partner Delta Air Lines. The proposed deal was fi=
+rst announced in May. Air France-KLM said it has been partnering with WestJ=
+et since 2009 and this relationship has expanded in recent years to include=
+ codeshare deals and reciprocal benefits for loyalty programme members.</p>
+</span>
+<!-- Read More Spacer --><table style=3D"width: 10%;" class=3D"read_more_sp=
+acer" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"><tbody><tr><td style=
+=3D"color: #000835; font-family: Calibri,Verdana,Arial,sans-serif; font-siz=
+e: 14px; font-style: normal; font-weight: normal; line-height: 1px; padding=
+-bottom: 5px; text-decoration: none;"><img border=3D"0" src=3D"https://amad=
+eusenterprise.newsweaver.com/nwstatic/spacer.gif" alt=3D"" width=3D"20" hei=
+ght=3D"1" style=3D"border: none; display: block;"></td></tr></tbody></table=
+><a class=3D"nw_readmore" href=3D"https://eur01.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Famadeusenterprise.newsweaver.com%2Fcorporatestra=
+tegy.DailyNewsReview%2F10k9pq9f9m91uan4l2qe55%2Fexternal%3Femail%3Dtrue%26a=
+%3D2%26p%3D13612289%26t%3D517945&amp;data=3D05%7C02%7CAmaia.LAGAREJOSARIAS%=
+40amadeus.com%7Ca668fcb4a17d43b3aba108de161313d6%7Cb3f4f7c272ce4192aba4d6c7=
+719b5766%7C0%7C0%7C638972468385936208%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hc=
+GkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3=
+D%3D%7C0%7C%7C%7C&amp;sdata=3D1avQNOF9xJMMdq3JDrPfOF77%2FMcNweJhiZYn2tdRWu8=
+%3D&amp;reserved=3D0" originalsrc=3D"https://amadeusenterprise.newsweaver.c=
+om/corporatestrategy.DailyNewsReview/10k9pq9f9m91uan4l2qe55/external?email=
+=3Dtrue&amp;a=3D2&amp;p=3D13612289&amp;t=3D517945" title=3D"Full story: BTN=
+Europe" target=3D"_blank" rel=3D"noopener noreferrer" style=3D"color: #ff58=
+ac; font-family: Arial,Helvetica,sans-serif; font-size: 13px; font-style: n=
+ormal; font-weight: normal; text-decoration: none;"><span class=3D"readmore=
+">Full story: BTNEurope
+</span></a>
+</td></tr></table>
+<!-- close article wrapper -->
+<!-- After Sections Fragment --><table style=3D"width: 100%;" class=3D"afte=
+r_sections_fragment" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"><tbod=
+y><tr><td style=3D"color: #000835; font-family: Calibri,Verdana,Arial,sans-=
+serif; font-size: 14px; font-style: normal; font-weight: normal; line-heigh=
+t: 1px; text-decoration: none;"><img border=3D"0" src=3D"https://amadeusent=
+erprise.newsweaver.com/nwstatic/spacer.gif" alt=3D"" width=3D"20" height=3D=
+"1" style=3D"border: none; display: block;"></td></tr></tbody></table> </td=
+>
+</tr>
+</table>
+</td></tr></table>
+<!-- /buildTemplateComponentStructure --></td></tr>
+</table>
+
+<!-- /renderTemplateComponent -->
+<!-- /renderCellComponentsList_list --><!-- renderCellComponentsList_list -=
+->
+<!-- renderTemplateComponent -->
+
+<table cellspacing=3D"0" cellpadding=3D"0" id=3D"focusarticlesDisplayTitle"=
+ class=3D"DisplayTitle" style=3D"width: 100%;"><tr><td style=3D"background-=
+color: #ffffff; color: #aeaeae; font-family: Arial,Helvetica,sans-serif; fo=
+nt-size: 30px; font-style: normal; font-weight: normal; padding: 10px 0; te=
+xt-decoration: none;">
+Regional News Review
+</td></tr></table>
+<table id=3D"nw_focusarticles_wrapper" class=3D"nw_component_wrapper" cellp=
+adding=3D"0" cellspacing=3D"0" style=3D"width: 100%;">
+<tr><td class=3D"nw-componentSpacerMainCell" style=3D"color: #000835; font-=
+family: Calibri,Verdana,Arial,sans-serif; font-size: 14px; font-style: norm=
+al; font-weight: normal; padding-bottom: 10px; text-decoration: none;"><!--=
+ buildTemplateComponentStructure -->
+<table cellpadding=3D"0" cellspacing=3D"0" class=3D"ArticleSummary" id=3D"f=
+ocusarticles" style=3D"margin-top:0px;margin-bottom:0px;margin-left:0px;mar=
+gin-right:0px;" width=3D"100%">
+<tr><td class=3D"nw-componentMainCell" style=3D"background-color: transpare=
+nt; color: #000835; font-family: Calibri,Verdana,Arial,sans-serif; font-siz=
+e: 14px; font-style: normal; font-weight: normal; padding: 0; text-decorati=
+on: none;">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%">
+<tr>
+<td style=3D"color: #000835; font-family: Calibri,Verdana,Arial,sans-serif;=
+ font-size: 14px; font-style: normal; font-weight: normal; text-decoration:=
+ none;">
+<table width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"nw_section_title_table"><tr><td class=3D"NorthAmerica" style=3D"color:=
+ #000835; font-family: Calibri,Verdana,Arial,sans-serif; font-size: 14px; f=
+ont-style: normal; font-weight: normal; text-decoration: none;">
+<div class=3D"section">
+<div class=3D"NorthAmerica">
+<!-- section headers -->
+<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=3D"0"><tr>=
+<td class=3D"section_header" style=3D"background-color: #ffffff; color: #00=
+0835; font-family: Arial,Helvetica,sans-serif; font-size: 28px; font-style:=
+ normal; font-weight: normal; padding: 10px 0; text-decoration: none;"> <di=
+v class=3D"section-name" style=3D"color: #000835; font-family: Arial,Helvet=
+ica,sans-serif; font-size: 28px; font-style: normal; font-weight: normal; t=
+ext-decoration: none;">North America</div>
+</td></tr></table><!-- After Section Title Fragment --><table style=3D"widt=
+h: 10%;" class=3D"after_section_title_fragment" border=3D"0" cellpadding=3D=
+"0" cellspacing=3D"0"><tbody><tr><td style=3D"color: #000835; font-family: =
+Calibri,Verdana,Arial,sans-serif; font-size: 14px; font-style: normal; font=
+-weight: normal; line-height: 1px; padding-bottom: 8px; text-decoration: no=
+ne;"><img border=3D"0" src=3D"https://amadeusenterprise.newsweaver.com/nwst=
+atic/spacer.gif" alt=3D"" width=3D"20" height=3D"1" style=3D"border: none; =
+display: block;"></td></tr></tbody></table> </div></div>
+</td></tr></table>
+<!-- [-ARTICLES-] -->
+<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=3D"0" alig=
+n=3D"left"><tr><td class=3D"article_wrapper" style=3D"color: #000835; font-=
+family: Calibri,Verdana,Arial,sans-serif; font-size: 14px; font-style: norm=
+al; font-weight: normal; text-decoration: none;"> <span class=3D"summary" i=
+d=3D"articleSummary_5756424" style=3D"color: #000835; font-family: Arial,He=
+lvetica,sans-serif; font-size: 13px; font-style: normal; font-weight: norma=
+l; text-decoration: none;">
+<p style=3D"line-height: 1.4; margin: 0; padding: 0;"><img src=3D"https://a=
+madeusenterprise.newsweaver.com/v3files/shard2/77635/a7/c858ac315abd18cd62b=
+2ce.png" style=3D"border: none; margin: 0px;" width=3D"68" height=3D"18" hs=
+pace=3D"0" vspace=3D"0" alt=3D""></p>
+<p style=3D"line-height: 1.4; margin: 0; padding: 0;"><span style=3D"color:=
+ #3a8bff;"><span style=3D"font-size: 15px;">Wyndham=E2=80=99s $95 Loyalty P=
+rogram: Can Hotels Make Subscriptions Work? <span style=3D"color: #7e8c8d; =
+font-size: 14px;">(27 Oct 2025)</span></span></span></p>
+<p style=3D"margin: 0; padding: 0; text-align: justify;">Wyndham has introd=
+uced a $95 annual paid loyalty program, Wyndham Rewards Insider, which prov=
+ides members with hotel discounts, automatic gold status, bonus points, and=
+ savings on flights and cruises. This marks a significant experiment in sub=
+scription-based loyalty by a U.S. hotel group. While the program seeks to d=
+rive greater customer engagement and compete with credit card rewards, it m=
+ust overcome challenges related to infrequent travel habits, partner coordi=
+nation, and demonstrating consistent value to subscribers.</p>
+</span>
+<!-- Read More Spacer --><table style=3D"width: 10%;" class=3D"read_more_sp=
+acer" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"><tbody><tr><td style=
+=3D"color: #000835; font-family: Calibri,Verdana,Arial,sans-serif; font-siz=
+e: 14px; font-style: normal; font-weight: normal; line-height: 1px; padding=
+-bottom: 5px; text-decoration: none;"><img border=3D"0" src=3D"https://amad=
+eusenterprise.newsweaver.com/nwstatic/spacer.gif" alt=3D"" width=3D"20" hei=
+ght=3D"1" style=3D"border: none; display: block;"></td></tr></tbody></table=
+><a class=3D"nw_readmore" href=3D"https://eur01.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Famadeusenterprise.newsweaver.com%2Fcorporatestra=
+tegy.DailyNewsReview%2F3dvqpx0qwbw1uan4l2qe55%2Fexternal%3Femail%3Dtrue%26a=
+%3D2%26p%3D13612289%26t%3D518098&amp;data=3D05%7C02%7CAmaia.LAGAREJOSARIAS%=
+40amadeus.com%7Ca668fcb4a17d43b3aba108de161313d6%7Cb3f4f7c272ce4192aba4d6c7=
+719b5766%7C0%7C0%7C638972468385967764%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hc=
+GkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3=
+D%3D%7C0%7C%7C%7C&amp;sdata=3Dj1OHEj8pLCWZQ%2FBXp%2BnbeRxBO3kcawoIwnwjaIBJT=
+bw%3D&amp;reserved=3D0" originalsrc=3D"https://amadeusenterprise.newsweaver=
+.com/corporatestrategy.DailyNewsReview/3dvqpx0qwbw1uan4l2qe55/external?emai=
+l=3Dtrue&amp;a=3D2&amp;p=3D13612289&amp;t=3D518098" title=3D"Full story: Sk=
+ift" target=3D"_blank" rel=3D"noopener noreferrer" style=3D"color: #ff58ac;=
+ font-family: Arial,Helvetica,sans-serif; font-size: 13px; font-style: norm=
+al; font-weight: normal; text-decoration: none;"><span class=3D"readmore">F=
+ull story: Skift
+</span></a>
+<!-- [-ARTICLES-] -->
+<!-- Between Article Fragment --><table style=3D"clear: both; width: 100%;"=
+ class=3D"between_article_fragment" border=3D"0" cellpadding=3D"0" cellspac=
+ing=3D"0"><tbody><tr><td class=3D"divider_line" style=3D"border-bottom: sol=
+id 1px #ffffff; color: #000835; font-family: Calibri,Verdana,Arial,sans-ser=
+if; font-size: 14px; font-style: normal; font-weight: normal; line-height: =
+1px; padding-bottom: 8px; text-decoration: none;"><img border=3D"0" src=3D"=
+https://amadeusenterprise.newsweaver.com/nwstatic/spacer.gif" alt=3D"" widt=
+h=3D"20" height=3D"1" style=3D"border: none; display: block;"></td></tr><tr=
+><td style=3D"color: #000835; font-family: Calibri,Verdana,Arial,sans-serif=
+; font-size: 14px; font-style: normal; font-weight: normal; line-height: 1p=
+x; padding-bottom: 8px; text-decoration: none;"><img border=3D"0" src=3D"ht=
+tps://amadeusenterprise.newsweaver.com/nwstatic/spacer.gif" alt=3D"" width=
+=3D"20" height=3D"1" style=3D"border: none; display: block;"></td></tr></tb=
+ody></table> <span class=3D"summary" id=3D"articleSummary_5756423" style=3D=
+"color: #000835; font-family: Arial,Helvetica,sans-serif; font-size: 13px; =
+font-style: normal; font-weight: normal; text-decoration: none;">
+<p style=3D"line-height: 1.4; margin: 0; padding: 0;"><span style=3D"color:=
+ #3a8bff;"><span style=3D"font-size: 15px;">U.S. to Expand Facial Recogniti=
+on For International Travelers <span style=3D"color: #7e8c8d; font-size: 14=
+px;">(28 Oct 2025)</span></span></span></p>
+<p style=3D"margin: 0; padding: 0; text-align: justify;">The U.S. Departmen=
+t of Homeland Security is expanding facial recognition requirements for all=
+ non-U.S. citizens entering and exiting the country, covering land borders,=
+ airports, and seaports. The new rule, effective December 26, also allows f=
+or the collection of additional biometric data such as fingerprints and rem=
+oves age exemptions for travelers under 14 and over 79.</p>
+</span>
+<!-- Read More Spacer --><table style=3D"width: 10%;" class=3D"read_more_sp=
+acer" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"><tbody><tr><td style=
+=3D"color: #000835; font-family: Calibri,Verdana,Arial,sans-serif; font-siz=
+e: 14px; font-style: normal; font-weight: normal; line-height: 1px; padding=
+-bottom: 5px; text-decoration: none;"><img border=3D"0" src=3D"https://amad=
+eusenterprise.newsweaver.com/nwstatic/spacer.gif" alt=3D"" width=3D"20" hei=
+ght=3D"1" style=3D"border: none; display: block;"></td></tr></tbody></table=
+><a class=3D"nw_readmore" href=3D"https://eur01.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Famadeusenterprise.newsweaver.com%2Fcorporatestra=
+tegy.DailyNewsReview%2Fglrckyypq6a1uan4l2qe55%2Fexternal%3Femail%3Dtrue%26a=
+%3D2%26p%3D13612289%26t%3D518098&amp;data=3D05%7C02%7CAmaia.LAGAREJOSARIAS%=
+40amadeus.com%7Ca668fcb4a17d43b3aba108de161313d6%7Cb3f4f7c272ce4192aba4d6c7=
+719b5766%7C0%7C0%7C638972468385996296%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hc=
+GkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3=
+D%3D%7C0%7C%7C%7C&amp;sdata=3DQyaZdh8gbHOaIfqxzsvceJqJPqFcFCWxmKnPnJnNF2s%3=
+D&amp;reserved=3D0" originalsrc=3D"https://amadeusenterprise.newsweaver.com=
+/corporatestrategy.DailyNewsReview/glrckyypq6a1uan4l2qe55/external?email=3D=
+true&amp;a=3D2&amp;p=3D13612289&amp;t=3D518098" title=3D"Full story: Skift"=
+ target=3D"_blank" rel=3D"noopener noreferrer" style=3D"color: #ff58ac; fon=
+t-family: Arial,Helvetica,sans-serif; font-size: 13px; font-style: normal; =
+font-weight: normal; text-decoration: none;"><span class=3D"readmore">Full =
+story: Skift
+</span></a>
+</td></tr></table>
+<!-- close article wrapper -->
+<!-- After Sections Fragment --><table style=3D"width: 100%;" class=3D"afte=
+r_sections_fragment" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"><tbod=
+y><tr><td style=3D"color: #000835; font-family: Calibri,Verdana,Arial,sans-=
+serif; font-size: 14px; font-style: normal; font-weight: normal; line-heigh=
+t: 1px; text-decoration: none;"><img border=3D"0" src=3D"https://amadeusent=
+erprise.newsweaver.com/nwstatic/spacer.gif" alt=3D"" width=3D"20" height=3D=
+"1" style=3D"border: none; display: block;"></td></tr></tbody></table> </td=
+>
+</tr>
+</table>
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%">
+<tr>
+<td style=3D"color: #000835; font-family: Calibri,Verdana,Arial,sans-serif;=
+ font-size: 14px; font-style: normal; font-weight: normal; text-decoration:=
+ none;">
+<table width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" clas=
+s=3D"nw_section_title_table"><tr><td class=3D"AsiaPacific" style=3D"color: =
+#000835; font-family: Calibri,Verdana,Arial,sans-serif; font-size: 14px; fo=
+nt-style: normal; font-weight: normal; text-decoration: none;">
+<div class=3D"section">
+<div class=3D"AsiaPacific">
+<!-- section headers -->
+<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=3D"0"><tr>=
+<td class=3D"section_header" style=3D"background-color: #ffffff; color: #00=
+0835; font-family: Arial,Helvetica,sans-serif; font-size: 28px; font-style:=
+ normal; font-weight: normal; padding: 10px 0; text-decoration: none;"> <di=
+v class=3D"section-name" style=3D"color: #000835; font-family: Arial,Helvet=
+ica,sans-serif; font-size: 28px; font-style: normal; font-weight: normal; t=
+ext-decoration: none;">Asia Pacific</div>
+</td></tr></table><!-- After Section Title Fragment --><table style=3D"widt=
+h: 10%;" class=3D"after_section_title_fragment" border=3D"0" cellpadding=3D=
+"0" cellspacing=3D"0"><tbody><tr><td style=3D"color: #000835; font-family: =
+Calibri,Verdana,Arial,sans-serif; font-size: 14px; font-style: normal; font=
+-weight: normal; line-height: 1px; padding-bottom: 8px; text-decoration: no=
+ne;"><img border=3D"0" src=3D"https://amadeusenterprise.newsweaver.com/nwst=
+atic/spacer.gif" alt=3D"" width=3D"20" height=3D"1" style=3D"border: none; =
+display: block;"></td></tr></tbody></table> </div></div>
+</td></tr></table>
+<!-- [-ARTICLES-] -->
+<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=3D"0" alig=
+n=3D"left"><tr><td class=3D"article_wrapper" style=3D"color: #000835; font-=
+family: Calibri,Verdana,Arial,sans-serif; font-size: 14px; font-style: norm=
+al; font-weight: normal; text-decoration: none;"> <span class=3D"summary" i=
+d=3D"articleSummary_5756425" style=3D"color: #000835; font-family: Arial,He=
+lvetica,sans-serif; font-size: 13px; font-style: normal; font-weight: norma=
+l; text-decoration: none;">
+<p style=3D"line-height: 1.4; margin: 0; padding: 0;"><img src=3D"https://a=
+madeusenterprise.newsweaver.com/v3files/shard2/77635/54/0a4ef08f059c90aea74=
+4c6.png" style=3D"border: none; margin: 0px;" width=3D"46" height=3D"18" hs=
+pace=3D"0" vspace=3D"0" alt=3D""></p>
+<p style=3D"line-height: 1.4; margin: 0; padding: 0;"><span style=3D"color:=
+ #3a8bff;"><span style=3D"font-size: 15px;">Grab, May Mobility partner to b=
+ring robotaxis to Southeast Asia&nbsp;<span style=3D"color: #7e8c8d; font-s=
+ize: 14px;">(24 Oct 2025)</span></span></span></p>
+<p style=3D"margin: 0; padding: 0; text-align: justify;">Singapore-based su=
+perapp Grab has partnered with autonomous vehicle company May Mobility to l=
+aunch AV services in Southeast Asia. As part of the multiyear partnership, =
+Grab invested an undisclosed amount in Michigan-based May Mobility as the c=
+ompany expands operations beyond the U.S. and Japan. May Mobility=E2=80=99s=
+ AV driving technology will be integrated into Grab=E2=80=99s =E2=80=9Ccore=
+ ecosystem,=E2=80=9D while May Mobility will have access to GrabMaps, the s=
+uperapp=E2=80=99s proprietary mapping technology.</p>
+</span>
+<!-- Read More Spacer --><table style=3D"width: 10%;" class=3D"read_more_sp=
+acer" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"><tbody><tr><td style=
+=3D"color: #000835; font-family: Calibri,Verdana,Arial,sans-serif; font-siz=
+e: 14px; font-style: normal; font-weight: normal; line-height: 1px; padding=
+-bottom: 5px; text-decoration: none;"><img border=3D"0" src=3D"https://amad=
+eusenterprise.newsweaver.com/nwstatic/spacer.gif" alt=3D"" width=3D"20" hei=
+ght=3D"1" style=3D"border: none; display: block;"></td></tr></tbody></table=
+><a class=3D"nw_readmore" href=3D"https://eur01.safelinks.protection.outloo=
+k.com/?url=3Dhttps%3A%2F%2Famadeusenterprise.newsweaver.com%2Fcorporatestra=
+tegy.DailyNewsReview%2Fs2v1fugkus01uan4l2qe55%2Fexternal%3Femail%3Dtrue%26a=
+%3D2%26p%3D13612289%26t%3D518098&amp;data=3D05%7C02%7CAmaia.LAGAREJOSARIAS%=
+40amadeus.com%7Ca668fcb4a17d43b3aba108de161313d6%7Cb3f4f7c272ce4192aba4d6c7=
+719b5766%7C0%7C0%7C638972468386023229%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hc=
+GkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3=
+D%3D%7C0%7C%7C%7C&amp;sdata=3DsQqmOJlKnTxILer1FO2oS1X%2BBXKhxe5ptZXy2m656Ok=
+%3D&amp;reserved=3D0" originalsrc=3D"https://amadeusenterprise.newsweaver.c=
+om/corporatestrategy.DailyNewsReview/s2v1fugkus01uan4l2qe55/external?email=
+=3Dtrue&amp;a=3D2&amp;p=3D13612289&amp;t=3D518098" title=3D"Full story: Pho=
+cusWire" target=3D"_blank" rel=3D"noopener noreferrer" style=3D"color: #ff5=
+8ac; font-family: Arial,Helvetica,sans-serif; font-size: 13px; font-style: =
+normal; font-weight: normal; text-decoration: none;"><span class=3D"readmor=
+e">Full story: PhocusWire
+</span></a>
+</td></tr></table>
+<!-- close article wrapper -->
+<!-- After Sections Fragment --><table style=3D"width: 100%;" class=3D"afte=
+r_sections_fragment" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"><tbod=
+y><tr><td style=3D"color: #000835; font-family: Calibri,Verdana,Arial,sans-=
+serif; font-size: 14px; font-style: normal; font-weight: normal; line-heigh=
+t: 1px; text-decoration: none;"><img border=3D"0" src=3D"https://amadeusent=
+erprise.newsweaver.com/nwstatic/spacer.gif" alt=3D"" width=3D"20" height=3D=
+"1" style=3D"border: none; display: block;"></td></tr></tbody></table> </td=
+>
+</tr>
+</table>
+</td></tr></table>
+<!-- /buildTemplateComponentStructure --></td></tr>
+</table>
+
+<!-- /renderTemplateComponent -->
+<!-- /renderCellComponentsList_list --><!-- renderCellComponentsList_list -=
+->
+<!-- renderTemplateComponent -->
+
+<table cellspacing=3D"0" cellpadding=3D"0" id=3D"featurearticleDisplayTitle=
+" class=3D"DisplayTitle" style=3D"width: 100%;"><tr><td style=3D"background=
+-color: #ffffff; color: #aeaeae; font-family: Arial,Helvetica,sans-serif; f=
+ont-size: 30px; font-style: normal; font-weight: normal; padding: 10px 0; t=
+ext-decoration: none;">
+More Stories
+</td></tr></table>
+<table id=3D"nw_featurearticle_wrapper" class=3D"nw_component_wrapper" cell=
+padding=3D"0" cellspacing=3D"0" style=3D"width: 100%;">
+<tr><td class=3D"nw-componentSpacerMainCell" style=3D"color: #000835; font-=
+family: Calibri,Verdana,Arial,sans-serif; font-size: 14px; font-style: norm=
+al; font-weight: normal; padding-bottom: 10px; text-decoration: none;"><!--=
+ buildTemplateComponentStructure -->
+<table cellpadding=3D"0" cellspacing=3D"0" class=3D"ArticleSummary" id=3D"f=
+eaturearticle" style=3D"margin-top:0px;margin-bottom:0px;margin-left:0px;ma=
+rgin-right:0px;" width=3D"100%">
+<tr><td class=3D"nw-componentMainCell" style=3D"background-color: #ffffff; =
+color: #000835; font-family: Calibri,Verdana,Arial,sans-serif; font-size: 1=
+4px; font-style: normal; font-weight: normal; padding: 0; text-decoration: =
+none;">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%">
+<tr>
+<td style=3D"color: #000835; font-family: Calibri,Verdana,Arial,sans-serif;=
+ font-size: 14px; font-style: normal; font-weight: normal; text-decoration:=
+ none;">
+<!-- [-ARTICLES-] -->
+<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" border=3D"0"><tr>=
+<td class=3D"article_wrapper" style=3D"color: #000835; font-family: Calibri=
+,Verdana,Arial,sans-serif; font-size: 14px; font-style: normal; font-weight=
+: normal; text-decoration: none;"> <span class=3D"summary" id=3D"articleSum=
+mary_5756420" style=3D"color: #000000; font-family: Arial,Helvetica,sans-se=
+rif; font-size: 15px; font-style: normal; font-weight: normal; text-decorat=
+ion: none;">
+<ul style=3D"list-style-position: outside; margin-left: 24px; padding-left:=
+ 0;">
+<li style=3D"line-height: 107%; font-size: 11pt; font-family: Calibri, sans=
+-serif;"><span style=3D"font-size: 9.0pt; line-height: 107%; font-family: A=
+rial, sans-serif; color: #7e8c8d;"><a href=3D"https://eur01.safelinks.prote=
+ction.outlook.com/?url=3Dhttps%3A%2F%2Famadeusenterprise.newsweaver.com%2Fc=
+orporatestrategy.DailyNewsReview%2F1pibqlypdgy1uan4l2qe55%2Fexternal%3Femai=
+l%3Dtrue%26a%3D5%26p%3D13612289%26t%3D517957&amp;data=3D05%7C02%7CAmaia.LAG=
+AREJOSARIAS%40amadeus.com%7Ca668fcb4a17d43b3aba108de161313d6%7Cb3f4f7c272ce=
+4192aba4d6c7719b5766%7C0%7C0%7C638972468386059675%7CUnknown%7CTWFpbGZsb3d8e=
+yJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIs=
+IldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=3DTHrpM53zA6nL3jE97GbZKLsNNkui4R6Ma=
+KTIfyx5jZQ%3D&amp;reserved=3D0" originalsrc=3D"https://amadeusenterprise.ne=
+wsweaver.com/corporatestrategy.DailyNewsReview/1pibqlypdgy1uan4l2qe55/exter=
+nal?email=3Dtrue&amp;a=3D5&amp;p=3D13612289&amp;t=3D517957" target=3D"_new"=
+ style=3D"color: #005eb8; font-style: normal; font-weight: normal; text-dec=
+oration: underline;">ITC Hotels unveils new premium brand =E2=80=98Epiq Col=
+lection=E2=80=99 as it shifts to asset-light model</a> (27 Oct 2025, Skift)=
+</span></li>
+<li style=3D"margin: 0in 0in 0in 0px; line-height: 107%; font-size: 11pt; f=
+ont-family: Calibri, sans-serif;"><span style=3D"font-size: 9.0pt; line-hei=
+ght: 107%; font-family: Arial, sans-serif; color: #7e8c8d;"><a href=3D"http=
+s://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Famadeusente=
+rprise.newsweaver.com%2Fcorporatestrategy.DailyNewsReview%2F1pp6okbeqz41uan=
+4l2qe55%2Fexternal%3Femail%3Dtrue%26a%3D5%26p%3D13612289%26t%3D517957&amp;d=
+ata=3D05%7C02%7CAmaia.LAGAREJOSARIAS%40amadeus.com%7Ca668fcb4a17d43b3aba108=
+de161313d6%7Cb3f4f7c272ce4192aba4d6c7719b5766%7C0%7C0%7C638972468386090475%=
+7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJ=
+XaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=3DJ5MCsukm=
+%2F8D3ApnDfQLczwHBh7dJKzflg3zTs8S7r5s%3D&amp;reserved=3D0" originalsrc=3D"h=
+ttps://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/1=
+pp6okbeqz41uan4l2qe55/external?email=3Dtrue&amp;a=3D5&amp;p=3D13612289&amp;=
+t=3D517957" target=3D"_new" style=3D"color: #005eb8; font-style: normal; fo=
+nt-weight: normal; text-decoration: underline;">CTM sees strong quarter fol=
+lowing FY25 accounting errors</a> (24 Oct 2025, BTNEurope)</span></li>
+<li style=3D"margin: 0in 0in 0in 0px; line-height: 107%; font-size: 11pt; f=
+ont-family: Calibri, sans-serif;"><span style=3D"font-size: 9.0pt; line-hei=
+ght: 107%; font-family: Arial, sans-serif; color: #7e8c8d;"><a href=3D"http=
+s://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Famadeusente=
+rprise.newsweaver.com%2Fcorporatestrategy.DailyNewsReview%2F9nxoxy2gz0g1uan=
+4l2qe55%2Fexternal%3Femail%3Dtrue%26a%3D5%26p%3D13612289%26t%3D517957&amp;d=
+ata=3D05%7C02%7CAmaia.LAGAREJOSARIAS%40amadeus.com%7Ca668fcb4a17d43b3aba108=
+de161313d6%7Cb3f4f7c272ce4192aba4d6c7719b5766%7C0%7C0%7C638972468386121761%=
+7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJ=
+XaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=3DNZ%2B7bw=
+A%2Bwo%2B1c5QdP4okYf9wrRg3Do%2Ffclt2x9rqPRw%3D&amp;reserved=3D0" originalsr=
+c=3D"https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsRe=
+view/9nxoxy2gz0g1uan4l2qe55/external?email=3Dtrue&amp;a=3D5&amp;p=3D1361228=
+9&amp;t=3D517957" target=3D"_new" style=3D"color: #005eb8; font-style: norm=
+al; font-weight: normal; text-decoration: underline;">Banks and airlines ba=
+ttle consumer loyalty</a> (24 Oct 2025, PhocusWire)&nbsp;</span></li>
+<li style=3D"margin: 0in 0in 0in 0px; line-height: 107%; font-size: 11pt; f=
+ont-family: Calibri, sans-serif;"><span style=3D"font-size: 9.0pt; line-hei=
+ght: 107%; font-family: Arial, sans-serif; color: #7e8c8d;"><a href=3D"http=
+s://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Famadeusente=
+rprise.newsweaver.com%2Fcorporatestrategy.DailyNewsReview%2Fgp7p59ybq6k1uan=
+4l2qe55%2Fexternal%3Femail%3Dtrue%26a%3D5%26p%3D13612289%26t%3D517957&amp;d=
+ata=3D05%7C02%7CAmaia.LAGAREJOSARIAS%40amadeus.com%7Ca668fcb4a17d43b3aba108=
+de161313d6%7Cb3f4f7c272ce4192aba4d6c7719b5766%7C0%7C0%7C638972468386149810%=
+7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJ=
+XaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=3DZoMlRBkQ=
+XT6hlkRowDLhOhNuACSW6XCf%2B4KVXTvT6MI%3D&amp;reserved=3D0" originalsrc=3D"h=
+ttps://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/g=
+p7p59ybq6k1uan4l2qe55/external?email=3Dtrue&amp;a=3D5&amp;p=3D13612289&amp;=
+t=3D517957" target=3D"_new" style=3D"color: #005eb8; font-style: normal; fo=
+nt-weight: normal; text-decoration: underline;">Smart kiosk market for trus=
+ted traveler enrollment expected to reach $3.6 bn by 2033</a> (28 Oct 2025,=
+ TravelDailyNews)</span></li>
+<li style=3D"margin: 0in 0in 0in 0px; line-height: 107%; font-size: 11pt; f=
+ont-family: Calibri, sans-serif;"><span style=3D"font-size: 9.0pt; line-hei=
+ght: 107%; font-family: Arial, sans-serif; color: #7e8c8d;"><a href=3D"http=
+s://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Famadeusente=
+rprise.newsweaver.com%2Fcorporatestrategy.DailyNewsReview%2Foprry1c3h7x1uan=
+4l2qe55%2Fexternal%3Femail%3Dtrue%26a%3D5%26p%3D13612289%26t%3D517957&amp;d=
+ata=3D05%7C02%7CAmaia.LAGAREJOSARIAS%40amadeus.com%7Ca668fcb4a17d43b3aba108=
+de161313d6%7Cb3f4f7c272ce4192aba4d6c7719b5766%7C0%7C0%7C638972468386177550%=
+7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJ=
+XaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=3DPBiylND2=
+wRZp9Kp6PyVjvJH5o0QmUyf7aC%2F994C%2B5QU%3D&amp;reserved=3D0" originalsrc=3D=
+"https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview=
+/oprry1c3h7x1uan4l2qe55/external?email=3Dtrue&amp;a=3D5&amp;p=3D13612289&am=
+p;t=3D517957" target=3D"_new" style=3D"color: #005eb8; font-style: normal; =
+font-weight: normal; text-decoration: underline;">Wizz Air boss says EU avi=
+ation rules risk creating a decaying economy</a> (23 Oct 2025, LuxTimes) </=
+span></li>
+<li style=3D"margin: 0in 0in 0in 0px; line-height: 107%; font-size: 11pt; f=
+ont-family: Calibri, sans-serif;"><span style=3D"font-size: 9.0pt; line-hei=
+ght: 107%; font-family: Arial, sans-serif; color: #7e8c8d;"><a href=3D"http=
+s://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Famadeusente=
+rprise.newsweaver.com%2Fcorporatestrategy.DailyNewsReview%2Fy4bi66ixlao1uan=
+4l2qe55%2Fexternal%3Femail%3Dtrue%26a%3D5%26p%3D13612289%26t%3D517957&amp;d=
+ata=3D05%7C02%7CAmaia.LAGAREJOSARIAS%40amadeus.com%7Ca668fcb4a17d43b3aba108=
+de161313d6%7Cb3f4f7c272ce4192aba4d6c7719b5766%7C0%7C0%7C638972468386226345%=
+7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJ=
+XaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=3D7e4H%2BX=
+Q06XvdXO6LCvjPZLjhx6mwgYeDRfICHd56xEE%3D&amp;reserved=3D0" originalsrc=3D"h=
+ttps://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/y=
+4bi66ixlao1uan4l2qe55/external?email=3Dtrue&amp;a=3D5&amp;p=3D13612289&amp;=
+t=3D517957" target=3D"_new" style=3D"color: #005eb8; font-style: normal; fo=
+nt-weight: normal; text-decoration: underline;">Airbnb app just got smarter=
+</a> (27 Oct 2025, TTRWeekly) </span></li>
+<li style=3D"margin: 0in 0in 0in 0px; line-height: 107%; font-size: 11pt; f=
+ont-family: Calibri, sans-serif;"><span style=3D"font-size: 9.0pt; line-hei=
+ght: 107%; font-family: Arial, sans-serif; color: #7e8c8d;"><a href=3D"http=
+s://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Famadeusente=
+rprise.newsweaver.com%2Fcorporatestrategy.DailyNewsReview%2F23yxsdb2yeq1uan=
+4l2qe55%2Fexternal%3Femail%3Dtrue%26a%3D5%26p%3D13612289%26t%3D517957&amp;d=
+ata=3D05%7C02%7CAmaia.LAGAREJOSARIAS%40amadeus.com%7Ca668fcb4a17d43b3aba108=
+de161313d6%7Cb3f4f7c272ce4192aba4d6c7719b5766%7C0%7C0%7C638972468386263228%=
+7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJ=
+XaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=3DCU5OoT4a=
+iYYw%2FsOY3vMqe0MoHNa6f8JI5J7%2Bmtztoig%3D&amp;reserved=3D0" originalsrc=3D=
+"https://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview=
+/23yxsdb2yeq1uan4l2qe55/external?email=3Dtrue&amp;a=3D5&amp;p=3D13612289&am=
+p;t=3D517957" target=3D"_new" style=3D"color: #005eb8; font-style: normal; =
+font-weight: normal; text-decoration: underline;">Airbnb safety reviews can=
+ turn off some travellers =E2=80=93 could increased transparency help</a> (=
+24 Oct 2025, Euronews)</span></li>
+<li style=3D"margin: 0in 0in 8pt 0px; line-height: 107%; font-size: 11pt; f=
+ont-family: Calibri, sans-serif;"><span style=3D"font-size: 9.0pt; line-hei=
+ght: 107%; font-family: Arial, sans-serif; color: #7e8c8d;"><a href=3D"http=
+s://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2F%2Famadeusente=
+rprise.newsweaver.com%2Fcorporatestrategy.DailyNewsReview%2F1gslfwcwrh01uan=
+4l2qe55%2Fexternal%3Femail%3Dtrue%26a%3D5%26p%3D13612289%26t%3D517957&amp;d=
+ata=3D05%7C02%7CAmaia.LAGAREJOSARIAS%40amadeus.com%7Ca668fcb4a17d43b3aba108=
+de161313d6%7Cb3f4f7c272ce4192aba4d6c7719b5766%7C0%7C0%7C638972468386296434%=
+7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJ=
+XaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=3DisgeDuRq=
+ez1V2WQAe609w8E679x7af528mQg3QckakI%3D&amp;reserved=3D0" originalsrc=3D"htt=
+ps://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/1gs=
+lfwcwrh01uan4l2qe55/external?email=3Dtrue&amp;a=3D5&amp;p=3D13612289&amp;t=
+=3D517957" target=3D"_new" style=3D"color: #005eb8; font-style: normal; fon=
+t-weight: normal; text-decoration: underline;">SAF production in Europe set=
+ to meet 2030 blending target =E2=80=93 EU report</a> (27 Oct 2025, BTNEuro=
+pe)</span></li>
+</ul>
+</span>
+<!-- [-ARTICLES-] -->
+</td></tr></table>
+<!-- close article wrapper -->
+<!-- Between Article Fragment --><table style=3D"clear: both; width: 100%;"=
+ class=3D"between_article_fragment" border=3D"0" cellpadding=3D"0" cellspac=
+ing=3D"0"><tbody><tr><td class=3D"divider_line" style=3D"border-bottom: sol=
+id 1px #ffffff; color: #000835; font-family: Calibri,Verdana,Arial,sans-ser=
+if; font-size: 14px; font-style: normal; font-weight: normal; line-height: =
+1px; padding-bottom: 8px; text-decoration: none;"><img border=3D"0" src=3D"=
+https://amadeusenterprise.newsweaver.com/nwstatic/spacer.gif" alt=3D"" widt=
+h=3D"20" height=3D"1" style=3D"border: none; display: block;"></td></tr><tr=
+><td style=3D"color: #000835; font-family: Calibri,Verdana,Arial,sans-serif=
+; font-size: 14px; font-style: normal; font-weight: normal; line-height: 1p=
+x; padding-bottom: 8px; text-decoration: none;"><img border=3D"0" src=3D"ht=
+tps://amadeusenterprise.newsweaver.com/nwstatic/spacer.gif" alt=3D"" width=
+=3D"20" height=3D"1" style=3D"border: none; display: block;"></td></tr></tb=
+ody></table><table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" borde=
+r=3D"0"><tr><td class=3D"article_wrapper" style=3D"color: #000835; font-fam=
+ily: Calibri,Verdana,Arial,sans-serif; font-size: 14px; font-style: normal;=
+ font-weight: normal; text-decoration: none;"> <span class=3D"summary" id=
+=3D"articleSummary_5756421" style=3D"color: #000000; font-family: Arial,Hel=
+vetica,sans-serif; font-size: 15px; font-style: normal; font-weight: normal=
+; text-decoration: none;">
+<p style=3D"margin: 0; padding: 0; text-align: center;"><img align=3D"cente=
+r" src=3D"https://amadeusenterprise.newsweaver.com/v3files/shard2/77635/40/=
+b2fcad43f30a0e99ee685f.png" width=3D"219" height=3D"65" hspace=3D"0" vspace=
+=3D"0" alt=3D"" style=3D"border: none;"></p>
+<p style=3D"margin: 0; padding: 0; text-align: center;">&nbsp;</p>
+<p style=3D"margin: 0; padding: 0; text-align: center;">&nbsp;</p>
+<p style=3D"margin: 0; padding: 0; text-align: center;"><span style=3D"font=
+-size: 14px;"><strong>Manage your subscription <span style=3D"font-family: =
+Arial, Helvetica, sans-serif;">here:</span></strong><span style=3D"font-fam=
+ily: Arial, Helvetica, sans-serif;"> <a id=3D"OWAee8f0d04-c3ea-74c5-2c7d-7d=
+f9eca98bbe" class=3D"x_x_x_x_fui-Link x_x_x_x____1q1shib x_x_x_x_f2hkw1w x_=
+x_x_x_f3rmtva x_x_x_x_f1ewtqcl x_x_x_x_fyind8e x_x_x_x_f1k6fduh x_x_x_x_f1w=
+7gpdv x_x_x_x_fk6fouc x_x_x_x_fjoy568 x_x_x_x_figsok6 x_x_x_x_f1s184ao x_x_=
+x_x_f1mk8lai x_x_x_x_fnbmjn9 x_x_x_x_f1o700av x_x_x_x_f13mvf36 x_x_x_x_f1cm=
+lufx x_x_x_x_f9n3di6 x_x_x_x_f1ids18y x_x_x_x_f1tx3yz7 x_x_x_x_f1deo86v x_x=
+_x_x_f1eh06m1 x_x_x_x_f1iescvh x_x_x_x_fhgqx19 x_x_x_x_f1olyrje x_x_x_x_f1p=
+93eir x_x_x_x_f1nev41a x_x_x_x_f1h8hb77 x_x_x_x_f1lqvz6u x_x_x_x_f10aw75t x=
+_x_x_x_fsle3fq x_x_x_x_f17ae5zn x_x_x_x_OWAAutoLink" style=3D"background-co=
+lor: #ffffff; border-width: 0px; color: #005eb8; font-feature-settings: inh=
+erit; font-kerning: inherit; font-optical-sizing: inherit; font-size-adjust=
+: inherit; font-stretch: inherit; font-style: normal; font-variation-settin=
+gs: inherit; font-weight: normal; line-height: inherit; margin: 0px; paddin=
+g: 0px; text-decoration: underline; vertical-align: baseline; white-space: =
+normal;" title=3D"Original URL: https://amadeusworkplace.sharepoint.com/Sit=
+es/Ourcompany_Official/SitePages/NewsletterRepository.aspx?web=3D1. Click o=
+r tap if you trust this link." href=3D"https://eur01.safelinks.protection.o=
+utlook.com/?url=3Dhttps%3A%2F%2Famadeusenterprise.newsweaver.com%2Fcorporat=
+estrategy.DailyNewsReview%2F85j4xhmunde1uan4l2qe55%2Fexternal%3Femail%3Dtru=
+e%26a%3D5%26p%3D13612289%26t%3D517957&amp;data=3D05%7C02%7CAmaia.LAGAREJOSA=
+RIAS%40amadeus.com%7Ca668fcb4a17d43b3aba108de161313d6%7Cb3f4f7c272ce4192aba=
+4d6c7719b5766%7C0%7C0%7C638972468386326791%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0=
+eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjo=
+yfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=3DDVq9jW5hfZPdRICAsSme9R4gFbGhii5ZVYDKACs3=
+B1k%3D&amp;reserved=3D0" originalsrc=3D"https://amadeusenterprise.newsweave=
+r.com/corporatestrategy.DailyNewsReview/85j4xhmunde1uan4l2qe55/external?ema=
+il=3Dtrue&amp;a=3D5&amp;p=3D13612289&amp;t=3D517957" data-linkindex=3D"0" d=
+ata-auth=3D"NotApplicable">Newsletter repository</a></span></span></p>
+</span>
+</td></tr></table>
+<!-- close article wrapper -->
+<!-- After Sections Fragment --><table style=3D"width: 100%;" class=3D"afte=
+r_sections_fragment" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"><tbod=
+y><tr><td style=3D"color: #000835; font-family: Calibri,Verdana,Arial,sans-=
+serif; font-size: 14px; font-style: normal; font-weight: normal; line-heigh=
+t: 1px; text-decoration: none;"><img border=3D"0" src=3D"https://amadeusent=
+erprise.newsweaver.com/nwstatic/spacer.gif" alt=3D"" width=3D"20" height=3D=
+"1" style=3D"border: none; display: block;"></td></tr></tbody></table> </td=
+>
+</tr>
+</table>
+</td></tr></table>
+<!-- /buildTemplateComponentStructure --></td></tr>
+</table>
+
+<!-- /renderTemplateComponent -->
+<!-- /renderCellComponentsList_list -->
+
+<!-- /renderCellComponentsList --></td>=20
+<!-- /buildCellForTableRow --></tr>
+<tr><!-- buildCellForTableRow -->
+<!-- buildCellForTableRow -->
+<td id=3D"footer" valign=3D"top" width=3D"650" style=3D"background-color: #=
+ffffff; color: #000835; font-family: Calibri,Verdana,Arial,sans-serif; font=
+-size: 14px; font-style: normal; font-weight: normal; padding: 20px 0 0 0; =
+text-decoration: none; width: 100%;">
+<!-- renderCellComponentsList --><!-- renderCellComponentsList_list -->
+<!-- renderTemplateComponent -->
+
+<table id=3D"nw_usefulhorizontal_wrapper" class=3D"nw_component_wrapper" ce=
+llpadding=3D"0" cellspacing=3D"0" style=3D"width: 100%;">
+<tr><td class=3D"nw-componentSpacerMainCell" style=3D"color: #000835; font-=
+family: Calibri,Verdana,Arial,sans-serif; font-size: 14px; font-style: norm=
+al; font-weight: normal; padding-bottom: 20px; text-decoration: none;"><!--=
+ buildTemplateComponentStructure -->
+<table cellpadding=3D"0" cellspacing=3D"0" class=3D"ContentBlock" id=3D"use=
+fulhorizontal" style=3D"margin-top:0px;margin-bottom:0px;margin-left:0px;ma=
+rgin-right:0px;" width=3D"100%">
+<tr><td class=3D"nw-componentMainCell" style=3D"background-color: #000835; =
+color: #ffffff; font-family: Calibri,Verdana,Arial,sans-serif; font-size: 1=
+4px; font-style: normal; font-weight: normal; padding: 5px 10px; text-align=
+: center; text-decoration: none;"><table style=3D"width: 100%;" cellspacing=
+=3D"0" cellpadding=3D"0" border=3D"0"><tbody><tr><td class=3D"footer_links"=
+ valign=3D"middle" align=3D"left" style=3D"background-color: #000835; color=
+: #ffffff; font-family: Calibri,Verdana,Arial,sans-serif; font-size: 14px; =
+font-style: normal; font-weight: normal; padding: 5px 10px; text-align: cen=
+ter; text-decoration: none;"><p style=3D"margin: 0; padding: 0;"><span styl=
+e=3D"font-family: Arial; font-size: 11px;"><a href=3D"https://eur01.safelin=
+ks.protection.outlook.com/?url=3Dhttps%3A%2F%2Famadeusenterprise.newsweaver=
+.com%2Fcorporatestrategy.DailyNewsReview%2F9crkio0osms1uan4l2qe55%2Fexterna=
+l%3Femail%3Dtrue%26a%3D6%26p%3D13612289%26t%3D517972&amp;data=3D05%7C02%7CA=
+maia.LAGAREJOSARIAS%40amadeus.com%7Ca668fcb4a17d43b3aba108de161313d6%7Cb3f4=
+f7c272ce4192aba4d6c7719b5766%7C0%7C0%7C638972468386362276%7CUnknown%7CTWFpb=
+GZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoi=
+TWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=3Di7HmSTtOHolYrTt9WvecghswT=
+aszOxyuej69qPK2jdk%3D&amp;reserved=3D0" originalsrc=3D"https://amadeusenter=
+prise.newsweaver.com/corporatestrategy.DailyNewsReview/9crkio0osms1uan4l2qe=
+55/external?email=3Dtrue&amp;a=3D6&amp;p=3D13612289&amp;t=3D517972" target=
+=3D"_blank" rel=3D"noopener" style=3D"color: #ffffff; font-size: 14px; font=
+-style: normal; font-weight: normal; text-decoration: none;">Corporate Subs=
+criptions</a> =E2=81=9E <a href=3D"https://eur01.safelinks.protection.outlo=
+ok.com/?url=3Dhttps%3A%2F%2Famadeusenterprise.newsweaver.com%2Fcorporatestr=
+ategy.DailyNewsReview%2Fhzkp7u2g23v1uan4l2qe55%3Femail%3Dtrue%26lang%3Den%2=
+6a%3D6%26p%3D13612289%26t%3D517972&amp;data=3D05%7C02%7CAmaia.LAGAREJOSARIA=
+S%40amadeus.com%7Ca668fcb4a17d43b3aba108de161313d6%7Cb3f4f7c272ce4192aba4d6=
+c7719b5766%7C0%7C0%7C638972468386397115%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1=
+hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ=
+%3D%3D%7C0%7C%7C%7C&amp;sdata=3DSfcS1jBlJ3rHhIBc5dm1phLcVysrvL0p2w3C04v9ggQ=
+%3D&amp;reserved=3D0" originalsrc=3D"https://amadeusenterprise.newsweaver.c=
+om/corporatestrategy.DailyNewsReview/hzkp7u2g23v1uan4l2qe55?email=3Dtrue&am=
+p;lang=3Den&amp;a=3D6&amp;p=3D13612289&amp;t=3D517972" target=3D"_blank" re=
+l=3D"noopener" style=3D"color: #ffffff; font-size: 14px; font-style: normal=
+; font-weight: normal; text-decoration: none;">Unsubscribe</a> =E2=81=9E <a=
+ href=3D"mailto:NewsReview@amadeus.com" style=3D"color: #ffffff; font-size:=
+ 14px; font-style: normal; font-weight: normal; text-decoration: none;">Con=
+tact us</a></span></p></td></tr></tbody></table>
+</td></tr></table>
+<!-- /buildTemplateComponentStructure --></td></tr>
+</table>
+<!-- /renderTemplateComponent -->
+<!-- /renderCellComponentsList_list --><!-- renderCellComponentsList_list -=
+->
+<!-- renderTemplateComponent -->
+
+<table id=3D"nw_footertext_wrapper" class=3D"nw_component_wrapper" cellpadd=
+ing=3D"0" cellspacing=3D"0" style=3D"width: 100%;">
+<tr><td class=3D"nw-componentSpacerMainCell" style=3D"color: #000835; font-=
+family: Calibri,Verdana,Arial,sans-serif; font-size: 14px; font-style: norm=
+al; font-weight: normal; padding-bottom: 20px; text-decoration: none;"><!--=
+ buildTemplateComponentStructure -->
+<table cellpadding=3D"0" cellspacing=3D"0" class=3D"ContentBlock" id=3D"foo=
+tertext" style=3D"margin-top:0px;margin-bottom:0px;margin-left:0px;margin-r=
+ight:0px;" width=3D"100%">
+<tr><td class=3D"nw-componentMainCell" style=3D"background-color: transpare=
+nt; color: #808080; font-family: Calibri,Verdana,Arial,sans-serif; font-siz=
+e: 14px; font-style: normal; font-weight: normal; line-height: 19px; paddin=
+g: 10px 0; text-decoration: none;"><p style=3D"margin: 0; padding: 0;"><spa=
+n style=3D"color: rgb(0, 8, 53); font-size: 9px;">IMPORTANT - CONFIDENTIALI=
+TY NOTICE - This e-mail is intended only for the use of the individual or e=
+ntity shown above as addressees . It may contain information which is privi=
+leged, confidential or otherwise protected from disclosure under applicable=
+ laws . If the reader of this transmission is not the intended recipient, y=
+ou are hereby notified that any dissemination, printing, distribution, copy=
+ing, disclosure or the taking of any action in reliance on the contents of =
+this information is strictly prohibited. If you have received this transmis=
+sion in error, please immediately notify us by reply e-mail and delete the =
+message and any attachments from your system. Thank you.</span></p>
+<p style=3D"margin: 0; padding: 0;"><span style=3D"color: rgb(0, 8, 53);"><=
+img align=3D"right" src=3D"https://amadeusenterprise.newsweaver.com/v3files=
+/shard2/77635/4e/2b2d34dacfc8cb56570174.png" style=3D"border: none; margin:=
+ 0px;" width=3D"148" height=3D"49" hspace=3D"0" vspace=3D"0" alt=3D""></spa=
+n></p>
+</td></tr></table>
+<!-- /buildTemplateComponentStructure --></td></tr>
+</table>
+<!-- /renderTemplateComponent -->
+<!-- /renderCellComponentsList_list -->
+
+<!-- /renderCellComponentsList --></td>=20
+<!-- /buildCellForTableRow --></tr>
+</table>
+<table align=3D"center" id=3D"after_text" style=3D"background-color: #fffff=
+f; width: 100%;"><tr><td class=3D"after_text" style=3D"color: #000001; font=
+-family: Calibri,Verdana,Arial,sans-serif; font-size: 11px; font-style: nor=
+mal; font-weight: normal; padding-bottom: 10px; padding-top: 10px; text-ali=
+gn: center; text-decoration: none;">
+<p style=3D"margin: 0; padding: 0;">This email was sent to <a href=3D"mailt=
+o:Amaia.LAGAREJOSARIAS@amadeus.com" style=3D"color: #000001; font-style: no=
+rmal; font-weight: normal; text-decoration: underline;">Amaia.LAGAREJOSARIA=
+S@amadeus.com</a> from no-reply@internal-communications.mail.amadeus.com<br=
+>=09
+<a href=3D"https://eur01.safelinks.protection.outlook.com/?url=3Dhttps%3A%2=
+F%2Famadeusenterprise.newsweaver.com%2Fcorporatestrategy.DailyNewsReview%2F=
+subscriber%2FswitchFormat.html%3FsubscriberId%3D1uan4l2qe55%26mailingRecord=
+Id%3D0021kba6xr1wm3u81nam49%26to%3DTEXT%26email%3Dtrue%26lang%3Den&amp;data=
+=3D05%7C02%7CAmaia.LAGAREJOSARIAS%40amadeus.com%7Ca668fcb4a17d43b3aba108de1=
+61313d6%7Cb3f4f7c272ce4192aba4d6c7719b5766%7C0%7C0%7C638972468386426899%7CU=
+nknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW=
+4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&amp;sdata=3DTWqV%2BFski=
+OT%2FAbqWDTxbQmWjUI8nvGc7kRN10KC0k4s%3D&amp;reserved=3D0" originalsrc=3D"ht=
+tps://amadeusenterprise.newsweaver.com/corporatestrategy.DailyNewsReview/su=
+bscriber/switchFormat.html?subscriberId=3D1uan4l2qe55&amp;mailingRecordId=
+=3D0021kba6xr1wm3u81nam49&amp;to=3DTEXT&amp;email=3Dtrue&amp;lang=3Den" sty=
+le=3D"color: #000001; font-style: normal; font-weight: normal; text-decorat=
+ion: underline;">Receive in Plain Text</a><br><br></p></td></tr></table>
+</div>
+</div>
+</body></html>
+
+------=_Part_14794321_1894863336.1761649200661--

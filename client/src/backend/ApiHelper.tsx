@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '../config/apiService';
-import { Digest, DigestHighlight, NewsletterHeader, Newsletter, NewsletterSchema, News, NewsSchema, SearchResponseSchema, SearchResponse, DigestSchema, DigestHightlightSchema, ComposeWeeklyItem, ComposeWeeklyInsightSchema, ComposeWeeklyInsight } from '../dto/InterfaceDefinition';
+import { Digest, DigestHighlight, NewsletterHeader, Newsletter, NewsletterSchema, News, NewsSchema, SearchResponseSchema, SearchResponse, DigestSchema, DigestHightlightSchema, ComposeWeeklyItem, ComposeWeeklyItemSchema, ComposeWeeklyInsightSchema, ComposeWeeklyInsight } from '../dto/InterfaceDefinition';
 import { z } from 'zod';
 
 
@@ -77,6 +77,26 @@ export const ApiHelper = {
         }
     }
     ,
+    async parseEmailFiles(files: FileList): Promise<ComposeWeeklyItem[]> {
+        try {
+            const formData = new FormData();
+            for (let i = 0; i < files.length; i++) {
+                formData.append('files', files[i]);
+            }
+
+            const response = await axios.post(`${serverUrl}/compose-weekly/parse-emails`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            const parsed = ComposeWeeklyItemSchema.array().parse(response.data.items);
+            return parsed;
+        } catch (error) {
+            console.error('Error parsing email files:', error);
+            throw error;
+        }
+    },
     async analyzeComposeWeekly(items: ComposeWeeklyItem[]): Promise<ComposeWeeklyInsight[]> {
         try {
             const response = await axios.post(`${serverUrl}/compose-weekly/analyze`, { items });
@@ -84,6 +104,25 @@ export const ApiHelper = {
             return parsed;
         } catch (error) {
             console.error('Error analyzing compose weekly items:', error);
+            throw error;
+        }
+    },
+    async generateWeeklyTemplate(newsItems: Array<{
+        title: string;
+        abstract?: string;
+        url?: string;
+        gemini_classification: string;
+        ci_comment: string;
+        gemini_comment?: string;
+    }>, weekInfo?: string): Promise<string> {
+        try {
+            const response = await axios.post(`${serverUrl}/compose-weekly/generate-template`, {
+                news_items: newsItems,
+                week_info: weekInfo
+            });
+            return response.data.html;
+        } catch (error) {
+            console.error('Error generating weekly template:', error);
             throw error;
         }
     },
@@ -177,7 +216,7 @@ export const ApiHelper = {
             console.error('Error saving newsletter:', error);
             throw error; // Re-throw the error to be handled by the caller
         }
-    },  
+    },
 
     async deleteNewsletter(nlId: string): Promise<void> {
         try {

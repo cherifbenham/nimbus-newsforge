@@ -12,15 +12,19 @@ services:
     environment:
       - PORT=5001
       - PROJECT_ID=${PROJECT_ID}
-      - REGION=${REGION}
+      - LOCATION=${LOCATION:-europe-west4}
+      - REGION=${REGION:-europe-west4}
       - FIRESTORE_DATABASE_ID=${FIRESTORE_DATABASE_ID}
       - COMPOSE_WEEKLY_SIM_WEIGHT=${COMPOSE_WEEKLY_SIM_WEIGHT:-0.3}
+      - MODEL_FLASH=${MODEL_FLASH:-gemini-2.5-flash}
+      - MODEL_PRO=${MODEL_PRO:-gemini-2.5-flash}
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:*}
       - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials/service-account.json
     volumes:
       # Mount credentials for local development
-      - ${GOOGLE_APPLICATION_CREDENTIALS:-./.secrets/service-account.json}:/app/credentials/service-account.json:ro
+      - ../fsa-amadeus-471508-796b6912a28f.json:/app/credentials/service-account.json:ro
       # Mount source code for hot-reload during development (optional)
-      - ./server:/app
+      - ../server:/app
     restart: unless-stopped
     networks:
       - newsletter-network

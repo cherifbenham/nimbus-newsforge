@@ -1,6 +1,7 @@
-import hashlib
 import datetime
+import hashlib
 import os
+
 from google.cloud import bigquery
 from utils import get_logger
 
@@ -11,7 +12,7 @@ from utils import get_logger
 # - BQ_NEWS_TABLE_ID / BQ_BATCH_TABLE_ID / BQ_URL_HASH_TABLE_ID: fully-qualified
 #   table IDs. If not provided, they will be constructed from PROJECT_ID and BQ_DATASET.
 
-_BQ_PROJECT = os.getenv("PROJECT_ID", "demo-project")
+_BQ_PROJECT = os.getenv("PROJECT_ID", "fsa-amadeus-471508")
 _BQ_DATASET = os.getenv("BQ_DATASET", "competitive_intel")
 
 BQ_NEWS_TABLE_ID = os.getenv(
@@ -37,7 +38,7 @@ def save_news_to_bigquery(news_dict):
 
     Args:
         news_dict: A dictionary containing the data to insert. Keys should match the field names in the BigQuery schema.
-    
+
     Returns:
         Updated news_dict with list[str] of url_hashes per website
     """
@@ -46,7 +47,7 @@ def save_news_to_bigquery(news_dict):
     table = bq_client.get_table(BQ_NEWS_TABLE_ID)
     schema_fields = [field.name for field in table.schema]
     news_items = news_dict["news"]
-    
+
     rows_to_insert = []
     # Iterate over news_list
     for news_item in news_items:
@@ -72,10 +73,10 @@ def save_news_to_bigquery(news_dict):
                 row_to_insert[key] = news_item[key]
         if 'datetime' in news_item:
             row_to_insert['published_at'] = news_item['datetime']
-        
+
         rows_to_insert.append(row_to_insert)
-    
-    # Remove duplicates and non-dictionaries 
+
+    # Remove duplicates and non-dictionaries
     cleaned_rows = []
     url_hashes = set()
 
@@ -85,7 +86,7 @@ def save_news_to_bigquery(news_dict):
             if url_hash not in url_hashes:
                 url_hashes.add(url_hash)
                 cleaned_rows.append(row)
-    
+
 
     # Only add new articles
     prev_day_ids = get_latest_website_hashes(news_dict["website"])
@@ -103,10 +104,10 @@ def save_news_to_bigquery(news_dict):
            logger.info(f"{len(todays_news)} new articles added from {todays_news[0]['website']}")
         else:
            logger.info(f"Encountered errors while inserting row: {errors}")
-    
+
     news_dict["news"] = todays_news
 
-    # Return all hashes attempted, not just added, so later runs can catch and 
+    # Return all hashes attempted, not just added, so later runs can catch and
     # prevent from adding the same articles
     news_dict["url_hashes"] = list(url_hashes)
     return news_dict
@@ -129,9 +130,9 @@ def update_url_hash_rows(row_data: list):
 
         if delete_job.num_dml_affected_rows > 0:
             logger.info(f"Deleted {delete_job.num_dml_affected_rows} row(s) with website = '{website}'")
-        
+
         rows_to_insert.append(row)
-    
+
     result = insert_bq_rows(BQ_URL_HASH_TABLE_ID, rows_to_insert)
 
     return result
@@ -151,7 +152,7 @@ def insert_bq_rows(bq_table: str, row_data: list):
 
 def get_latest_website_hashes(website):
     """
-    Fetches the list of article_ids (hashes) for a given website from the most 
+    Fetches the list of article_ids (hashes) for a given website from the most
     recent entry in the BigQuery table.
 
     Args:
@@ -167,7 +168,7 @@ def get_latest_website_hashes(website):
         FROM `{BQ_URL_HASH_TABLE_ID}` AS hashes
         WHERE website = '{website}'
     """
-    
+
     query_job = bq_client.query(query)
     results = query_job.result()  # Waits for job to complete
 

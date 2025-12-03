@@ -1,10 +1,10 @@
-from google.api_core.client_options import ClientOptions
-from google.cloud import discoveryengine_v1 as discoveryengine
-from vertexai.generative_models import GenerativeModel, Part, GenerationConfig
-from utils import MODEL_FLASH
-import vertexai
 import os
 
+import vertexai
+from google.api_core.client_options import ClientOptions
+from google.cloud import discoveryengine_v1 as discoveryengine
+from utils import MODEL_FLASH
+from vertexai.generative_models import GenerationConfig, GenerativeModel, Part
 
 IResponseParams = {
     "ISearchResult": 0,
@@ -12,7 +12,7 @@ IResponseParams = {
     "ISearchResponse": 2,
 }
 
-DE_PROJECT_ID = os.getenv("DISCOVERY_PROJECT_ID") or os.getenv("PROJECT_ID", "demo-project")
+DE_PROJECT_ID = os.getenv("DISCOVERY_PROJECT_ID") or os.getenv("PROJECT_ID", "fsa-amadeus-471508")
 DE_LOCATION = os.getenv("DISCOVERY_LOCATION", "global")
 DE_ENGINE_ID = os.getenv("DISCOVERY_ENGINE_ID", "news-finder-v2_1730891472107")
 
@@ -25,8 +25,8 @@ discovery_client = discoveryengine.SearchServiceClient(
     client_options=client_options)
 
 
-PROJECT_ID = os.getenv("PROJECT_ID", "demo-project")
-LOCATION = os.getenv("REGION", "us-central1")
+PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus-471508")
+LOCATION = os.getenv("REGION", "europe-west4")
 
 
 vertexai.init(project=PROJECT_ID, location=LOCATION)

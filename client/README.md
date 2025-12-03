@@ -1,50 +1,47 @@
-# React + TypeScript + Vite
+# CI Newsletter Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite application that powers the CI Newsletter UI (Daily News, Weekly Digest, Compose Weekly, Search, and Setup screens).
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Node.js 18+
+- npm 9+
+- A running backend API (`http://localhost:5001/api` when developing locally)
 
-## Expanding the ESLint configuration
+## Commands
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+```
+# Install dependencies (first run)
+npm install
 
-- Configure the top-level `parserOptions` property like this:
+# Start Vite dev server on http://localhost:5173
+npm run dev
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+# Type-check/lint
+npm run lint
+
+# Production build (outputs to dist/)
+npm run build
+
+# Preview production build locally
+npm run preview
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Environment Variables
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Only build-time variables prefixed with `VITE_` are available inside the app.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+| Variable | Description |
+| --- | --- |
+| `VITE_API_URL` | Base URL for the Flask backend (defaults to `http://localhost:5001/api`). |
+
+For Cloud Run deployments, `docker/deploy-to-gcp.sh` sets `_VITE_API_URL` during the Cloud Build step so the production bundle targets the deployed backend service automatically.
+
+## Key Source Files
+
+- `src/backend/ApiHelper.tsx` – Centralized API client used across pages.
+- `src/pages/ComposeWeekly.tsx` – Compose Weekly workflow, AI scoring, and exports.
+- `src/pages/WeeklyDigest.tsx` & `src/pages/DailyNewsletter.tsx` – Digest/news views.
+- `src/pages/Setup.tsx` – Prompt editors and configuration controls.
+
+Refer to the root `README.md`/`instructions.md` for full-stack setup and deployment guides.

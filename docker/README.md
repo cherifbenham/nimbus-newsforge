@@ -16,7 +16,7 @@ This directory contains all Docker and deployment-related files.
 
 ```bash
 # From project root
-docker-compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml up
+docker compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml up
 ```
 
 ### Deploy to GCP

@@ -5,12 +5,11 @@ WORKDIR /app
 COPY package.json package-lock.json* ./
 RUN npm ci || npm install
 
-# Copy source and build
+# Copy source and build (includes .env.production)
 COPY . .
-# Allow passing backend API at build time
+# Allow passing backend API at build time (optional, overrides .env.production)
 ARG VITE_API_URL
-ENV VITE_API_URL=${VITE_API_URL}
-RUN npm run build
+RUN if [ -n "$VITE_API_URL" ]; then export VITE_API_URL=$VITE_API_URL; fi && npm run build
 
 # Serve with nginx
 FROM nginx:alpine
@@ -18,4 +17,3 @@ COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
-

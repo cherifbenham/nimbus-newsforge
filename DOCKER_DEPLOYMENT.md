@@ -23,9 +23,9 @@ This application is fully containerized with Docker for easy deployment to Googl
 
 ### Quick Start
 
-1. **Start both frontend and backend**:
+1. **Start both frontend and backend** (from repo root):
    ```bash
-   docker-compose up
+   docker compose -f docker/docker-compose.yml up
    ```
 
 2. **Access the application**:
@@ -34,7 +34,7 @@ This application is fully containerized with Docker for easy deployment to Googl
 
 3. **Development mode with hot-reload**:
    ```bash
-   docker-compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml up
+   docker compose -f docker/docker-compose.yml -f docker/docker-compose.dev.yml up
    ```
    - Frontend dev server: http://localhost:5173
    - Backend: http://localhost:5001
@@ -43,22 +43,22 @@ This application is fully containerized with Docker for easy deployment to Googl
 
 ```bash
 # Build images
-docker-compose build
+docker compose -f docker/docker-compose.yml build
 
 # Start in detached mode
-docker-compose up -d
+docker compose -f docker/docker-compose.yml up -d
 
 # View logs
-docker-compose logs -f
+docker compose -f docker/docker-compose.yml logs -f
 
 # Stop services
-docker-compose down
+docker compose -f docker/docker-compose.yml down
 
 # Remove volumes
-docker-compose down -v
+docker compose -f docker/docker-compose.yml down -v
 
 # Rebuild and start
-docker-compose up --build
+docker compose -f docker/docker-compose.yml up --build
 ```
 
 ---

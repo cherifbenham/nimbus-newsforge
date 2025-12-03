@@ -1,22 +1,23 @@
+import concurrent.futures
+import json
+import logging
+import os
+import traceback
+from datetime import datetime
+from urllib.parse import urlparse
+
+import json_repair
+import pandas as pd
 import requests
 import vertexai
-import json
-from vertexai.generative_models import GenerativeModel, Part, GenerationConfig
-import os
-import logging
-import concurrent.futures
-from datetime import datetime
-import traceback
-import json_repair
-from firebase_helpers import get_rejected_stories, get_config, get_urls, save_media
-from utils import fetch_and_store, MODEL_FLASH, MODEL_PRO, generate_with_fallback
-import concurrent.futures
-from urllib.parse import urlparse
-import pandas as pd
+from firebase_helpers import (get_config, get_rejected_stories, get_urls,
+                              save_media)
+from utils import (MODEL_FLASH, MODEL_PRO, fetch_and_store,
+                   generate_with_fallback)
+from vertexai.generative_models import GenerationConfig, GenerativeModel, Part
 
-
-PROJECT_ID = os.getenv("PROJECT_ID", "demo-project")
-LOCATION = os.getenv("REGION", "us-central1")
+PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus-471508")
+LOCATION = os.getenv("REGION", "europe-west4")
 MEDIA_BUCKET = os.getenv("MEDIA_BUCKET", "ci_media")
 MAX_PAGES = 5
 
@@ -140,9 +141,9 @@ Use markdown for formatting. Do not exceed 100 words. Format the response using 
 
 News:
 {}
-    
+
 Analyzis:
-    
+
     """.format(news_item)
 
     model = GenerativeModel(model_name=MODEL_FLASH, generation_config=GenerationConfig(
@@ -394,7 +395,7 @@ def get_html_content(urls=None):
       urls: A list of URLs to scrape.
 
     Returns:
-      A list of strings, where each string contains the HTML content 
+      A list of strings, where each string contains the HTML content
       of the corresponding URL.
     """
     if not urls:
@@ -438,10 +439,10 @@ def extract_news_with_gemini(html_content):
         1. **title**: The headline of the news article.
         2. **abstract**: A short summary or description of the article.
         3. **datetime**: **datetime**: The date and time the article was published. Format should be: YYYY-MM-DD HH:MM. If the date and/or time is not found, leave the "datetime" field empty. If the HH:MM is "00:00", replace it with "12:01".
-        4. **url**: The complete URL of the full article, including the domain. 
+        4. **url**: The complete URL of the full article, including the domain.
 
         **Filtering Criteria:**
- 
+
         - Only extract articles from the main News section.
         - Only extract articles that have an abstract.
 
@@ -459,7 +460,7 @@ def extract_news_with_gemini(html_content):
                     "title": "News Article Title 2",
                     "abstract": "Short abstract of the news article...",
                     "datetime": "Publishing date time of the article format should be:YYYY-MM-DD HH:MM" ,
-                    "url": "The complete URL of the full article, including the domain." 
+                    "url": "The complete URL of the full article, including the domain."
                     }},
                     // ... more news articles
                 ]
@@ -573,7 +574,7 @@ def extract_datetime_with_gemini(html):
         html: The HTML content of an article.
 
     Returns:
-        The datetime of the article publication. If the datetime is not found, an empty string is returned. 
+        The datetime of the article publication. If the datetime is not found, an empty string is returned.
         The datetime is returned as a string in the following format: "YYYY-MM-DD HH:MM."
     """
 
@@ -587,7 +588,7 @@ def extract_datetime_with_gemini(html):
         ```
         Extract the date and time of the article publication from the HTML.
         The date and time should be in the following format: "YYYY-MM-DD HH:MM."
-        Do not return any other context or metadata. 
+        Do not return any other context or metadata.
         If the date is found but the time is not, return the "HH:MM" section as "12:01".
         If the time is found to be "00:00" or "12:00:00 AM", return the "HH:MM" section as "12:01".
         If the date and time are not found, output an empty string.
@@ -632,7 +633,7 @@ def generate_newsletter_text(news_list, past_newsletters=None, media_list=None):
     using Gemini Pro for content creation.
 
     Args:
-        news_list (list): A list of dictionaries, with each dictionary containing 
+        news_list (list): A list of dictionaries, with each dictionary containing
                           news from a specific website.
 
     Returns:
@@ -657,7 +658,7 @@ def generate_newsletter_text(news_list, past_newsletters=None, media_list=None):
         **Prioritization:**
 
 * **Relevance:** Prioritize news that directly impacts our company's business, its competitors, or its key customer segments.
-* **Quantitative Metrics:**  Prioritize news that involves significant funding rounds (above $5M), mergers, acquisitions, or changes in market share. 
+* **Quantitative Metrics:**  Prioritize news that involves significant funding rounds (above $5M), mergers, acquisitions, or changes in market share.
 
 **Rejected News Examples:**
 
@@ -714,8 +715,8 @@ Input News:
         {json.dumps(news_list,ensure_ascii=False, default=str)}
 
 Newsletter:
-              
-      
+
+
     """
 
     config = GenerationConfig(
@@ -748,7 +749,7 @@ def find_duplicate_news(news_list, simplified_published_newslist):
     prompt = """
 You are an experienced travel industry editor, tasked with identifying duplicate articles
 
-Your goal is to identify articles that discuss the **EXACT SAME** news as already covered in the provided past newsletters.  
+Your goal is to identify articles that discuss the **EXACT SAME** news as already covered in the provided past newsletters.
 **Carefully look for strong indicators of duplication:**
 * **Identical company names:** The articles should mention the same company in the same context (e.g., a product launch by the same company).
 * **Identical facts:** The articles should report the same specific facts or figures (e.g., the same amount of investment, the same number of flights).
@@ -854,7 +855,7 @@ def process_news_chunk(news_chunk):
     * **Consolidator:** Aerticket
     * **Corporate Travel:** Concur, Amex GBT, Travelperk, Spotnana, CWT, CTM, Navan, Deem, Serko, Chase Travel, BCD
     * **Data:** STR, OAG
-    * **Distribution IT:** Accelya 
+    * **Distribution IT:** Accelya
     * **GDS:** Sabre, Travelport, Travelsky
     * **Hospitality:** Oracle, Hyatt, Marriott, Accor, Hilton, Hotelbeds, Cendyn, Siteminder, Shiji, Cloudbeds, Mews, Rategain, D-Edge, IDS
     * **Metasearch:** Kayak, trivago, Google, Skyscanner

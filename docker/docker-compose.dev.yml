@@ -11,7 +11,7 @@ services:
     volumes:
       # Mount source for hot-reload
       - ./server:/app
-      - ${GOOGLE_APPLICATION_CREDENTIALS:-./.secrets/service-account.json}:/app/credentials/service-account.json:ro
+      - ${GOOGLE_APPLICATION_CREDENTIALS:-./fsa-amadeus-471508-796b6912a28f.json}:/app/credentials/service-account.json:ro
     environment:
       - FLASK_ENV=development
       - FLASK_DEBUG=1

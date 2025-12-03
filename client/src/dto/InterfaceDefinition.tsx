@@ -156,6 +156,7 @@ export type ComposeWeeklyItem = z.infer<typeof ComposeWeeklyItemSchema>;
 
 export const ComposeWeeklyInsightSchema = z.object({
     id: z.string(),
+    refined_title: z.string().optional(),
     gemini_comment: z.string(),
     gemini_classification: z.string(),
     similarity: z.number().int().min(0).max(100).optional(),

@@ -5,9 +5,9 @@ set -e
 # This script deploys both frontend and backend to Google Cloud Run
 
 # Configuration
-PROJECT_ID="${PROJECT_ID:-your-gcp-project-id}"
-REGION="${REGION:-europe-west1}"
-SERVICE_ACCOUNT="${SERVICE_ACCOUNT:-your-service-account@your-gcp-project-id.iam.gserviceaccount.com}"
+PROJECT_ID="${PROJECT_ID:-fsa-amadeus-471508}"
+REGION="${REGION:-europe-west4}"
+SERVICE_ACCOUNT="${SERVICE_ACCOUNT:-your-service-account@fsa-amadeus-471508.iam.gserviceaccount.com}"
 
 # Service names
 BACKEND_SERVICE="ci-newsletter-backend"
@@ -32,7 +32,7 @@ cd server
 gcloud builds submit --tag ${BACKEND_IMAGE}
 cd ..
 
-# Deploy backend
+# Deploy backend (initial deployment with wildcard CORS for Cloud Run)
 echo "🚀 Deploying backend to Cloud Run..."
 gcloud run deploy ${BACKEND_SERVICE} \
   --image ${BACKEND_IMAGE} \
@@ -40,7 +40,7 @@ gcloud run deploy ${BACKEND_SERVICE} \
   --region ${REGION} \
   --allow-unauthenticated \
   --service-account ${SERVICE_ACCOUNT} \
-  --set-env-vars "PROJECT_ID=${PROJECT_ID},REGION=${REGION},FIRESTORE_DATABASE_ID=(default),COMPOSE_WEEKLY_SIM_WEIGHT=0.3" \
+  --set-env-vars "PROJECT_ID=${PROJECT_ID},LOCATION=${REGION},REGION=${REGION},FIRESTORE_DATABASE_ID=(default),COMPOSE_WEEKLY_SIM_WEIGHT=0.3,MODEL_FLASH=gemini-2.5-flash,MODEL_PRO=gemini-2.5-flash,CORS_ORIGINS=https://*.run.app|http://localhost:*" \
   --port 5001 \
   --memory 1Gi \
   --cpu 1 \
@@ -55,8 +55,8 @@ echo "✅ Backend deployed at: ${BACKEND_URL}"
 # Build and push frontend with backend URL
 echo "🔨 Building frontend image with backend URL..."
 cd client
-gcloud builds submit --tag ${FRONTEND_IMAGE} \
-  --substitutions=_VITE_API_URL="${BACKEND_URL}/api"
+gcloud builds submit \
+  --substitutions=_VITE_API_URL="${BACKEND_URL}/api",_IMAGE_NAME="${FRONTEND_IMAGE}"
 cd ..
 
 # Deploy frontend

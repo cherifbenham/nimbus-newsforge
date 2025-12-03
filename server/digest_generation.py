@@ -1,23 +1,24 @@
-import vertexai
-import json
-from vertexai.generative_models import GenerativeModel
-import os
 import copy
-from datetime import datetime, date
-import json_repair
+import json
 import logging
-from firebase_helpers import get_last_week_newsletters, save_digest, get_news_by_date_range, get_config, get_past_digests
-from utils import fix_json_formatting, MODEL_FLASH
-from urllib.parse import urlparse
+import os
+from datetime import date, datetime
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel
-from newsletter_generation import *
+from urllib.parse import urlparse
+
+import json_repair
+import vertexai
 from classes.Newsletter import *
-from utils import parse_iso_date
+from firebase_helpers import (get_config, get_last_week_newsletters,
+                              get_news_by_date_range, get_past_digests,
+                              save_digest)
+from newsletter_generation import *
+from pydantic import BaseModel
+from utils import MODEL_FLASH, fix_json_formatting, parse_iso_date
+from vertexai.generative_models import GenerativeModel
 
-
-PROJECT_ID = os.getenv("PROJECT_ID", "demo-project")
-LOCATION = os.getenv("REGION", "us-central1")
+PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus-471508")
+LOCATION = os.getenv("REGION", "europe-west4")
 MAX_PAGES = 5
 
 vertexai.init(project=PROJECT_ID, location=LOCATION)
@@ -92,7 +93,7 @@ def generate_weekly_digest_text(newsletter_list):
     using Gemini Pro for content creation.
 
     Args:
-        newsletter_list (list): A list of dictionaries, with each dictionary containing 
+        newsletter_list (list): A list of dictionaries, with each dictionary containing
                           news from a specific website.
 
     Returns:
@@ -140,12 +141,12 @@ def generate_weekly_digest_text(newsletter_list):
     **Newsletters:**
         {}
 
-The following section contains examples of previously generated and approved digests. 
+The following section contains examples of previously generated and approved digests.
 Use them to help make decisions on whether to include certain articles
-in this digest. Do not use the actual examples in this digest. 
+in this digest. Do not use the actual examples in this digest.
     ** Generated Past Digests:**
         {}
-    
+
     """
 
     config = get_config()
@@ -195,15 +196,15 @@ def generate_highlights(digest_text):
     """
 
     prompt = """
-    {}   
-        
+    {}
+
    The output format should be a well formatted JSON object. Do not place the complete output text in brackets ("[]"). The output should formatted as follows:
     {{
         "Highlights of the Week": {{
             "text": "complete text contents of the 'highlights of the week' section, with reference numbers to relevant articles in brackets.",
             "markdown_text": "Organize the content of this section clearly and use appealing formatting to catch the readers eye. Give each highlight a short intro title, and prefix the title with an engaging icon. Place a colon between the title and the highilght contents.
             The title and icon should NOT be in a header format, but should be bold. Separate each highlight with a new line. Do not include the title "Highlights of the Week" in the markdown text. The hyperlinks should be in bold font and redirect to the article when clicked.
-            The reference numbers should start at '1' and increase sequentially (eg. [1], [2], [3]...) 
+            The reference numbers should start at '1' and increase sequentially (eg. [1], [2], [3]...)
             (hyperlink markdown example: "**[1](https://www.example.com)**")"
             "news": [
                 {{
@@ -219,9 +220,9 @@ def generate_highlights(digest_text):
 
     ** Digest contents **:
     {}
-The following section contains examples of previously generated and approved digests. 
+The following section contains examples of previously generated and approved digests.
 Use them to help make decisions on whether to include certain articles
-in the highlights section, and how to format it. Do not use the actual examples in this digest. 
+in the highlights section, and how to format it. Do not use the actual examples in this digest.
 
     ** Past Digests **:
     {}
@@ -270,13 +271,13 @@ def regenerate_digest_highlights(digest: Digest):
     prompt = """
     Rewrite the 'Highlights of the Week' section of the digest below using only articles included in the 'Highlights News Items' section below.
     Remove all highlights that do not reference items in the news list, and add new highlights for items in the news list not yet referenced.
-    
+
     The output format should be a well formatted JSON object. Do not place the complete output text in brackets ("[]"). The output should formatted as follows:
     {{
             "text": "complete text contents of the 'highlights of the week' section, with reference numbers to relevant articles in brackets.",
             "markdown_text": "Organize the content of this section clearly and use appealing formatting to catch the readers eye. Give each highlight a short intro title, and prefix the title with an engaging icon. Place a colon between the title and the highilght contents.
             The title and icon should NOT be in a header format, but should be bold. Separate each highlight with a new line. Do not include the title "Highlights of the Week" in the markdown text. The hyperlinks should be in bold font and redirect to the article when clicked.
-            The reference numbers should start at '1' and increase sequentially (eg. [1], [2], [3]...) 
+            The reference numbers should start at '1' and increase sequentially (eg. [1], [2], [3]...)
             (hyperlink markdown example: "**[1](https://www.example.com)**")"
             "news": [
                 {{
@@ -333,7 +334,7 @@ def generate_digest_metadata(nl_article):
 
     prompt = """
     Reformat the ' newsletter article' below to match the following output format:
-                    
+
                     {{
                         "url": "link to the full article"
                         "title": "title of the article",
@@ -343,15 +344,15 @@ def generate_digest_metadata(nl_article):
                         "gen_context": "additional context or description",
                         "published_date": "date the article was published. leave blank if not included in the original news item."
                     }}
-    
+
     Additional instructions on generating the gen_context field:
     * 'gen_context' should explain why the story is important, what broader industry trend it reflects, and why it is meaningful given other ongoing trends.
-    * Keep the statement short and to the point. 
-    * Do not include phrases such as "This news is significant for our company because...". 
+    * Keep the statement short and to the point.
+    * Do not include phrases such as "This news is significant for our company because...".
     * Do not restate what is already said in the key message.
 
     The output format should be a well formatted JSON object. Do not place the complete output text in brackets ("[]").
-     
+
     Newsletter article:
     {}
     """
@@ -390,7 +391,7 @@ def highlights_cleanup(highlights_markdown):
 
     prompt = """
     For the following markdown text, perform the following revisions:
-    1. ensure there are two newline characters before each new item. Items are demarcated by two asterix and an emoji character. 
+    1. ensure there are two newline characters before each new item. Items are demarcated by two asterix and an emoji character.
     If there is already one newline character, add another. If there are none, add two.
     2. Make sure the references are in sequential order. Renumber them if necessary.
 

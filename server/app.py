@@ -1,36 +1,67 @@
-from flask import Flask, request, jsonify
-from google.cloud import firestore
-from google.cloud import bigquery
-from vertexai.generative_models import GenerativeModel, GenerationConfig
-from utils import MODEL_FLASH
-import os
-from datetime import datetime
-from firebase_helpers import *
-from newsletter_generation import *
-from digest_generation import *
-from classes.Newsletter import *
-from news_search import *
-from urllib.parse import urlparse
-from flask_cors import CORS
-from compose_weekly import generate_compose_weekly_insights
-
 import concurrent.futures
 import json
+import os
+from datetime import datetime
+from urllib.parse import urlparse
+
+from classes.Newsletter import *
+from compose_weekly import generate_compose_weekly_insights
+from digest_generation import *
+from firebase_helpers import *
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+from google.cloud import bigquery, firestore
+from news_search import *
+from newsletter_generation import *
+from utils import MODEL_FLASH
+from vertexai.generative_models import GenerationConfig, GenerativeModel
 
 port = int(os.environ.get('PORT', 5000))
 app = Flask(__name__)
-# Allow CORS origins from env (comma-separated) or default to localhost for dev
-cors_origins = os.getenv("CORS_ORIGINS", "http://localhost:*")
-if "," in cors_origins:
-    cors_origins = [o.strip() for o in cors_origins.split(",") if o.strip()]
-CORS(app, resources={
-    "/api/*": {
-        "origins": cors_origins,
-        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"],
-        "max_age": 600,
-    }
-})
+
+# Allow CORS origins from env (comma or semicolon-separated) or default to localhost for dev
+cors_origins_str = os.getenv("CORS_ORIGINS", "http://localhost:*")
+# Support both comma and semicolon as separators (gcloud uses semicolon for env vars)
+separator = ";" if ";" in cors_origins_str else ","
+cors_origins = [o.strip() for o in cors_origins_str.split(separator) if o.strip()]
+
+# Configure CORS with flexible origin matching
+# Support wildcards like https://*.run.app by converting to regex pattern
+import re
+
+
+def origin_matches(origin):
+    """Check if origin matches any of the allowed patterns"""
+    if not origin:
+        return False
+    for pattern in cors_origins:
+        if pattern == "*":
+            return True
+        # Convert wildcard pattern to regex
+        regex_pattern = pattern.replace(".", r"\.").replace("*", ".*")
+        if re.match(f"^{regex_pattern}$", origin):
+            return True
+    return False
+
+# Use regex patterns for CORS (flask-cors supports regex patterns with re.compile)
+# Convert wildcard patterns to regex patterns
+def wildcard_to_regex(pattern):
+    """Convert wildcard pattern like 'http://localhost:*' to regex"""
+    if pattern == "*":
+        return re.compile(r".*")
+    # Escape special chars except * and convert * to .*
+    escaped = re.escape(pattern).replace(r'\*', '.*')
+    return re.compile(f"^{escaped}$")
+
+cors_patterns = [wildcard_to_regex(p) for p in cors_origins] if cors_origins else [re.compile(r".*")]
+
+CORS(app,
+     resources={r"/api/*": {
+         "origins": cors_patterns,
+         "supports_credentials": True
+     }},
+     allow_headers=["Content-Type", "Authorization"],
+     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
 
 
 # Initialize Firestore client honoring PROJECT_ID and FIRESTORE_DATABASE_ID
@@ -664,6 +695,46 @@ def search_news_route():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route('/api/compose-weekly/parse-emails', methods=['POST'])
+def compose_weekly_parse_emails():
+    """Parse .eml files and extract news items"""
+    try:
+        from email_parser import parse_eml_file
+
+        if 'files' not in request.files:
+            return jsonify({"error": "No files provided"}), 400
+
+        files = request.files.getlist('files')
+        if not files:
+            return jsonify({"error": "No files provided"}), 400
+
+        all_news_items = []
+
+        for file in files:
+            if not file.filename.endswith('.eml'):
+                continue
+
+            try:
+                # Read file content
+                file_content = file.read()
+
+                # Parse the email
+                news_items = parse_eml_file(file_content)
+                all_news_items.extend(news_items)
+
+            except Exception as e:
+                print(f"Error parsing {file.filename}: {str(e)}")
+                continue
+
+        if not all_news_items:
+            return jsonify({"error": "No news items found in the uploaded emails"}), 400
+
+        return jsonify({"items": all_news_items}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 @app.route('/api/compose-weekly/analyze', methods=['POST'])
 def compose_weekly_analyze_route():
     try:
@@ -739,6 +810,30 @@ def set_compose_weekly_prompt():
                 pass
         return jsonify({"status": "ok"}), 200
     except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/compose-weekly/generate-template', methods=['POST'])
+def generate_weekly_template_route():
+    """Generate HTML newsletter template using Gemini from selected news items."""
+    try:
+        from weekly_template_generator import generate_weekly_template
+
+        data = request.get_json() or {}
+        news_items = data.get('news_items', [])
+        week_info = data.get('week_info')
+
+        if not news_items:
+            return jsonify({"error": "No news items provided"}), 400
+
+        html_content = generate_weekly_template(news_items, week_info)
+
+        return jsonify({
+            "status": "ok",
+            "html": html_content
+        }), 200
+
+    except Exception as e:
+        print(f"Error generating weekly template: {e}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/digests/metadata', methods=['POST'])

@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+
 try:
     # Load environment variables from a local .env file if present (dev convenience)
     # Use override=True so .env wins over stray shell settings
@@ -23,29 +24,29 @@ else:
     _cred_files = sorted(glob.glob(str(_repo_root / "service-account-*.json")), reverse=True)
     if _cred_files:
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = _cred_files[0]
-import vertexai
-import logging
-import json_repair
-import random
-import string
-from pytube import YouTube
-from google.cloud import storage
-from vertexai.generative_models import GenerativeModel
+import datetime
+import hashlib
 import io
 import json
-import hashlib
-import datetime
 import logging
-from logging import getLogger
 import os
-import google.cloud.logging
+import random
+import string
+from logging import getLogger
 
-PROJECT_ID = os.getenv("PROJECT_ID", "demo-project")
-LOCATION = os.getenv("REGION", "us-central1")
+import google.cloud.logging
+import json_repair
+import vertexai
+from google.cloud import storage
+from pytube import YouTube
+from vertexai.generative_models import GenerativeModel
+
+PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus-471508")
+LOCATION = os.getenv("LOCATION", os.getenv("REGION", "europe-west4"))
 # Model names can be overridden via environment variables
-# Default to Gemini 2.0 Flash for broader availability
-MODEL_FLASH = os.getenv("MODEL_FLASH", "gemini-2.0-flash-001")
-MODEL_PRO = os.getenv("MODEL_PRO", "gemini-1.5-pro-002")
+# Use Gemini 2.5 Flash - latest model
+MODEL_FLASH = os.getenv("MODEL_FLASH", "gemini-2.5-flash")
+MODEL_PRO = os.getenv("MODEL_PRO", "gemini-2.5-flash")
 
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 
