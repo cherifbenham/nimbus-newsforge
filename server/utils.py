@@ -41,7 +41,7 @@ from google.cloud import storage
 from pytube import YouTube
 from vertexai.generative_models import GenerativeModel
 
-PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus-471508")
+PROJECT_ID = os.getenv("PROJECT_ID", "nimbus-newsforge")
 LOCATION = os.getenv("LOCATION", os.getenv("REGION", "europe-west4"))
 # Model names can be overridden via environment variables
 # Use Gemini 2.5 Flash - latest model

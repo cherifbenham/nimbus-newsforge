@@ -5,9 +5,9 @@ set -e
 # This script deploys both frontend and backend to Google Cloud Run
 
 # Configuration
-PROJECT_ID="${PROJECT_ID:-fsa-amadeus-471508}"
+PROJECT_ID="${PROJECT_ID:-nimbus-newsforge}"
 REGION="${REGION:-europe-west4}"
-SERVICE_ACCOUNT="${SERVICE_ACCOUNT:-your-service-account@fsa-amadeus-471508.iam.gserviceaccount.com}"
+SERVICE_ACCOUNT="${SERVICE_ACCOUNT:-your-service-account@${PROJECT_ID}.iam.gserviceaccount.com}"
 
 # Service names
 BACKEND_SERVICE="ci-newsletter-backend"

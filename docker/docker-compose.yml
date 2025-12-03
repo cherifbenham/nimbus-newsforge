@@ -22,7 +22,7 @@ services:
       - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials/service-account.json
     volumes:
       # Mount credentials for local development
-      - ../fsa-amadeus-471508-796b6912a28f.json:/app/credentials/service-account.json:ro
+      - ../service-account.json:/app/credentials/service-account.json:ro
       # Mount source code for hot-reload during development (optional)
       - ../server:/app
     restart: unless-stopped

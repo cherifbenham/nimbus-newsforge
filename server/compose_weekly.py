@@ -96,7 +96,7 @@ def _build_prompt(items: List[Dict[str, str]]) -> str:
     custom = _load_custom_prompt()
     addendum = f"\n\nAdditional CI instructions (for scoring/classification):\n{custom}\n" if custom else ""
     return f"""
-You are a senior Competitive Intelligence analyst for Amadeus, a leading travel technology company. Your role is to provide actionable insights for strategic decision-making.
+You are a senior Competitive Intelligence analyst for Nimbus Travel, a leading travel technology company. Your role is to provide actionable insights for strategic decision-making.
 
 For each news item, you must provide THREE outputs:
 
@@ -121,7 +121,7 @@ For each news item, you must provide THREE outputs:
 
 2. **"gemini_comment"**: This is the CI comment - a separate analytical insight that:
    - Extracts specific metrics and numbers (percentages, revenue figures, growth rates, market share, etc.)
-   - Identifies strategic implications for Amadeus (market opportunities, competitive threats, technology trends)
+   - Identifies strategic implications for Nimbus Travel (market opportunities, competitive threats, technology trends)
    - Provides comparative context when available (year-over-year changes, regional differences, competitor positioning)
    - Focuses on business impact rather than describing what happened
    - Is concise (1-3 sentences) but packed with insights
@@ -311,11 +311,11 @@ def _add_similarity_scores(
     prompt_text = _load_custom_prompt()
     if not prompt_text:
         logging.warning("No custom prompt found for similarity scoring, using default scoring context")
-        # Use a default prompt about Amadeus relevance
+        # Use a default prompt about Nimbus relevance
         prompt_text = """
-        Amadeus is a leading travel technology company providing IT solutions for airlines, hotels,
-        travel agencies, and corporations. We focus on: airline IT systems, hotel property management,
-        GDS (Global Distribution Systems), corporate travel management, payments, and travel analytics.
+        Nimbus Travel is a travel technology company providing solutions for airlines, hotels,
+        travel agencies, and corporate travelers. We focus on airline IT systems, hotel property management,
+        distribution (GDS), corporate travel management, payments, and travel analytics.
         """
 
     global _CACHED_PROMPT_TEXT, _CACHED_PROMPT_EMBEDDING  # noqa: PLW0603

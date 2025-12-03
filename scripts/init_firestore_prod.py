@@ -9,7 +9,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'server'))
 
 # Set environment variables
 os.environ['ENV'] = 'production'
-os.environ['PROJECT_ID'] = 'fsa-amadeus-471508'
+os.environ['PROJECT_ID'] = 'nimbus-newsforge'
 
 from firebase_helpers import db
 

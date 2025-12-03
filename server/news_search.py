@@ -12,7 +12,7 @@ IResponseParams = {
     "ISearchResponse": 2,
 }
 
-DE_PROJECT_ID = os.getenv("DISCOVERY_PROJECT_ID") or os.getenv("PROJECT_ID", "fsa-amadeus-471508")
+DE_PROJECT_ID = os.getenv("DISCOVERY_PROJECT_ID") or os.getenv("PROJECT_ID", "nimbus-newsforge")
 DE_LOCATION = os.getenv("DISCOVERY_LOCATION", "global")
 DE_ENGINE_ID = os.getenv("DISCOVERY_ENGINE_ID", "news-finder-v2_1730891472107")
 
@@ -25,7 +25,7 @@ discovery_client = discoveryengine.SearchServiceClient(
     client_options=client_options)
 
 
-PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus-471508")
+PROJECT_ID = os.getenv("PROJECT_ID", "nimbus-newsforge")
 LOCATION = os.getenv("REGION", "europe-west4")
 
 

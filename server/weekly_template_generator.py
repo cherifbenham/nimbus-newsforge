@@ -11,7 +11,7 @@ import vertexai
 from vertexai.generative_models import GenerationConfig, GenerativeModel
 
 # Initialize Vertex AI with correct project
-PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus-471508")
+PROJECT_ID = os.getenv("PROJECT_ID", "nimbus-newsforge")
 LOCATION = os.getenv("REGION", "europe-west4")
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 
@@ -103,7 +103,7 @@ Generate a professional HTML newsletter following this EXACT structure and styli
    - **Source link - CRITICAL INSTRUCTIONS**: Determine the actual news source and use it as the link text
      * **IGNORE aggregator/redirect domains**: If URL is from newsweaver, safelinks, redirects, or similar aggregators, DO NOT use that domain name
      * **Identify the real source**: Use the article title, abstract context, or URL path to determine the actual publication
-     * Examples of what to IGNORE: "newsweaver", "amadeusenterprise", "safelinks", "protection.outlook"
+     * Examples of what to IGNORE: "newsweaver", "digestrelay", "safelinks", "protection.outlook"
      * **Extract from direct URLs**: For direct links, parse the domain
        - https://www.phocuswire.com/article → "Phocuswire"
        - https://skift.com/article → "Skift"
@@ -146,7 +146,7 @@ Generate a professional HTML newsletter following this EXACT structure and styli
   * DO NOT simply copy the source title - transform it to be more informative
 - Keep summaries concise and actionable (use &ndash; for dash separator after title)
 - **SOURCE LINKS ARE CRITICAL - READ CAREFULLY**: Identify the ACTUAL news source, not aggregator domains
-  * **DO NOT USE** these aggregator/redirect domains: newsweaver, amadeusenterprise, safelinks, protection.outlook, redirects
+  * **DO NOT USE** these aggregator/redirect domains: newsweaver, digestrelay, safelinks, protection.outlook, redirects
   * **Direct URLs**: Extract from domain (e.g., www.phocuswire.com → Phocuswire)
   * **Aggregator URLs**:
     - Check if title has source in brackets like "[Phocuswire]" - use that
@@ -180,10 +180,10 @@ CORRECT - Title with bold essence + clarification, source link, and CI comment:
 <p style="margin: 0cm 0cm 8pt 42.55pt; font-size: 10pt; font-family: Arial, sans-serif; color: #000835; line-height: 14pt; background: #c5d5f9; font-style: italic;">CI comment: Air France-KLM acquired a 2.3% shareholding in WestJet from Delta Air Lines, expanding their partnership which began in 2009.</p>
 
 CORRECT - Aggregator URL with title transformation:
-<p style="margin: 0cm 0cm 8pt; font-size: 11pt; font-family: Arial, sans-serif; color: #000835; line-height: 14pt;"><strong>Uber and WeRide launch robotaxis in Saudi Arabia</strong> marking first deployment in the Middle East &ndash; available via the Uber platform for passenger rides in Riyadh. <a href="https://amadeusenterprise.newsweaver.com/xyz">Phocuswire</a></p>
+<p style="margin: 0cm 0cm 8pt; font-size: 11pt; font-family: Arial, sans-serif; color: #000835; line-height: 14pt;"><strong>Uber and WeRide launch robotaxis in Saudi Arabia</strong> marking first deployment in the Middle East &ndash; available via the Uber platform for passenger rides in Riyadh. <a href="https://digestrelay.newsweaver.com/xyz">Phocuswire</a></p>
 
 WRONG - Using aggregator name:
-<p style="margin: 0cm 0cm 8pt; font-size: 11pt; font-family: Arial, sans-serif; color: #000835; line-height: 14pt;"><strong>News article</strong> &ndash; summary text. <a href="https://amadeusenterprise.newsweaver.com/xyz">Amadeusenterprise Newsweaver</a></p>"""
+<p style="margin: 0cm 0cm 8pt; font-size: 11pt; font-family: Arial, sans-serif; color: #000835; line-height: 14pt;"><strong>News article</strong> &ndash; summary text. <a href="https://digestrelay.newsweaver.com/xyz">DigestRelay Newsweaver</a></p>"""
 
     config = GenerationConfig(
         temperature=0.7,

@@ -17,7 +17,7 @@ from pydantic import BaseModel
 from utils import MODEL_FLASH, fix_json_formatting, parse_iso_date
 from vertexai.generative_models import GenerativeModel
 
-PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus-471508")
+PROJECT_ID = os.getenv("PROJECT_ID", "nimbus-newsforge")
 LOCATION = os.getenv("REGION", "europe-west4")
 MAX_PAGES = 5
 

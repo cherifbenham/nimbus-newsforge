@@ -42,7 +42,7 @@ const Setup: React.FC = () => {
           <h1 className="text-2xl font-semibold">Compose Weekly Setup</h1>
           <p className="text-sm text-gray-600 dark:text-slate-300">
             Configure how Gemini generates CI comments for news items. These instructions guide the AI to produce insightful,
-            data-driven analysis tailored to Amadeus's competitive intelligence needs.
+            data-driven analysis tailored to your team's competitive intelligence needs.
           </p>
         </header>
 
@@ -51,7 +51,7 @@ const Setup: React.FC = () => {
             <h2 className="text-lg font-semibold mb-2">System Prompt Instructions</h2>
             <p className="text-sm text-gray-600 dark:text-slate-300 mb-4">
               Define additional context and guidance for Gemini. This is appended to the default system prompt and helps
-              the AI understand what's relevant to Amadeus and how to generate meaningful comments.
+              the AI understand what's relevant to your company and how to generate meaningful comments.
             </p>
           </div>
 
@@ -65,24 +65,24 @@ const Setup: React.FC = () => {
               placeholder={`# Custom CI Analysis Instructions
 
 ## Company Context
-Amadeus is a leading travel technology company providing IT solutions to airlines, hotels, travel agencies, and other travel providers through its Global Distribution System (GDS) and technology platforms.
+Nimbus Travel is a global travel technology provider supporting airlines, hotels, travel agencies, and corporate travel teams with distribution, retailing, and analytics platforms.
 
 ### Key Business Areas
-- **GDS & Distribution**: Airline reservations, hotel bookings, car rentals
-- **IT Solutions**: Airline reservation systems, departure control, revenue management
-- **Payment & Merchandising**: Payment processing, ancillary revenue optimization
-- **Travel Seller Solutions**: Agency booking tools, corporate travel management
+- **Distribution & Retailing**: Flight, hotel, and ground inventory via GDS/APIs
+- **IT Solutions**: Reservation systems, departure control, revenue management, and ops platforms
+- **Payments & Merchandising**: Payment processing, ancillaries, offer/price management
+- **Corporate Travel Tools**: Booking and expense integrations for managed travel
 
 ### Primary Competitors
-- **Sabre**: Direct GDS competitor, airline IT provider
-- **Travelport**: GDS competitor (owned by Farelogix)
-- **Google Travel**: Growing threat in distribution and search
+- **Sabre**: Direct GDS competitor and airline IT provider
+- **Travelport**: Distribution competitor
+- **Google Travel**: Search and discovery pressure
 - **Accelya**: Payment and revenue accounting competitor
 
 ### Key Markets & Customers
-- **Airlines**: Our largest customer segment (reservation systems, revenue management)
-- **Travel Agencies & OTAs**: Use our GDS for booking (Booking.com, Expedia, CTMs)
-- **Hotels**: Distribution via GDS, property management systems
+- **Airlines**: Core customer segment (reservation systems, revenue management)
+- **Travel Agencies & OTAs**: Use our distribution platforms for booking
+- **Hotels**: Distribution via GDS and property management systems
 - **Ground Transportation**: Emerging segment
 
 ## CI Comment Guidelines
@@ -96,7 +96,7 @@ Amadeus is a leading travel technology company providing IT solutions to airline
 
 ### How to Write Comments
 - **Be data-driven**: Lead with numbers and facts
-- **Show impact**: Explain what it means for Amadeus (opportunity or threat)
+- **Show impact**: Explain what it means for Nimbus Travel (opportunity or threat)
 - **Compare when possible**: YoY changes, regional differences, vs competitors
 - **Avoid generic statements**: No "this is interesting" or "relevant development"
 - **Keep concise**: 1-3 sentences maximum

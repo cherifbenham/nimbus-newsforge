@@ -54,7 +54,7 @@ __pycache__/
 .env.*
 *.key
 *.pem
-fsa-amadeus-*.json
+fsa-*.json
 *creds*.json
 *credentials*.json
 

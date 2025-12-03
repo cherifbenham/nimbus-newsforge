@@ -12,7 +12,7 @@ from utils import get_logger
 # - BQ_NEWS_TABLE_ID / BQ_BATCH_TABLE_ID / BQ_URL_HASH_TABLE_ID: fully-qualified
 #   table IDs. If not provided, they will be constructed from PROJECT_ID and BQ_DATASET.
 
-_BQ_PROJECT = os.getenv("PROJECT_ID", "fsa-amadeus-471508")
+_BQ_PROJECT = os.getenv("PROJECT_ID", "nimbus-newsforge")
 _BQ_DATASET = os.getenv("BQ_DATASET", "competitive_intel")
 
 BQ_NEWS_TABLE_ID = os.getenv(

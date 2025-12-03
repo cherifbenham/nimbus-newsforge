@@ -16,7 +16,7 @@ from utils import (MODEL_FLASH, MODEL_PRO, fetch_and_store,
                    generate_with_fallback)
 from vertexai.generative_models import GenerationConfig, GenerativeModel, Part
 
-PROJECT_ID = os.getenv("PROJECT_ID", "fsa-amadeus-471508")
+PROJECT_ID = os.getenv("PROJECT_ID", "nimbus-newsforge")
 LOCATION = os.getenv("REGION", "europe-west4")
 MEDIA_BUCKET = os.getenv("MEDIA_BUCKET", "ci_media")
 MAX_PAGES = 5

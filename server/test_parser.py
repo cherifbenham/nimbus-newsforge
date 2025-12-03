@@ -5,7 +5,7 @@ import json
 
 from email_parser import parse_eml_file
 
-with open('../data/input/Industry News Review Oct 28, 2025.eml', 'rb') as f:
+with open('../data/input/sample_news.eml', 'rb') as f:
     content = f.read()
 
 items = parse_eml_file(content)

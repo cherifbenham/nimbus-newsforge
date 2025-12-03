@@ -7,7 +7,7 @@ from firebase_helpers import db
 
 # Force production mode
 os.environ['ENV'] = 'production'
-os.environ['PROJECT_ID'] = 'fsa-amadeus-471508'
+os.environ['PROJECT_ID'] = 'nimbus-newsforge'
 
 # Default prompt_daily configuration
 prompt_daily = """You are a senior analyst specialized in the travel, tourism, and hospitality sectors. Your task is to curate a daily newsletter highlighting the most impactful news for industry professionals.
